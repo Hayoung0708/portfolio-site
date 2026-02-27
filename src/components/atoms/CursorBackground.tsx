@@ -34,7 +34,7 @@ export default function CursorBackground() {
     return (
         <div
             ref={cursorRef}
-            className="fixed z-0 w-[200vw] h-[200vw] lg:w-[80vw] lg:h-[80vw] duration-5000 ease-out -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none bg-[radial-gradient(50%_50%_at_50%_50%,#251e20_0%,#1a1617_100%)]"
+            className="fixed -z-1 w-[200vw] h-[200vw] lg:w-[80vw] lg:h-[80vw] duration-2000 ease-out -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none bg-[radial-gradient(45%_45%_at_50%_50%,#251e20_0%,#251e20_30%,#1a1617_100%)]"
         />
     );
 }
