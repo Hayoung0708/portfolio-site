@@ -2,8 +2,13 @@ import { useEffect, useRef } from "react";
 
 export default function Cursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
+    const isTouchDevice =
+        typeof window !== "undefined" &&
+        ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
     useEffect(() => {
+        if (isTouchDevice) return;
+
         let [mouseX, mouseY] = [0, 0];
         let rafId: number;
 
@@ -26,7 +31,9 @@ export default function Cursor() {
             window.removeEventListener("mousemove", move);
             cancelAnimationFrame(rafId);
         };
-    }, []);
+    }, [isTouchDevice]);
+
+    if (isTouchDevice) return null;
 
     return (
         <div
