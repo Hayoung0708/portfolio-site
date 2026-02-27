@@ -25,7 +25,7 @@
 }
 .animate__animated.animate__bounceInUpCustom {
     animation-name: bounceInUpCustom;
-    animation-duration: 800ms;
+    animation-duration: 600ms;
 }
 
 @keyframes rotateZoomIn {
