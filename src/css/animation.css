@@ -1,0 +1,65 @@
+@import "animate.css";
+
+@keyframes bounceInUpCustom {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    from {
+        opacity: 0;
+        transform: translate3d(0, 100px, 0);
+    }
+    60% {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0) scaleY(0.9);
+    }
+    75% {
+        transform: translate3d(0, 10px, 0) scaleY(0.95);
+    }
+    90% {
+        transform: translate3d(0, -5px, 0) scaleY(0.985);
+    }
+}
+.animate__animated.animate__bounceInUpCustom {
+    animation-name: bounceInUpCustom;
+    animation-duration: 800ms;
+}
+
+@keyframes rotateZoomIn {
+    from {
+        transform: rotate3d(0, 0, 1, 200deg) scale3d(0.3, 0.3, 0.3);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+.animate__animated.animate__rotateZoomIn {
+    animation-name: rotateZoomIn;
+}
+
+@keyframes Fly {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.fly {
+    animation: Fly 4s ease-in-out infinite;
+}
+
+.delay1 {
+    animation-delay: 4.6s;
+}
+.delay2 {
+    animation-delay: 4.7s;
+}

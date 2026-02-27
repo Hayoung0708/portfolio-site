@@ -1,1 +1,57 @@
 @import "tailwindcss";
+@import "./font.css";
+@import "./animation.css";
+
+@utility pretendard {
+    font-family: "Pretendard", sans-serif;
+}
+
+@theme {
+    --color-gray1000: #1a1617;
+    --color-gray900: #1e181a;
+    --color-gray800: #251e20;
+    --color-gray700: #292325;
+    --color-gray600: #2f282a;
+    --color-gray500: #;
+    --color-gray400: #;
+    --color-gray300: #;
+    --color-gray200: #;
+    --color-gray100: #ffd7d2;
+
+    --color-shadow: #0f0d0d;
+
+    --color-gray: #64748b;
+
+    --color-stroke: #523d41;
+    --color-main: #fbb6ad;
+    --color-main-hover: #f69e93;
+    --color-sub: #1e293b;
+    --color-sub-hover: #232f41;
+}
+
+@layer base {
+    * {
+        @apply duration-200 cursor-none z-1;
+    }
+    body {
+        @apply pretendard bg-gray1000 text-white antialiased select-none;
+    }
+    h1 {
+        @apply text-[8vw] lg:text-[4.7vw] xl:text-[4vw] leading-[1.1] font-bold mb-[0.5vw];
+    }
+    p {
+        @apply text-sm sm:text-base lg:text-lg;
+    }
+    span {
+        @apply text-main;
+    }
+}
+@layer components {
+    .main-button {
+        @apply w-fit px-5 py-3 flex items-center font-semibold rounded-2xl hover:-translate-y-2 hover:scale-101 text-sm sm:text-base md:text-lg 2xl:text-xl;
+    }
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
