@@ -26,19 +26,19 @@ export default function VsCode() {
                         <div className="w-[0.8vw] h-[0.8vw] rounded-full bg-main/50" />
                         <div className="w-[0.8vw] h-[0.8vw] rounded-full bg-main" />
                     </div>
-                    <div className="flex items-center gap-1 text-gray">
+                    <div className="flex items-center gap-1 text-sub">
                         <p className="text-[1vw]">portfolio-site</p>
                     </div>
                 </header>
 
                 <div className="h-[calc(100%-3vw)] flex">
                     <div className="w-[40%] border-r border-gray600">
-                        <div className="w-full h-[2vw] flex justify-between items-center px-[0.8vw] text-gray text-[0.8vw]">
+                        <div className="w-full h-[2vw] flex justify-between items-center px-[0.8vw] text-sub text-[0.8vw]">
                             탐색기
                             <Ellipsis className="w-[0.8vw]" />
                         </div>
                         <div
-                            className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[0.8vw] hover:bg-gray800 text-gray text-[0.8vw]"
+                            className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[0.8vw] hover:bg-gray800 text-white/50 text-[0.8vw]"
                             onClick={() => setIsFolderOpen(!isFolderOpen)}
                         >
                             <ChevronDown
@@ -57,19 +57,19 @@ export default function VsCode() {
                                     <Braces className="w-[1vw] text-yellow-400" />
                                     intro.json
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-gray text-[0.8vw]">
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
                                     <CodeXml className="w-[1vw] text-blue-400" />
                                     AboutMe.tsx
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-gray text-[0.8vw]">
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
                                     <CodeXml className="w-[1vw] text-blue-400" />
                                     TechStack.tsx
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center pl-[2.3vw] hover:bg-gray800 text-gray text-[0.8vw]">
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center pl-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
                                     <CodeXml className="w-[1vw] text-blue-400" />
                                     CoreCompetence.tsx
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-gray text-[0.8vw]">
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
                                     <ChevronRight className="w-[1vw]" />
                                     <Folder className="w-[1vw] text-main/50" />
                                     projects
@@ -88,7 +88,7 @@ export default function VsCode() {
                             <div className="w-[60%] bg-gray900" />
                         </div>
                         <div className="flex pt-[0.5vw]">
-                            <div className="w-[20%] flex justify-center text-end text-gray text-[0.8vw] leading-[1.25vw] whitespace-pre-wrap">
+                            <div className="w-[20%] flex justify-center text-end text-sub text-[0.8vw] leading-[1.25vw] whitespace-pre-wrap">
                                 {`1
 2
 3

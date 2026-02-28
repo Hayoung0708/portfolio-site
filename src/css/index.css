@@ -20,13 +20,13 @@
 
     --color-shadow: #0f0d0d;
 
-    --color-gray: #64748b;
+    --color-sub: #64748b;
 
     --color-stroke: #523d41;
     --color-main: #fbb6ad;
     --color-main-hover: #f69e93;
-    --color-sub: #1e293b;
-    --color-sub-hover: #232f41;
+    --color-github: #1e293b;
+    --color-github-hover: #232f41;
 }
 
 @layer base {
@@ -39,6 +39,9 @@
     h1 {
         @apply text-[8vw] lg:text-[4.7vw] xl:text-[4vw] leading-[1.1] font-bold mb-[0.5vw];
     }
+    h2 {
+        @apply text-[6vw] lg:text-[3vw] xl:text-[2.5vw] leading-[1.1] font-bold mb-[0.5vw];
+    }
     p {
         @apply text-sm sm:text-base lg:text-lg;
     }
@@ -47,6 +50,9 @@
     }
 }
 @layer components {
+    .template {
+        @apply relative w-screen p-5 sm:p-10 md:p-15 lg:p-[5%] 2xl:p-[10%] pt-[20%];
+    }
     .main-button {
         @apply w-fit px-5 py-3 flex items-center font-semibold rounded-2xl hover:-translate-y-2 hover:scale-101 text-sm sm:text-base md:text-lg 2xl:text-xl;
     }

@@ -6,7 +6,7 @@ import Title from "../atoms/Title";
 
 export default function Home() {
     return (
-        <div className="relative w-screen h-screen flex pt-[20%] sm:items-center p-5 sm:p-10 md:p-15 lg:p-[5%] 2xl:p-[10%]">
+        <div className="template snap-start h-screen sm:items-center flex">
             <div className="flex flex-col gap-5 pb-10">
                 <OpenToWorkBadge />
                 <Title />
@@ -17,14 +17,14 @@ export default function Home() {
                     </button>
                     <Link
                         to="https://github.com/Hayoung0708"
-                        className="main-button group gap-2 bg-sub text-white hover:bg-sub-hover animate__animated animate__bounceInUpCustom delay2"
+                        className="main-button group gap-2 bg-github text-white hover:bg-github-hover animate__animated animate__bounceInUpCustom delay2"
                     >
                         <div className="w-6 h-6 p-1 bg-white rounded-full">
                             <Github
                                 size={20}
                                 strokeWidth={1}
                                 fill="currentColor"
-                                className="mt-px -ml-0.5 text-sub group-hover:text-sub-hover"
+                                className="mt-px -ml-0.5 text-github group-hover:text-github-hover"
                             />
                         </div>
                         Github

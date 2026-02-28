@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { Outlet } from "react-router";
 
 export default function RootLayout() {
-    useEffect(() => {
-        const id = setTimeout(() => window.scrollTo({ top: 0 }), 0);
-        return () => clearTimeout(id);
-    }, []);
+    // useEffect(() => {
+    //     const id = setTimeout(() => window.scrollTo({ top: 0 }), 0);
+    //     return () => clearTimeout(id);
+    // }, []);
 
     return (
         <>

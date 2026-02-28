@@ -47,7 +47,7 @@ export default function Title() {
                         <span>{title4.displayText}</span>
                         {title5.displayText}
                     </h1>
-                    <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-gray animate__animated animate__fadeInUp animate__delay-4s">
+                    <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-sub animate__animated animate__fadeInUp animate__delay-4s">
                         이 웹사이트는 모바일부터 PC까지 다양한 디바이스 환경에
                         맞춰 반응형으로 설계되었습니다.
                     </p>
