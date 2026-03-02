@@ -6,7 +6,7 @@ import Title from "../atoms/Title";
 
 export default function Home() {
     return (
-        <div className="template snap-start h-screen sm:items-center flex">
+        <div className="template h-screen sm:items-center flex">
             <div className="flex flex-col gap-5 pb-10">
                 <OpenToWorkBadge />
                 <Title />
