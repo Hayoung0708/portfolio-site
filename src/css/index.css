@@ -42,6 +42,12 @@
     h2 {
         @apply text-[6vw] lg:text-[3vw] xl:text-[2.5vw] leading-[1.1] font-bold mb-[0.5vw];
     }
+    h3 {
+        @apply text-[3vw] lg:text-[1.5vw] xl:text-[1.2vw] text-main font-medium tracking-wider;
+    }
+    h4 {
+        @apply text-[4vw] lg:text-[2vw] xl:text-[1.5vw] font-bold;
+    }
     p {
         @apply text-sm sm:text-base lg:text-lg;
     }

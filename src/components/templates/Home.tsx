@@ -36,7 +36,7 @@ export default function Home() {
             <ArrowDown
                 strokeWidth={1}
                 size={32}
-                className="absolute bottom-10 left-1/2 -translate-x-2 animate-bounce"
+                className="absolute bottom-10 left-1/2 -translate-x-4 animate-bounce"
             />
         </div>
     );

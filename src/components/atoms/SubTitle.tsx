@@ -1,0 +1,9 @@
+export default function SubTitle({ children }: { children: React.ReactNode }) {
+    return (
+        <div className="flex items-center gap-2">
+            <div className="w-5 h-px bg-main" />
+            <h3>{children}</h3>
+            <div className="w-5 h-px bg-main" />
+        </div>
+    );
+}
