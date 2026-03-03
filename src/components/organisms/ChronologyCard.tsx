@@ -30,7 +30,7 @@ export default function ChronologyCard({
                 <div className="w-3 h-3 bg-gray1000 rounded-full" />
             </div>
             <div
-                className={`absolute top-3 w-[40vw] p-5 flex flex-col gap-3 bg-sub/8 border border-gray100/10 rounded-4xl
+                className={`absolute top-3 w-[40vw] p-5 flex flex-col gap-3 bg-gray600/50 border border-gray100/10 rounded-4xl
                 ${position === "left" ? "right-10 -translate-y-1/2" : "left-10 -translate-y-1/2"}`}
             >
                 <span className="-mb-3">{node.date}</span>
@@ -53,7 +53,7 @@ export default function ChronologyCard({
                     node.projects.map((p, i) => (
                         <div
                             key={i}
-                            className="w-full p-3 bg-main/10 rounded-2xl"
+                            className="w-full flex flex-col gap-1 px-4 py-3 bg-gray100/10 rounded-2xl"
                         >
                             <span className="font-medium">{p.title}</span>
                             <div className="flex justify-between">
