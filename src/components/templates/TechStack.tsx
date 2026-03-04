@@ -4,7 +4,7 @@ import { TECH_STACKS } from "@/constants/techStack";
 
 export default function TechStack() {
     return (
-        <div className="template flex flex-col items-center">
+        <div className="template flex flex-col items-center pt-0">
             <SubTitle>TECK STACK</SubTitle>
             <div className="w-full grid grid-cols-4 gap-x-5 gap-y-10 justify-center">
                 {TECH_STACKS.map((s, i) => (
