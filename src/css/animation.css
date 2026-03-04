@@ -1,4 +1,10 @@
 @import "animate.css";
+@import "swiper/css";
+
+.swiper-container .swiper-wrapper {
+    transition-timing-function: linear !important;
+    position: relative;
+}
 
 @keyframes bounceInUpCustom {
     from,
