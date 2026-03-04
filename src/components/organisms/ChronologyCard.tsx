@@ -1,4 +1,4 @@
-import ChronologyBadge from "../atoms/ChronologyBadge";
+import Badge from "../atoms/Badge";
 
 interface Project {
     title: string;
@@ -74,7 +74,7 @@ export default function ChronologyCard({
                 {node.badges && (
                     <div className="flex gap-2">
                         {node.badges.map((b, i) => (
-                            <ChronologyBadge key={i}>{b}</ChronologyBadge>
+                            <Badge key={i}>{b}</Badge>
                         ))}
                     </div>
                 )}

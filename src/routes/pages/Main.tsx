@@ -1,6 +1,7 @@
 import AboutMe from "@/components/templates/AboutMe";
 import Chronology from "@/components/templates/Chronology";
 import Home from "@/components/templates/Home";
+import Projects from "@/components/templates/Projects";
 import TechStack from "@/components/templates/TechStack";
 
 export default function Main() {
@@ -10,6 +11,7 @@ export default function Main() {
             <AboutMe />
             <Chronology />
             <TechStack />
+            <Projects />
         </>
     );
 }
