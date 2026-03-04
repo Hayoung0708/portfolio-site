@@ -1,30 +1,5 @@
 export const CHRONOLOGY_NODES = [
     {
-        date: "2025.10 - 개발중",
-        title: "찜콩",
-        body: `리뷰 클렌징 없이 나만의 솔직 리뷰를 저장하는 웹 애플리케이션 "찜콩" 개발`,
-        list: ["Gemini Code Assist를 활용한 코드 리뷰 및 품질 개선"],
-        badges: ["React", "Team Project", "Project Lead"],
-    },
-    {
-        date: "2026.03",
-        title: "Portfolio Site",
-        body: "",
-        list: ["Stitch를 활용한 AI 기반 디자인 설계 경험"],
-        badges: ["React", "Solo Project"],
-    },
-    {
-        date: "2026.02",
-        title: "DUNCOP",
-        body: `던전앤파이터 유저들을 위한 파티 컷 확인 서비스 "DUNCOP" 개발`,
-        list: [
-            "가비아에서 도메인을 구매해 실제 서비스 운영 경험",
-            "SEO 최적화 및 Open Graph 설정을 통한 검색 노출 개선 경험",
-            "Supabase를 활용한 데이터베이스 설계 및 CRUD 로직 구현 경험",
-        ],
-        badges: ["Next.js", "Supabase", "Solo Project"],
-    },
-    {
         date: "2025.03 - 2025.08",
         title: "Programmers 데브코스 웹프론트엔드 4기",
         body: "HTML, CSS, JavaScript 기초부터 TypeScript, React, Vue, Next.js 심화까지 학습",

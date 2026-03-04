@@ -25,7 +25,7 @@ export default function ChronologyCard({
     position: "left" | "right";
 }) {
     return (
-        <div className={`relative ${id === 3 && "my-50"}`}>
+        <div className={`relative ${id === 0 && "my-50"}`}>
             <div className="w-5 h-5 bg-main rounded-full flex justify-center items-center">
                 <div className="w-3 h-3 bg-gray1000 rounded-full" />
             </div>
