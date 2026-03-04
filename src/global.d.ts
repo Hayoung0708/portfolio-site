@@ -14,8 +14,13 @@ export declare global {
         title: string;
         image: string;
         intro: string;
+        period: string;
         description: string;
         type: string;
+        team?: {
+            frontend: number;
+            backend: number;
+        };
         lead?: string;
         stacks: Stack[];
         link: {
