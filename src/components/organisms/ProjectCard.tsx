@@ -6,11 +6,11 @@ export default function ProjectCard({ project }: { project: Project }) {
 
     return (
         <div
-            className="w-full border border-gray600 bg-gray800 rounded-3xl shadow-[0_0_10px_var(--color-shadow)]"
+            className="w-full border border-gray100/10 bg-gray600/50 rounded-3xl shadow-[0_0_10px_var(--color-shadow)]"
             onClick={() => navigate(`/project/${project.id}`)}
         >
             <img
-                src={project.image}
+                src={project.image[0]}
                 className="w-full aspect-video object-cover rounded-t-3xl"
             />
             <div className="flex flex-col p-5">

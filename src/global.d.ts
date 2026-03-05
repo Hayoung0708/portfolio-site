@@ -9,10 +9,17 @@ export declare global {
         list: { name: string; description?: string }[];
     }
 
+    interface Feature {
+        title: string;
+        body: string;
+        img: string;
+        icon: string;
+    }
+
     interface Project {
         id: string;
         title: string;
-        image: string;
+        image: string[];
         intro: string;
         period: string;
         description: string;
@@ -27,7 +34,7 @@ export declare global {
             github: string;
             deploy: string;
         };
-        features: string[];
+        features: Feature[];
         contributions: string[];
         learn: string[];
     }
