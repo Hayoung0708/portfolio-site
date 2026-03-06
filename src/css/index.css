@@ -50,7 +50,7 @@
         @apply text-[4vw] lg:text-[2vw] xl:text-[1.5vw] font-bold;
     }
     p {
-        @apply text-sm sm:text-base lg:text-lg;
+        @apply text-sm sm:text-base lg:text-lg whitespace-pre-wrap break-keep;
     }
     span {
         @apply text-main;

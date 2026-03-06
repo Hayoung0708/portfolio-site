@@ -7,7 +7,7 @@ import FeatureCard from "../organisms/FeatureCard";
 
 export default function ProjectInfo({ project }: { project: Project }) {
     return (
-        <div className="template flex flex-col items-center gap-5 px-[20%] pt-10">
+        <div className="template flex flex-col items-center gap-5 px-[20%] py-10">
             <h2>{project.title}</h2>
             <p className="text-main -mt-5">{project.intro}</p>
             <Swiper
@@ -74,9 +74,7 @@ export default function ProjectInfo({ project }: { project: Project }) {
                         <FileText size={32} className="text-main" />
                         프로젝트 소개
                     </div>
-                    <p className="whitespace-pre-wrap text-base">
-                        {project.description}
-                    </p>
+                    <p className="text-base">{project.description}</p>
                     <div className="flex flex-col gap-5 mt-5">
                         <div className="flex gap-2 text-4xl font-semibold items-center">
                             <Star
@@ -91,6 +89,7 @@ export default function ProjectInfo({ project }: { project: Project }) {
                             modules={[Autoplay, EffectCoverflow]}
                             effect="coverflow"
                             slidesPerView={1.7}
+                            spaceBetween={20}
                             centeredSlides
                             loop={true}
                             speed={1000}

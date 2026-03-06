@@ -38,7 +38,7 @@ export default function Cursor() {
     return (
         <div
             ref={cursorRef}
-            className="fixed z-2 w-5 h-5 bg-gray600/50 border border-gray100/50 rounded-full -translate-2 duration-0 pointer-events-none"
+            className="fixed z-10 w-5 h-5 bg-gray600/50 border border-gray100/50 rounded-full -translate-2 duration-0 pointer-events-none"
         />
     );
 }

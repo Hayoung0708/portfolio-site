@@ -36,8 +36,8 @@ export default function Title() {
                 <h1 className="text-gray700">사용자 경험을 생각하는</h1>
                 <h1 className="text-gray700">프론트엔드 강하영입니다.</h1>
                 <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-gray1000/0">
-                    이 웹사이트는 모바일부터 PC까지 다양한 디바이스 환경에 맞춰
-                    반응형으로 설계되었습니다.
+                    사용자 피드백과 고민을 통해 끊임없이 개선하며 더 나은
+                    서비스를 만들어갑니다.
                 </p>
                 <div className="absolute top-0">
                     <h1>{title1.displayText}</h1>
@@ -48,8 +48,8 @@ export default function Title() {
                         {title5.displayText}
                     </h1>
                     <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-sub animate__animated animate__fadeInUp animate__delay-4s">
-                        이 웹사이트는 모바일부터 PC까지 다양한 디바이스 환경에
-                        맞춰 반응형으로 설계되었습니다.
+                        사용자 피드백과 고민을 통해 끊임없이 개선하며 더 나은
+                        서비스를 만들어갑니다.
                     </p>
                 </div>
             </div>

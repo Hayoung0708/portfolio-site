@@ -8,14 +8,22 @@ export declare global {
         group: string;
         list: { name: string; description?: string }[];
     }
-
     interface Feature {
         title: string;
         body: string;
-        img: string;
-        icon: string;
+        img?: string;
+        icon?: string;
     }
-
+    interface ContributionSummary {
+        title: string;
+        percent: number;
+        body: string;
+    }
+    interface Contribution {
+        title: string;
+        icon: string;
+        list: Feature[];
+    }
     interface Project {
         id: string;
         title: string;
@@ -35,7 +43,8 @@ export declare global {
             deploy: string;
         };
         features: Feature[];
-        contributions: string[];
+        contributionSummary: ContributionSummary[];
+        contributions: Contribution[];
         learn: string[];
     }
 }

@@ -1,3 +1,4 @@
+import ProjectContribution from "@/components/templates/ProjectContribution";
 import ProjectInfo from "@/components/templates/ProjectInfo";
 import { MAIN_PROJECTS } from "@/constants/projects";
 import { useParams } from "react-router";
@@ -13,6 +14,10 @@ export default function ProjectDetail() {
     return (
         <>
             <ProjectInfo project={project} />
+            <ProjectContribution
+                summary={project.contributionSummary}
+                contributions={project.contributions}
+            />
         </>
     );
 }
