@@ -19,10 +19,15 @@ export declare global {
         percent: number;
         body: string;
     }
+    interface Image {
+        title: string;
+        src: string;
+    }
     interface Contribution {
         title: string;
         icon: string;
         list: Feature[];
+        img?: Image[];
     }
     interface Project {
         id: string;

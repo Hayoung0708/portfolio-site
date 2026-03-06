@@ -35,24 +35,46 @@ export default function ProjectContribution({
                 {contributions.map((c, i) => (
                     <li
                         key={i}
-                        className="card flex flex-col items-center gap-5 p-5 rounded-2xl"
+                        className="card flex flex-col items-center gap-5 p-5 rounded-3xl"
                     >
                         <div className="flex flex-col items-center gap-1 mt-5">
                             <IconBox icon={c.icon} />
                             <h4>{c.title}</h4>
                         </div>
+                        {c.img && (
+                            <div className="flex gap-5 justify-center items-center">
+                                {c.img.map((img, i) => (
+                                    <div className="w-[40%] min-w-[40%] flex flex-col items-center gap-2">
+                                        <img
+                                            src={img.src}
+                                            key={i}
+                                            className="w-full aspect-video object-cover rounded-xl"
+                                        />
+                                        {img.title}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                         <ul className="w-full flex flex-col gap-2">
                             {c.list.map((l, i) => (
                                 <li
                                     key={i}
-                                    className="card p-5 flex flex-col gap-2 bg-gray1000/50 rounded-2xl border-none"
+                                    className="card p-5 flex gap-5 justify-between bg-gray1000/50 rounded-2xl border-none"
                                 >
-                                    <p className="text-xl font-semibold text-main">
-                                        {l.title}
-                                    </p>
-                                    <p className="text-[#94a3b8] leading-6">
-                                        {l.body}
-                                    </p>
+                                    <div className="flex flex-col gap-2">
+                                        <p className="text-xl font-semibold text-main">
+                                            {l.title}
+                                        </p>
+                                        <p className="text-[#94a3b8] leading-6">
+                                            {l.body}
+                                        </p>
+                                    </div>
+                                    {l.img && (
+                                        <img
+                                            src={l.img}
+                                            className="w-[30%] min-w-[30%] aspect-video object-cover rounded-xl"
+                                        />
+                                    )}
                                 </li>
                             ))}
                         </ul>

@@ -8,6 +8,9 @@ import duncopFeature3Img from "@/assets/images/duncop_feature3.png";
 import duncopFeature4Img from "@/assets/images/duncop_feature4.gif";
 import duncopFeature5Img from "@/assets/images/duncop_feature5.gif";
 import duncopFeature6Img from "@/assets/images/duncop_feature6.gif";
+import duncopEx1Img from "@/assets/images/duncop_ex1.png";
+import duncopEx2Img from "@/assets/images/duncop_ex2.png";
+import duncopEx3Img from "@/assets/images/duncop_ex3.png";
 import jjimkongImg from "@/assets/images/jjimkong.png";
 import studiumImg from "@/assets/images/studium.png";
 import bookjeokbookjeokImg from "@/assets/images/bookjeokbookjeok.png";
@@ -303,7 +306,6 @@ export const MAIN_PROJECTS = [
                         body: `◦ 소규모 프로젝트로 빠른 개발 속도가 중요했기 때문에 기본적으로 Layer-based Structure를 채택, components 영역은 Feature-based Structure로 관리하는 하이브리드 구조로 프로젝트 구조 설계`,
                     },
                 ],
-                img: "",
             },
             {
                 title: "프론트엔드 개발 및 배포",
@@ -327,7 +329,6 @@ export const MAIN_PROJECTS = [
                         body: `◦ Vercel을 활용해 프론트엔드 배포`,
                     },
                 ],
-                img: "",
             },
             {
                 title: "데이터베이스 설계 및 구축",
@@ -345,7 +346,6 @@ export const MAIN_PROJECTS = [
                         body: `◦ 2024년 12월부터 던전앤파이터 커뮤니티에 박제되어있는 비매너 유저들을 데이터베이스에 삽입`,
                     },
                 ],
-                img: "",
             },
             {
                 title: "사용자 경험(UX) 개선",
@@ -357,16 +357,16 @@ export const MAIN_PROJECTS = [
 ◦ 페이지 로드 과정에서 라이트 테마가 잠깐 표시되는 깜빡임이 발생하지 않도록 HTML 단계에서 테마를 미리 적용하도록 처리`,
                     },
                     {
-                        title: "모바일 UI 데이터 최적화",
-                        body: `◦ 모바일 레이아웃에서 과도한 스크롤이 발생하지 않도록 UI에 표시되는 데이터 간소화 (캐릭터 목록을 노출하지 않도록 설계)`,
-                    },
-                    {
                         title: "요청 처리 개선 및 사용자 피드백 UI 제공",
                         body: `◦ 폼 제출 시 useState를 활용해 버튼이 여러 번 눌려 중복 API가 호출되는 문제 방지
 ◦ Toast UI를 활용해 요청 성공 및 실패 여부를 사용자에게 즉시 안내하도록 구현`,
                     },
+                    {
+                        title: "모바일 UI 데이터 간소화",
+                        body: `◦ 모바일 레이아웃에서 과도한 스크롤이 발생하지 않도록 UI에 표시되는 데이터 간소화 (캐릭터 목록을 노출하지 않도록 설계)`,
+                        img: duncopFeature5Img,
+                    },
                 ],
-                img: "",
             },
             {
                 title: "검색엔진 최적화",
@@ -382,7 +382,10 @@ export const MAIN_PROJECTS = [
 ◦ viewport 설정 및 semantic HTML 구조를 적용해 검색 엔진이 페이지 구조를 보다 명확하게 인식할 수 있도록 개선`,
                     },
                 ],
-                img: "",
+                img: [
+                    { title: "Google 검색 결과", src: duncopEx1Img },
+                    { title: "카카오톡 Open Graph", src: duncopEx2Img },
+                ],
             },
             {
                 title: "실제 서비스 운영",
@@ -399,7 +402,7 @@ export const MAIN_PROJECTS = [
 ◦ 커뮤니티를 통해 플랫폼 홍보, 하루 동안 약 500명의 사용자와 약 1,400회의 페이지 방문을 기록`,
                     },
                 ],
-                img: "",
+                img: [{ title: "Google Analytics 그래프", src: duncopEx3Img }],
             },
         ],
         learn: [],
