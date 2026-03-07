@@ -12,7 +12,7 @@ export default function ProjectContribution({
     contributionRefs: React.RefObject<HTMLDivElement[]>;
 }) {
     return (
-        <div className="template flex flex-col gap-5 pt-0 px-[20%]">
+        <div className="template flex flex-col gap-5 py-10 px-[20%]">
             <div
                 ref={(el) => {
                     // eslint-disable-next-line
@@ -20,7 +20,7 @@ export default function ProjectContribution({
                 }}
                 className="flex gap-2 text-4xl font-semibold items-center"
             >
-                <Handshake size={32} className="text-main" />
+                <Handshake size={40} className="text-main" />
                 프로젝트 기여
             </div>
 
@@ -58,7 +58,7 @@ export default function ProjectContribution({
                         {c.img && (
                             <div className="flex gap-5 justify-center items-center">
                                 {c.img.map((img, i) => (
-                                    <div className="w-[40%] min-w-[40%] flex flex-col items-center gap-2">
+                                    <div className="w-[40%] min-w-[40%] flex flex-col items-center gap-2 text-sub">
                                         <img
                                             src={img.src}
                                             key={i}

@@ -77,18 +77,13 @@ export default function ProjectInfo({
             <div ref={infoRef} className="w-full flex gap-10 mt-5">
                 <div className="w-[70%] flex flex-col gap-5">
                     <div className="flex gap-2 text-4xl font-semibold items-center">
-                        <FileText size={32} className="text-main" />
+                        <FileText size={40} className="text-main" />
                         프로젝트 소개
                     </div>
                     <p className="text-base">{project.description}</p>
                     <div className="flex flex-col gap-5 mt-5">
                         <div className="flex gap-2 text-4xl font-semibold items-center">
-                            <Star
-                                strokeWidth={1}
-                                size={32}
-                                fill="currentColor"
-                                className="text-main"
-                            />
+                            <Star size={40} className="text-main" />
                             핵심 기능
                         </div>
                         <Swiper
