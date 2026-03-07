@@ -4,10 +4,12 @@ export default function ProjectNav({
     project,
     infoRef,
     contributionRefs,
+    learnRefs,
 }: {
     project: Project;
     infoRef: React.RefObject<HTMLDivElement | null>;
     contributionRefs: React.RefObject<(HTMLDivElement | null)[]>;
+    learnRefs: React.RefObject<(HTMLDivElement | null)[]>;
 }) {
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -25,7 +27,11 @@ export default function ProjectNav({
 
     useEffect(() => {
         const handleScroll = () => {
-            const elements = [infoRef.current, ...contributionRefs.current];
+            const elements = [
+                infoRef.current,
+                ...contributionRefs.current,
+                ...learnRefs.current,
+            ];
             let lastIndex = -1;
 
             for (let i = elements.length - 1; i >= 0; i--) {
@@ -44,7 +50,7 @@ export default function ProjectNav({
         window.addEventListener("scroll", handleScroll);
         handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [infoRef, contributionRefs]);
+    }, [infoRef, contributionRefs, learnRefs]);
 
     return (
         <div className="fixed top-0 right-0 h-screen w-[20%] flex justify-center items-center">
@@ -93,9 +99,40 @@ export default function ProjectNav({
                         {c.title}
                     </button>
                 ))}
-                <button className="text-white/50 hover:text-white/75 hover:scale-105">
+                <button
+                    className={`hover:scale-105 ${
+                        activeIndex === contributionRefs.current.length + 2
+                            ? "text-white"
+                            : "text-white/50 hover:text-white/75"
+                    }`}
+                    onClick={() =>
+                        scrollTo(
+                            learnRefs.current[0],
+                            contributionRefs.current.length + 2,
+                        )
+                    }
+                >
                     어려웠던 점 & 배운 점
                 </button>
+                {project.learn.map((c, i) => (
+                    <button
+                        key={i}
+                        className={`ml-5 hover:scale-105 ${
+                            activeIndex ===
+                            contributionRefs.current.length + i + 3
+                                ? "text-white"
+                                : "text-white/50 hover:text-white/75"
+                        }`}
+                        onClick={() =>
+                            scrollTo(
+                                learnRefs.current[i + 1],
+                                contributionRefs.current.length + i + 3,
+                            )
+                        }
+                    >
+                        {c.title}
+                    </button>
+                ))}
             </div>
         </div>
     );

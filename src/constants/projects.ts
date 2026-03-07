@@ -405,7 +405,28 @@ export const MAIN_PROJECTS = [
                 img: [{ title: "Google Analytics 그래프", src: duncopEx3Img }],
             },
         ],
-        learn: [],
+        learn: [
+            {
+                title: "외부 API CORS 우회",
+                badge: "Trouble Shooting",
+                problem: `DUNDAM API 연동 중, 허용된 도메인('dundam.xyz')이 아닌 곳에서 브라우저가 직접 요청을 보낼 때 차단되는 문제 발생`,
+                solution: `◦ Postman에서는 정상 호출되나 브라우저에서만 실패하는 현상을 통해 브라우저 보안 정책이 원인임을 파악
+◦ Next.js API Route를 활용한 서버 프록시 구조로, 브라우저가 아닌 서버 단에서 API를 호출하도록 우회`,
+                learn: `◦ CORS 정책이 브라우저 단의 제약임을 체득
+◦ Next.js API Route를 활용한 서버 프록시(BFF) 패턴 구현 경험
+◦ 클라이언트와 서버 간의 책임 분리`,
+            },
+            {
+                title: "비공식 API의 지식재산권",
+                badge: "Ethic",
+                problem: `프로젝트 배포 후 커뮤니티 피드백을 통해, 사전 협의되지 않은 외부 서비스(DUNDAM)의 API를 활용하는 것이 지식재산권 위배 소지가 있음을 인지`,
+                solution: `◦ 문제의 소지를 확인한 즉시, 데이터 원작자의 권리를 존중하여 배포된 서비스를 내리는 빠른 조치
+◦ DUNDAM 측에 API 무단 사용에 대한 정중한 사과문 전달, 정식 API 사용 권한 및 협업을 요청하는 제안서 발송`,
+                learn: `◦ 기술적 구현 가능성과 윤리적/법적 허용 여부는 다르다는 점을 깊이 체감
+◦ 개발자로서 지식재산권(IP)을 존중하고 책임감 있게 데이터를 다루는 태도 학습
+◦ 개발 과정의 실수를 회피하지 않고, 서비스 중단 및 대안 제시(협업 제안)를 통해 책임감 있게 대처하는 문제 해결 역량 성장`,
+            },
+        ],
     },
     {
         id: "studium",

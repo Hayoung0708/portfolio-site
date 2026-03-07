@@ -29,6 +29,14 @@ export declare global {
         list: Feature[];
         img?: Image[];
     }
+    interface Learn {
+        title: string;
+        badge: string;
+        problem: string;
+        solution: string;
+        learn: string;
+        img?: Image[];
+    }
     interface Project {
         id: string;
         title: string;
@@ -50,6 +58,6 @@ export declare global {
         features: Feature[];
         contributionSummary: ContributionSummary[];
         contributions: Contribution[];
-        learn: string[];
+        learn: Learn[];
     }
 }
