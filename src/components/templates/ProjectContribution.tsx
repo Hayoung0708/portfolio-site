@@ -5,13 +5,21 @@ import IconBox from "../atoms/IconBox";
 export default function ProjectContribution({
     summary,
     contributions,
+    contributionRefs,
 }: {
     summary: ContributionSummary[];
     contributions: Contribution[];
+    contributionRefs: React.RefObject<HTMLDivElement[]>;
 }) {
     return (
         <div className="template flex flex-col gap-5 pt-0 px-[20%]">
-            <div className="flex gap-2 text-4xl font-semibold items-center">
+            <div
+                ref={(el) => {
+                    // eslint-disable-next-line
+                    if (el) contributionRefs.current[0] = el;
+                }}
+                className="flex gap-2 text-4xl font-semibold items-center"
+            >
                 <Handshake size={32} className="text-main" />
                 프로젝트 기여
             </div>
@@ -35,8 +43,14 @@ export default function ProjectContribution({
                 {contributions.map((c, i) => (
                     <li
                         key={i}
-                        className="card flex flex-col items-center gap-5 p-5 rounded-3xl"
+                        className="card relative flex flex-col items-center gap-5 p-5 rounded-3xl"
                     >
+                        <div
+                            ref={(el) => {
+                                if (el) contributionRefs.current[i + 1] = el;
+                            }}
+                            className="absolute"
+                        />
                         <div className="flex flex-col items-center gap-1 mt-5">
                             <IconBox icon={c.icon} />
                             <h4>{c.title}</h4>

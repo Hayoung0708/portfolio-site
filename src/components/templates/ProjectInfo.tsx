@@ -5,7 +5,13 @@ import { Autoplay, Pagination, EffectCoverflow } from "swiper/modules";
 import TechStackCard from "../organisms/TechStackCard";
 import FeatureCard from "../organisms/FeatureCard";
 
-export default function ProjectInfo({ project }: { project: Project }) {
+export default function ProjectInfo({
+    project,
+    infoRef,
+}: {
+    project: Project;
+    infoRef: React.RefObject<HTMLDivElement | null>;
+}) {
     return (
         <div className="template flex flex-col items-center gap-5 px-[20%] py-10">
             <h2>{project.title}</h2>
@@ -68,7 +74,7 @@ export default function ProjectInfo({ project }: { project: Project }) {
                 </div>
             </div>
 
-            <div className="w-full flex gap-10 mt-5">
+            <div ref={infoRef} className="w-full flex gap-10 mt-5">
                 <div className="w-[70%] flex flex-col gap-5">
                     <div className="flex gap-2 text-4xl font-semibold items-center">
                         <FileText size={32} className="text-main" />
