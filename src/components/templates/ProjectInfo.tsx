@@ -48,7 +48,7 @@ export default function ProjectInfo({
                         <p className="text-2xl">
                             FE
                             {project.team
-                                ? ` ${project.team.frontend} ${project.team.backend !== 0 && `| BE ${project.team.backend}`}`
+                                ? ` ${project.team.frontend} ${project.team.backend ? `| BE ${project.team.backend}` : ""}`
                                 : " 1"}
                             <span className="ml-2">
                                 {project.lead && `${project.lead} Lead`}

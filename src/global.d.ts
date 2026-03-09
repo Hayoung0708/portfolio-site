@@ -35,7 +35,6 @@ export declare global {
         problem: string;
         solution: string;
         learn: string;
-        img?: Image[];
     }
     interface Project {
         id: string;
@@ -47,7 +46,7 @@ export declare global {
         type: string;
         team?: {
             frontend: number;
-            backend: number;
+            backend?: number;
         };
         lead?: string;
         stacks: Stack[];
