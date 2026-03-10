@@ -14,7 +14,9 @@ import duncopEx3Img from "@/assets/images/duncop_ex3.png";
 import jjimkongImg from "@/assets/images/jjimkong.png";
 import studiumImg from "@/assets/images/studium.png";
 import bookjeokbookjeokImg from "@/assets/images/bookjeokbookjeok.png";
-import deCaffeineImg from "@/assets/images/de-caffeine.png";
+import deCaffeine1Img from "@/assets/images/de-caffeine1.png";
+import deCaffeine2Img from "@/assets/images/de-caffeine2.png";
+import deCaffeine3Img from "@/assets/images/de-caffeine3.png";
 import deCaffeineFeature1Img from "@/assets/images/de-caffeine_feature1.gif";
 import deCaffeineFeature2Img from "@/assets/images/de-caffeine_feature2.png";
 import deCaffeineFeature3Img from "@/assets/images/de-caffeine_feature3.png";
@@ -476,8 +478,12 @@ export const MAIN_PROJECTS = [
         image: [bookjeokbookjeokImg],
         intro: "독서를 기록하고 공유하는 독서 커뮤니티 플랫폼",
         period: "2025.05.30 - 2025.06.19",
-        description: "",
+        description: `북적북적은 독서 다이어리를 작성하고, 관심사에 맞는 북클럽을 개설하거나 참여하며, 자유롭게 의견을 나누는 게시판 활동을 통해 다른 독자들과 소통할 수 있는 독서 커뮤니티 플랫폼입니다.
+알라딘 오픈 API를 활용해 실시간 베스트셀러, 연관 도서, 도서 검색 기능을 제공하여 사용자들이 다양한 책 정보를 손쉽게 확인하고 공유할 수 있도록 지원합니다.`,
         type: "Team Project",
+        team: {
+            frontend: 5,
+        },
         stacks: [
             {
                 group: "Programming",
@@ -492,8 +498,8 @@ export const MAIN_PROJECTS = [
             },
         ],
         link: {
-            github: "",
-            deploy: "",
+            github: "https://github.com/Programmers-FE5-VueFinder/bookjeokbookjeok",
+            deploy: "https://bookjeokbookjeok.netlify.app/",
         },
         features: [],
         contributionSummary: [],
@@ -503,7 +509,7 @@ export const MAIN_PROJECTS = [
     {
         id: "de-caffeine",
         title: "De:caffeine",
-        image: [deCaffeineImg],
+        image: [deCaffeine1Img, deCaffeine2Img, deCaffeine3Img],
         intro: "개발자들을 위한 커뮤니티 플랫폼",
         period: "2025.04.25 - 2025.05.19",
         description: `de:caffeine(디:카페인)은 개발자들이 자신의 개발 일지를 SNS처럼 공유하고, 서로의 질문과 답변을 주고받을 수 있는 개발자 커뮤니티 플랫폼입니다.
