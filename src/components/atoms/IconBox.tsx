@@ -1,15 +1,20 @@
 import { twMerge } from "tailwind-merge";
 import {
     ActivityIcon,
+    Bell,
     Calculator,
     Database,
     DraftingCompass,
+    HeartHandshake,
     LayoutTemplate,
+    MessageCircleMore,
     MonitorSmartphone,
     Moon,
     Search,
     Siren,
     TriangleAlert,
+    UserKey,
+    UserPlus,
     UserStar,
 } from "lucide-react";
 
@@ -42,6 +47,13 @@ export default function IconBox({
             {icon === "database" && <Database size={Iconsize} />}
             {icon === "user-star" && <UserStar size={Iconsize} />}
             {icon === "activity" && <ActivityIcon size={Iconsize} />}
+            {icon === "user-key" && <UserKey size={Iconsize} />}
+            {icon === "heart-handshake" && <HeartHandshake size={Iconsize} />}
+            {icon === "bell" && <Bell size={Iconsize} />}
+            {icon === "message-circle-more" && (
+                <MessageCircleMore size={Iconsize} />
+            )}
+            {icon === "user-plus" && <UserPlus size={Iconsize} />}
         </div>
     );
 }

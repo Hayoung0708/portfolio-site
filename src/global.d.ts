@@ -32,9 +32,10 @@ export declare global {
     interface Learn {
         title: string;
         badge: string;
-        problem: string;
-        solution: string;
+        problem?: string;
+        solution?: string;
         learn: string;
+        img?: Image[];
     }
     interface Project {
         id: string;

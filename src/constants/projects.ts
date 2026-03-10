@@ -15,6 +15,17 @@ import jjimkongImg from "@/assets/images/jjimkong.png";
 import studiumImg from "@/assets/images/studium.png";
 import bookjeokbookjeokImg from "@/assets/images/bookjeokbookjeok.png";
 import deCaffeineImg from "@/assets/images/de-caffeine.png";
+import deCaffeineFeature1Img from "@/assets/images/de-caffeine_feature1.gif";
+import deCaffeineFeature2Img from "@/assets/images/de-caffeine_feature2.png";
+import deCaffeineFeature3Img from "@/assets/images/de-caffeine_feature3.png";
+import deCaffeineFeature4Img from "@/assets/images/de-caffeine_feature4.gif";
+import deCaffeineFeature5Img from "@/assets/images/de-caffeine_feature5.png";
+import deCaffeineFeature6Img from "@/assets/images/de-caffeine_feature6.gif";
+import deCaffeineFeature7Img from "@/assets/images/de-caffeine_feature7.gif";
+import deCaffeineEx1Img from "@/assets/images/de-caffeine_ex1.gif";
+import deCaffeineEx2Img from "@/assets/images/de-caffeine_ex2.png";
+import deCaffeineEx3Img from "@/assets/images/de-caffeine_ex3.png";
+import deCaffeineEx4Img from "@/assets/images/de-caffeine_ex4.png";
 
 export const MAIN_PROJECTS = [
     {
@@ -495,8 +506,13 @@ export const MAIN_PROJECTS = [
         image: [deCaffeineImg],
         intro: "개발자들을 위한 커뮤니티 플랫폼",
         period: "2025.04.25 - 2025.05.19",
-        description: "",
+        description: `de:caffeine(디:카페인)은 개발자들이 자신의 개발 일지를 SNS처럼 공유하고, 서로의 질문과 답변을 주고받을 수 있는 개발자 커뮤니티 플랫폼입니다.
+
+◦ 프로그래머스 OPEN API 사용 (현재는 프로그래머스 API 제공 기간이 끝나 데이터가 보여지지 않습니다)`,
         type: "Team Project",
+        team: {
+            frontend: 5,
+        },
         stacks: [
             {
                 group: "Programming",
@@ -509,14 +525,229 @@ export const MAIN_PROJECTS = [
                     },
                 ],
             },
+            {
+                group: "Styling",
+                list: [
+                    {
+                        name: "TailwindCSS",
+                    },
+                ],
+            },
+            {
+                group: "State Management",
+                list: [
+                    {
+                        name: "Zustand",
+                    },
+                ],
+            },
+            {
+                group: "Routing",
+                list: [
+                    {
+                        name: "React Router",
+                    },
+                ],
+            },
+            {
+                group: "Data Fetching",
+                list: [
+                    {
+                        name: "Axios",
+                    },
+                ],
+            },
+            {
+                group: "Build",
+                list: [
+                    {
+                        name: "Vite",
+                    },
+                ],
+            },
+            {
+                group: "Deployment",
+                list: [
+                    {
+                        name: "Netlify",
+                    },
+                ],
+            },
+            {
+                group: "Tools",
+                list: [
+                    {
+                        name: "VSCode",
+                    },
+                    {
+                        name: "Git / GitHub",
+                    },
+                    {
+                        name: "Figma",
+                    },
+                    {
+                        name: "ESLint",
+                    },
+                    {
+                        name: "Slack",
+                    },
+                    {
+                        name: "Notion",
+                    },
+                ],
+            },
+            {
+                group: "Library",
+                list: [
+                    {
+                        name: "react-toastify",
+                    },
+                ],
+            },
         ],
         link: {
-            github: "",
-            deploy: "",
+            github: "https://github.com/de-caffeine/de-caffeine",
+            deploy: "https://funny-crumble-1516b7.netlify.app/",
         },
-        features: [],
-        contributionSummary: [],
-        contributions: [],
-        learn: [],
+        features: [
+            {
+                title: "로그인 및 회원가입",
+                body: "서비스 내 로그인 기능을 구현하며 사용자 인증을 통해 권한을 분리했습니다. 비로그인 사용자는 게시물 열람만 가능하며, 게시물 작성 등 핵심 기능은 로그인 후 이용할 수 있습니다.",
+                img: deCaffeineFeature1Img,
+                icon: "user-key",
+            },
+            {
+                title: "게시물 & 댓글 작성 및 좋아요",
+                body: "게시물 및 댓글 작성 기능을 통해 사용자 간 자유로운 의견 교환이 가능하며, '좋아요' 기능을 제공하여 콘텐츠에 대한 활발한 상호작용을 유도했습니다.",
+                img: deCaffeineFeature2Img,
+                icon: "heart-handshake",
+            },
+            {
+                title: "알림",
+                body: "내 게시물에 달린 댓글, 좋아요, 새로운 팔로우 등 서비스 내 주요 상호작용 발생 시 사용자에게 알림을 제공합니다.",
+                img: deCaffeineFeature3Img,
+                icon: "bell",
+            },
+            {
+                title: "채팅",
+                body: "실시간 채팅 기능을 도입하여, 다른 사용자들과 즉각적이고 원활한 1:1 또는 그룹 소통이 가능하도록 지원합니다.",
+                img: deCaffeineFeature4Img,
+                icon: "message-circle-more",
+            },
+            {
+                title: "유저 팔로우",
+                body: "개인 프로필 페이지에서 작성한 글, 댓글, 좋아요 내역을 한눈에 모아볼 수 있습니다. 관심 있는 사용자를 팔로우/언팔로우하며 네트워킹을 형성할 수 있습니다.",
+                img: deCaffeineFeature5Img,
+                icon: "user-plus",
+            },
+            {
+                title: "반응형 UI",
+                body: "ailwindCSS를 활용해 모바일부터 데스크톱까지 다양한 디바이스에 대응하는 반응형 UI를 구현했습니다.",
+                img: deCaffeineFeature6Img,
+                icon: "monitor-smartphone",
+            },
+            {
+                title: "다크모드",
+                body: "TailwindCSS를 활용해 부드럽게 토글되는 다크모드를 구현했습니다.",
+                img: deCaffeineFeature7Img,
+                icon: "moon",
+            },
+        ],
+        contributionSummary: [
+            {
+                title: "기획 및 설계",
+                percent: 90,
+                body: `◦ 프로젝트 기획 및 UI/UX 디자인
+◦ 프로젝트 아키텍쳐 설계`,
+            },
+            {
+                title: "개발 구현",
+                percent: 40,
+                body: `◦ React 기반 프론트엔드 구현
+◦ UX 개선 및 배포`,
+            },
+        ],
+        contributions: [
+            {
+                title: "기획 및 설계",
+                icon: "drafting-compass",
+                list: [
+                    {
+                        title: "기획 및 UI/UX 디자인",
+                        body: `◦ 프로젝트 기획 주도
+◦ Figma를 활용해 UI/UX 디자인`,
+                    },
+                    {
+                        title: "프로젝트 구조 설계",
+                        body: `◦ atomic 디자인 패턴 기반으로 페이지 단위의 컴포넌트 구조를 설계하여, 유지보수가 쉽고 재사용 가능한 아키텍처 구현`,
+                    },
+                ],
+            },
+            {
+                title: "프론트엔드 개발 및 배포",
+                icon: "layout-template",
+                list: [
+                    {
+                        title: "라우팅 구조 설계",
+                        body: `◦ react-router-dom을 활용해 동적 라우팅 구조 설계
+◦ 경로 오류 발생 시 404 에러 페이지로 자연스러운 안내와 이탈 최소화 유도`,
+                    },
+                    {
+                        title: "프론트엔드 구현",
+                        body: `◦ TypeScript 기반 React 환경에서 메인, 커뮤니티, 코드질문, 검색, 404 에러 페이지 및 알림 모달 퍼블리싱
+◦ 좋아요 순, 최신 순 정렬 로직 구현으로 포스트 목록 동적 출력
+◦ 좋아요 로직 구현
+◦ 사용자 입력 기반 필터링 로직으로 검색 기능 구현
+◦ 알림 필터링, 읽음 처리 로직 구현
+◦ Zustand와 LocalStorage를 활용한 로그인 전역 상태 관리 및 세션 유지 처리`,
+                    },
+                    {
+                        title: "프로젝트 배포",
+                        body: `◦ Netlify을 활용해 프론트엔드 배포`,
+                    },
+                ],
+            },
+            {
+                title: "사용자 경험(UX) 개선",
+                icon: "user-star",
+                list: [
+                    {
+                        title: "낙관적 업데이트 적용",
+                        body: `◦ 좋아요 아이콘 클릭 시 서버 응답 지연으로 인해 발생하는 UI 답답함을 낙관적 업데이트 로직으로 해결하여 즉각적인 클릭 피드백 구현`,
+                    },
+                    {
+                        title: "스켈레톤 UI 적용",
+                        body: `◦ 데이터 로딩 중 발생하는 빈 화면 대신 스켈레톤 컴포넌트를 먼저 렌더링하여, 체감 대기 시간을 단축하고 시각적 안정감 제공`,
+                        img: deCaffeineEx1Img,
+                    },
+                    {
+                        title: "동적 레이아웃 구현",
+                        body: `◦ 브라우저 화면 너비(Viewport) 변화를 감지해 한 줄에 렌더링할 포스트 개수를 동적으로 계산하는 로직을 구현하여, 더 매끄러운 반응형 화면 구현`,
+                        img: deCaffeineFeature6Img,
+                    },
+                ],
+            },
+        ],
+        learn: [
+            {
+                title: "프로젝트의 모든 프로세스 경험",
+                badge: "Learn",
+                learn: `◦ 기획부터 디자인, 개발, 배포까지 전 과정을 직접 기여하며 프로젝트 전반의 개발 프로세스와 협업 흐름 이해
+◦ TypeScript 기반 React를 활용해 프로젝트를 완성하는 과정에서 기술 역량 성장`,
+            },
+            {
+                title: "OS별 텍스트 렌더링 차이 개선",
+                badge: "UI/UX",
+                problem: `Windows와 Mac OS 환경의 폰트 렌더링 방식 차이로 인해 동일한 폰트임에도 다르게 출력되는 현상 발견`,
+                solution: `◦ CSS 'transform' 속성을 이용해 텍스트를 미세하게 회전시켜 안티앨리어싱 효과 시도`,
+                learn: `◦ OS에 따른 그래픽 렌더링 원리와 안티앨리어싱에 대한 개념 학습
+◦ 단순한 기능 구현을 넘어, 다양한 사용자 환경(OS 및 브라우저)에서 일관된 시각적 경험을 제공하는 디테일의 중요성 체감`,
+                img: [
+                    { title: "Window 개선 전", src: deCaffeineEx2Img },
+                    { title: "Window 개선 후", src: deCaffeineEx3Img },
+                    { title: "Mac", src: deCaffeineEx4Img },
+                ],
+            },
+        ],
     },
 ];

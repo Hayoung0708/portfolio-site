@@ -40,7 +40,9 @@ export default function ProjectLearn({
                         {l.img && (
                             <div className="flex gap-5 justify-center items-center">
                                 {l.img.map((img, i) => (
-                                    <div className="w-[40%] min-w-[40%] flex flex-col items-center gap-2 text-sub">
+                                    <div
+                                        className={`flex flex-col items-center gap-2 text-sub ${l.img!.length >= 3 ? "w-[30%] min-w-[30%]" : "w-[40%] min-w-[40%]"}`}
+                                    >
                                         <img
                                             src={img.src}
                                             key={i}
@@ -51,26 +53,32 @@ export default function ProjectLearn({
                                 ))}
                             </div>
                         )}
-                        <div className="w-full flex gap-5">
-                            <div className="card w-full p-5 flex flex-col gap-2 bg-gray1000/50 rounded-2xl border-none">
-                                <p className="flex gap-1 items-center text-xl font-semibold text-red-500">
-                                    <TriangleAlert />
-                                    문제
-                                </p>
-                                <p className="text-[#94a3b8] leading-6">
-                                    {l.problem}
-                                </p>
+                        {l.problem && (
+                            <div className="w-full flex gap-5">
+                                {l.problem && (
+                                    <div className="card w-full p-5 flex flex-col gap-2 bg-gray1000/50 rounded-2xl border-none">
+                                        <p className="flex gap-1 items-center text-xl font-semibold text-red-500">
+                                            <TriangleAlert />
+                                            문제
+                                        </p>
+                                        <p className="text-[#94a3b8] leading-6">
+                                            {l.problem}
+                                        </p>
+                                    </div>
+                                )}
+                                {l.solution && (
+                                    <div className="card w-full p-5 flex flex-col gap-2 bg-gray1000/50 rounded-2xl border-none">
+                                        <p className="flex gap-1 items-center text-xl font-semibold text-green-500">
+                                            <Lightbulb />
+                                            해결
+                                        </p>
+                                        <p className="text-[#94a3b8] leading-6">
+                                            {l.solution}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
-                            <div className="card w-full p-5 flex flex-col gap-2 bg-gray1000/50 rounded-2xl border-none">
-                                <p className="flex gap-1 items-center text-xl font-semibold text-green-500">
-                                    <Lightbulb />
-                                    해결
-                                </p>
-                                <p className="text-[#94a3b8] leading-6">
-                                    {l.solution}
-                                </p>
-                            </div>
-                        </div>
+                        )}
                         <div className="card w-full p-5 flex flex-col gap-2 bg-gray1000/50 rounded-2xl border-none">
                             <p className="flex gap-2 items-center text-xl font-semibold text-main">
                                 <Sparkles />
