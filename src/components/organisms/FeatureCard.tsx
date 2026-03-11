@@ -10,10 +10,18 @@ export default function FeatureCard({ feature }: { feature: Feature }) {
                     <p className="text-sm text-[#94a3b8]">{feature.body}</p>
                 </div>
             </div>
-            <img
-                src={feature.img}
-                className="w-full aspect-video object-cover rounded-2xl"
-            />
+            {feature.img && (
+                <img
+                    src={feature.img}
+                    className="w-full aspect-video object-cover rounded-2xl"
+                />
+            )}
+            {feature.mobileImg && (
+                <img
+                    src={feature.mobileImg}
+                    className="w-[50%] mx-auto object-cover rounded-2xl"
+                />
+            )}
         </div>
     );
 }

@@ -12,6 +12,7 @@ export declare global {
         title: string;
         body: string;
         img?: string;
+        mobileImg?: string;
         icon?: string;
     }
     interface ContributionSummary {
@@ -54,6 +55,7 @@ export declare global {
         link: {
             github: string;
             deploy: string;
+            preview?: string;
         };
         features: Feature[];
         contributionSummary: ContributionSummary[];
