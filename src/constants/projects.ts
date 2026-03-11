@@ -11,8 +11,22 @@ import duncopFeature6Img from "@/assets/images/duncop_feature6.gif";
 import duncopEx1Img from "@/assets/images/duncop_ex1.png";
 import duncopEx2Img from "@/assets/images/duncop_ex2.png";
 import duncopEx3Img from "@/assets/images/duncop_ex3.png";
-import jjimkongImg from "@/assets/images/jjimkong.png";
-import studiumImg from "@/assets/images/studium.png";
+// import jjimkongImg from "@/assets/images/jjimkong.png";
+import studium1Img from "@/assets/images/studium1.png";
+import studium2Img from "@/assets/images/studium2.png";
+import studium3Img from "@/assets/images/studium3.png";
+import studium4Img from "@/assets/images/studium4.png";
+import studium5Img from "@/assets/images/studium5.png";
+import studium6Img from "@/assets/images/studium6.png";
+import studiumFeature1Img from "@/assets/images/studium_feature1.gif";
+import studiumFeature2Img from "@/assets/images/studium_feature2.gif";
+import studiumFeature3Img from "@/assets/images/studium_feature3.gif";
+import studiumFeature4Img from "@/assets/images/studium_feature4.gif";
+import studiumFeature5Img from "@/assets/images/studium_feature5.gif";
+import studiumFeature6Img from "@/assets/images/studium_feature6.gif";
+import studiumFeature7Img from "@/assets/images/studium_feature7.gif";
+import studiumEx1Img from "@/assets/images/studium_ex1.png";
+import studiumExImg from "@/assets/images/studiums.png";
 import bookjeokbookjeok1Img from "@/assets/images/bookjeokbookjeok1.png";
 import bookjeokbookjeok2Img from "@/assets/images/bookjeokbookjeok2.png";
 import bookjeokbookjeok3Img from "@/assets/images/bookjeokbookjeok3.png";
@@ -39,41 +53,41 @@ import deCaffeineEx3Img from "@/assets/images/de-caffeine_ex3.png";
 import deCaffeineEx4Img from "@/assets/images/de-caffeine_ex4.png";
 
 export const MAIN_PROJECTS = [
-    {
-        id: "jjimkong",
-        title: "찜콩",
-        image: [jjimkongImg],
-        intro: "리뷰 클렌징 없는 나만의 솔직 리뷰 저장소",
-        period: "2025.10.02 - 개발중",
-        description: "",
-        type: "Team Project",
-        team: {
-            frontend: 1,
-            backend: 1,
-        },
-        lead: "Project",
-        stacks: [
-            {
-                group: "Programming",
-                list: [
-                    {
-                        name: "TypeScript",
-                    },
-                    {
-                        name: "React",
-                    },
-                ],
-            },
-        ],
-        link: {
-            github: "",
-            deploy: "",
-        },
-        features: [],
-        contributionSummary: [],
-        contributions: [],
-        learn: [],
-    },
+    // {
+    //     id: "jjimkong",
+    //     title: "찜콩",
+    //     image: [jjimkongImg],
+    //     intro: "리뷰 클렌징 없는 나만의 솔직 리뷰 저장소",
+    //     period: "2025.10.02 - 개발중",
+    //     description: "",
+    //     type: "Team Project",
+    //     team: {
+    //         frontend: 1,
+    //         backend: 1,
+    //     },
+    //     lead: "Project",
+    //     stacks: [
+    //         {
+    //             group: "Programming",
+    //             list: [
+    //                 {
+    //                     name: "TypeScript",
+    //                 },
+    //                 {
+    //                     name: "React",
+    //                 },
+    //             ],
+    //         },
+    //     ],
+    //     link: {
+    //         github: "",
+    //         deploy: "",
+    //     },
+    //     features: [],
+    //     contributionSummary: [],
+    //     contributions: [],
+    //     learn: [],
+    // },
     {
         id: "portfolio-site",
         title: "Portfolio Site",
@@ -345,7 +359,7 @@ export const MAIN_PROJECTS = [
                     },
                     {
                         title: "프로젝트 배포",
-                        body: `◦ Vercel을 활용해 프론트엔드 배포`,
+                        body: `◦ Vercel을 활용해 프론트엔드 배포 및 배포 자동화`,
                     },
                 ],
             },
@@ -450,11 +464,26 @@ export const MAIN_PROJECTS = [
     {
         id: "studium",
         title: "Studium",
-        image: [studiumImg],
+        image: [
+            studium1Img,
+            studium2Img,
+            studium3Img,
+            studium4Img,
+            studium5Img,
+            studium6Img,
+        ],
         intro: "목표 기반 스터디 관리 플랫폼",
-        period: "2025.06.27 - 2025.08.24",
-        description: "",
+        period: "2025.06.27 - 2025.08.04",
+        description: `스터디움 Studium은 공통의 목표를 설정하고, 구성원과 함께 꾸준히 학습할 수 있도록 돕는 🎯 목표 기반 스터디 관리 플랫폼입니다!
+
+출석 체크, 목표 달성, 리워드 시스템, 서바이벌 스터디 등을 통해 스터디의 몰입도와 지속성을 높이는 데 중점을 둡니다.
+
+◦ 현재는 서버 제공 기간이 끝나 데이터가 보여지지 않습니다`,
         type: "Team Project",
+        team: {
+            frontend: 4,
+            backend: 5,
+        },
         lead: "FrontEnd",
         stacks: [
             {
@@ -462,21 +491,259 @@ export const MAIN_PROJECTS = [
                 list: [
                     {
                         name: "TypeScript",
+                        description: "language",
                     },
                     {
                         name: "Next",
+                        description: "framework",
+                    },
+                ],
+            },
+            {
+                group: "Styling",
+                list: [
+                    {
+                        name: "TailwindCSS",
+                    },
+                ],
+            },
+            {
+                group: "Routing",
+                list: [
+                    {
+                        name: "App Route",
+                    },
+                ],
+            },
+            {
+                group: "Data Fetching",
+                list: [
+                    {
+                        name: "Axios",
+                    },
+                    {
+                        name: "TanStack",
+                    },
+                ],
+            },
+            {
+                group: "Build",
+                list: [
+                    {
+                        name: "Vite",
+                    },
+                ],
+            },
+            {
+                group: "Deployment",
+                list: [
+                    {
+                        name: "Vercel",
+                    },
+                ],
+            },
+            {
+                group: "Tools",
+                list: [
+                    {
+                        name: "VSCode",
+                    },
+                    {
+                        name: "Git / GitHub",
+                    },
+                    {
+                        name: "Figma",
+                    },
+                    {
+                        name: "Notion",
+                    },
+                    {
+                        name: "Discord",
+                    },
+                    {
+                        name: "Piskel",
+                    },
+                ],
+            },
+            {
+                group: "Library",
+                list: [
+                    {
+                        name: "lucide-react",
+                    },
+                    {
+                        name: "lottiefiles",
+                    },
+                    {
+                        name: "dayjs",
+                    },
+                    {
+                        name: "react-day-picker",
+                    },
+                    {
+                        name: "react-mobile-picker",
+                    },
+                    {
+                        name: "react-toastify",
                     },
                 ],
             },
         ],
         link: {
-            github: "",
-            deploy: "",
+            github: "https://github.com/prgrms-web-devcourse-final-project/WEB4_5_9to6_FE",
+            deploy: "https://studium-9to6.vercel.app/",
+            preview: "https://www.youtube.com/watch?v=G-fUFeWH3Ak",
         },
-        features: [],
-        contributionSummary: [],
-        contributions: [],
-        learn: [],
+        features: [
+            {
+                title: "로그인 및 회원가입",
+                body: "서비스 내 로그인 기능 및 소셜 로그인을 구현하며 사용자 인증을 통해 권한을 분리했습니다. 비로그인 사용자는 스터디 목록 열람만 가능하며, 핵심 기능은 로그인 후 이용할 수 있습니다.",
+                mobileImg: studiumFeature1Img,
+                icon: "user-key",
+            },
+            {
+                title: "스터디",
+                body: "출석 체크와 목표 달성 체크 등의 활동을 통해 리워드를 얻을 수 있습니다. 또한, 내장된 타이머 기능을 통해 학습에 집중한 시간을 측정하고 기록할 수 있습니다.",
+                mobileImg: studiumFeature2Img,
+                icon: "book-open-text",
+            },
+            {
+                title: "실시간 채팅",
+                body: `스터디원들과 원활하게 소통할 수 있도록 실시간 단체 채팅 및 1:1 귓속말 기능을 제공합니다.`,
+                mobileImg: studiumFeature3Img,
+                icon: "message-circle-more",
+            },
+            {
+                title: "서바이벌 스터디",
+                body: "플랫폼 자체적으로 분야별 서바이벌 스터디를 진행합니다. 참가자는 LLM을 활용해 매주 새롭게 생성되는 퀴즈를 풀며 생존 경쟁을 하고, 생존 시 특별한 리워드를 획득할 수 있습니다.",
+                mobileImg: studiumFeature4Img,
+                icon: "swords",
+            },
+            {
+                title: "실시간 알림",
+                body: "스터디 가입 신청, 수락 및 거절 등 서비스 내 주요 상호작용 발생 시 사용자에게 실시간으로 알림을 제공합니다.",
+                mobileImg: studiumFeature5Img,
+                icon: "bell",
+            },
+            {
+                title: "리워드 상점",
+                body: "스터디 활동으로 얻은 리워드를 사용해 앱 테마, 스터디룸 테마, 아바타를 구매할 수 있습니다.",
+                mobileImg: studiumFeature6Img,
+                icon: "store",
+            },
+            {
+                title: "테마 변경",
+                body: "TailwindCSS를 활용해 여러 색상의 테마를 자유롭게 변경할 수 있는 기능을 구현했습니다.",
+                mobileImg: studiumFeature7Img,
+                icon: "palette",
+            },
+        ],
+        contributionSummary: [
+            {
+                title: "기획 및 설계",
+                percent: 50,
+                body: `◦ 프로젝트 기획 주도`,
+            },
+            {
+                title: "개발 구현",
+                percent: 40,
+                body: `◦ Next.js 기반 프론트엔드 구현`,
+            },
+        ],
+        contributions: [
+            {
+                title: "기획 및 설계",
+                icon: "drafting-compass",
+                list: [
+                    {
+                        title: "기획 및 와이어프레임 설계",
+                        body: `◦ 프로젝트 기획을 주도하며 서비스 구조와 플로우 설계
+◦ 프론트엔드 팀장으로서 개발 상황을 정리하며 팀의 진행 방향 관리, 백엔드 팀과 주도적으로 소통
+◦ 로그인/회원가입 및 스터디 생성 페이지의 와이어프레임 설계`,
+                    },
+                    {
+                        title: "에셋 제작",
+                        body: `◦ Piskel을 활용하여 프로젝트 아이덴티티인 캐릭터 에셋 제작`,
+                        img: studiumEx1Img,
+                    },
+                ],
+            },
+            {
+                title: "프론트엔드 개발 및 배포",
+                icon: "layout-template",
+                list: [
+                    {
+                        title: "프론트엔드 구현",
+                        body: `◦ 로그인, 회원가입, 스터디 생성/수정, 알림 페이지 퍼블리싱
+◦ 소셜 로그인 및 이메일 로그인 로직 구현
+◦ 회원가입, 스터디 생성/수정 로직 구현
+◦ 사용자별 알림 필터링, 읽음 처리 로직 구현
+◦ react-day-picker 라이브러리를 활용해 달력 UI 스타일링 및 날짜 선택 로직 구현
+◦ react-mobile-picker 라이브러리를 활용해 휠 선택 UI 스타일링 및 로직 구현`,
+                    },
+                    {
+                        title: "Auth 세션 관리",
+                        body: `◦ cookie와 Zustand를 활용해 로그인 세션 저장
+◦ AuthInitializer 컴포넌트를 제작해 새로고침 또는 페이지 재접속 시 로그인 세션 불러오는 로직 구현`,
+                    },
+                    {
+                        title: "실시간 알림 기능 구현",
+                        body: `◦ SSE를 활용해 실시간으로 업데이트되는 알림 기능 구현
+◦ 사용자가 새로운 알림을 시각적으로 즉시 확인할 수 있는 UI 구축`,
+                    },
+                    {
+                        title: "프로젝트 배포",
+                        body: `◦ Vercel을 활용해 프론트엔드 배포 및 배포 자동화`,
+                    },
+                ],
+            },
+            {
+                title: "사용자 경험(UX) 개선",
+                icon: "user-star",
+                list: [
+                    {
+                        title: "낙관적 업데이트 적용",
+                        body: `◦ API 응답 대기시 낙관적 업데이트를 적용해 중복 요청이나 에러 발생 예방, 로딩 스트레스 저하`,
+                    },
+                    {
+                        title: "퍼널 모델 적용",
+                        body: `◦ 회원가입 및 스터디 생성 페이지에 퍼널 모델을 적용하고 자연스러운 애니메이션을 추가해 UI/UX 개선`,
+                    },
+                ],
+            },
+            {
+                title: "커뮤니케이션 프로세스 개선",
+                icon: "message-circle-more",
+                list: [
+                    {
+                        title: "담당자 지정 및 소통 규칙 정립",
+                        body: `◦ 불특정 다수에게 질문하던 기존 방식을 개선하여, 디스코드에 기능별 담당자를 명시하고 해당 담당자만 태그하여 소통하는 프로세스 제안
+◦ 구두로 진행되던 모호한 논의를 글로 명확히 정리하여 질문하도록 소통 규칙 정립
+◦ 관련 없는 팀원의 불필요한 시간 소모를 방지하고, 문제 해결에 드는 소통 비용과 시간을 크게 단축`,
+                        img: studiumExImg,
+                    },
+                ],
+            },
+        ],
+        learn: [
+            {
+                title: "다른 직군과의 커뮤니케이션",
+                badge: "Learn",
+                learn: `◦ 프론트엔드 팀장으로서 다수의 백엔드 개발자와 협업하며, 원활한 프로젝트 진행을 위해 타 직군의 기술 스택과 아키텍처에 대한 이해가 필수적임을 체감
+◦ 직군 간의 관점 차이를 조율하고 원활하게 소통하는 소프트 스킬의 중요성 체감
+◦ 백엔드 전반의 프로세스와 용어에 대한 이해도 향상`,
+            },
+            {
+                title: "로그인 상태 관리 이슈",
+                badge: "Auth",
+                problem: `◦ 서비스 내 로그인이 아닌 OAuth 로그인 시 서버가 response값을 주는 게 아닌 리다이렉트 방식으로 동작해, 기존 response값에 따라 동작하는 로직으로는 로그인 여부를 확인하기 어려운 문제 발생`,
+                solution: `◦ URL 쿼리 파라미터로 토큰을 전달받는 방식을 요청했으나, 보안 취약점을 방지하고자 하는 백엔드 팀의 의견 수용
+◦ 백엔드에서 cookie로 인증/인가를 처리하고 있다는 점을 활용해, 프로젝트 진입점에 AuthInitializer 컴포넌트를 구성하고, useEffect로 유저 정보를 fetch하여 전역 로그인 상태를 동기화하는 로직 구현`,
+                learn: `◦ 인가 코드 발급부터 토큰 교환으로 이어지는 OAuth의 흐름과 서버-클라이언트 간의 역할 분담에 대한 이해도 향상
+◦ LocalStorage와 cookie의 보안적 차이를 학습하고, 프론트엔드 관점에서의 안전한 인증 토큰 처리 방식 체득
+◦ 앱 초기화 단계에서 유저 세션을 검증하고 라우팅을 제어하는 Auth Flow 아키텍처 설계 경험`,
+            },
+        ],
     },
     {
         id: "bookjeokbookjeok",

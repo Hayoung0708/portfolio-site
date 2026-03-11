@@ -11,8 +11,11 @@ import {
     MessageCircleMore,
     MonitorSmartphone,
     Moon,
+    Palette,
     Search,
     Siren,
+    Store,
+    Swords,
     TriangleAlert,
     UserKey,
     UserPlus,
@@ -56,6 +59,9 @@ export default function IconBox({
             )}
             {icon === "user-plus" && <UserPlus size={Iconsize} />}
             {icon === "book-open-text" && <BookOpenText size={Iconsize} />}
+            {icon === "swords" && <Swords size={Iconsize} />}
+            {icon === "store" && <Store size={Iconsize} />}
+            {icon === "palette" && <Palette size={Iconsize} />}
         </div>
     );
 }
