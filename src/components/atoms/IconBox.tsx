@@ -2,6 +2,7 @@ import { twMerge } from "tailwind-merge";
 import {
     ActivityIcon,
     Bell,
+    BookOpenText,
     Calculator,
     Database,
     DraftingCompass,
@@ -54,6 +55,7 @@ export default function IconBox({
                 <MessageCircleMore size={Iconsize} />
             )}
             {icon === "user-plus" && <UserPlus size={Iconsize} />}
+            {icon === "book-open-text" && <BookOpenText size={Iconsize} />}
         </div>
     );
 }

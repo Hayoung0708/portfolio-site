@@ -87,8 +87,8 @@ export const CHRONOLOGY_NODES = [
         ],
     },
     {
-        date: "2021.06 - 2021.08",
-        title: `가짜개발자 Season 3 & Season 4`,
+        date: "2021.06 - 2021.07",
+        title: `가짜개발자 Season 3`,
         body: `인천대학교 깃허브/알고리즘 스터디 "가짜개발자" 활동`,
         list: [
             "백준 알고리즘 문제 풀이 및 코드 설명을 통해 알고리즘 역량 향상",

@@ -13,7 +13,16 @@ import duncopEx2Img from "@/assets/images/duncop_ex2.png";
 import duncopEx3Img from "@/assets/images/duncop_ex3.png";
 import jjimkongImg from "@/assets/images/jjimkong.png";
 import studiumImg from "@/assets/images/studium.png";
-import bookjeokbookjeokImg from "@/assets/images/bookjeokbookjeok.png";
+import bookjeokbookjeok1Img from "@/assets/images/bookjeokbookjeok1.png";
+import bookjeokbookjeok2Img from "@/assets/images/bookjeokbookjeok2.png";
+import bookjeokbookjeok3Img from "@/assets/images/bookjeokbookjeok3.png";
+import bookjeokbookjeok4Img from "@/assets/images/bookjeokbookjeok4.png";
+import bookjeokbookjeok5Img from "@/assets/images/bookjeokbookjeok5.png";
+import bookjeokbookjeokFeature1Img from "@/assets/images/bookjeokbookjeok_feature1.png";
+import bookjeokbookjeokFeature2Img from "@/assets/images/bookjeokbookjeok_feature2.png";
+import bookjeokbookjeokFeature3Img from "@/assets/images/bookjeokbookjeok_feature3.gif";
+import bookjeokbookjeokFeature4Img from "@/assets/images/bookjeokbookjeok_feature4.png";
+import bookjeokbookjeokFeature5Img from "@/assets/images/bookjeokbookjeok_feature5.png";
 import deCaffeine1Img from "@/assets/images/de-caffeine1.png";
 import deCaffeine2Img from "@/assets/images/de-caffeine2.png";
 import deCaffeine3Img from "@/assets/images/de-caffeine3.png";
@@ -227,9 +236,6 @@ export const MAIN_PROJECTS = [
                     },
                     {
                         name: "Figma",
-                    },
-                    {
-                        name: "ESLint",
                     },
                     {
                         name: "Google Analytics",
@@ -475,11 +481,20 @@ export const MAIN_PROJECTS = [
     {
         id: "bookjeokbookjeok",
         title: "북적북적",
-        image: [bookjeokbookjeokImg],
+        image: [
+            bookjeokbookjeok1Img,
+            bookjeokbookjeok2Img,
+            bookjeokbookjeok3Img,
+            bookjeokbookjeok4Img,
+            bookjeokbookjeok5Img,
+        ],
         intro: "독서를 기록하고 공유하는 독서 커뮤니티 플랫폼",
         period: "2025.05.30 - 2025.06.19",
         description: `북적북적은 독서 다이어리를 작성하고, 관심사에 맞는 북클럽을 개설하거나 참여하며, 자유롭게 의견을 나누는 게시판 활동을 통해 다른 독자들과 소통할 수 있는 독서 커뮤니티 플랫폼입니다.
-알라딘 오픈 API를 활용해 실시간 베스트셀러, 연관 도서, 도서 검색 기능을 제공하여 사용자들이 다양한 책 정보를 손쉽게 확인하고 공유할 수 있도록 지원합니다.`,
+
+알라딘 오픈 API를 활용해 실시간 베스트셀러, 연관 도서, 도서 검색 기능을 제공하여 사용자들이 다양한 책 정보를 손쉽게 확인하고 공유할 수 있도록 지원합니다.
+
+◦ 현재는 알라딘 API KEY 및 Supabase 플랜이 만료돼 데이터가 보여지지 않습니다`,
         type: "Team Project",
         team: {
             frontend: 5,
@@ -496,15 +511,229 @@ export const MAIN_PROJECTS = [
                     },
                 ],
             },
+            {
+                group: "Styling",
+                list: [
+                    {
+                        name: "TailwindCSS",
+                    },
+                ],
+            },
+            {
+                group: "State Management",
+                list: [
+                    {
+                        name: "Zustand",
+                    },
+                ],
+            },
+            {
+                group: "Routing",
+                list: [
+                    {
+                        name: "React Router",
+                    },
+                ],
+            },
+            {
+                group: "Database",
+                list: [
+                    {
+                        name: "Supabase",
+                    },
+                ],
+            },
+            {
+                group: "Data Fetching",
+                list: [
+                    {
+                        name: "Axios",
+                    },
+                ],
+            },
+            {
+                group: "Build",
+                list: [
+                    {
+                        name: "Vite",
+                    },
+                ],
+            },
+            {
+                group: "Deployment",
+                list: [
+                    {
+                        name: "Netlify",
+                    },
+                ],
+            },
+            {
+                group: "Tools",
+                list: [
+                    {
+                        name: "VSCode",
+                    },
+                    {
+                        name: "Git / GitHub",
+                    },
+                    {
+                        name: "Figma",
+                    },
+                    {
+                        name: "Notion",
+                    },
+                    {
+                        name: "Slack",
+                    },
+                ],
+            },
+            {
+                group: "Library",
+                list: [
+                    {
+                        name: "mui",
+                    },
+                    {
+                        name: "react-icons",
+                    },
+                    {
+                        name: "react-toastify",
+                    },
+                    {
+                        name: "dayjs",
+                    },
+                ],
+            },
         ],
         link: {
             github: "https://github.com/Programmers-FE5-VueFinder/bookjeokbookjeok",
             deploy: "https://bookjeokbookjeok.netlify.app/",
         },
-        features: [],
-        contributionSummary: [],
-        contributions: [],
-        learn: [],
+        features: [
+            {
+                title: "로그인 및 회원가입",
+                body: "서비스 내 로그인 기능 및 소셜 로그인을 구현하며 사용자 인증을 통해 권한을 분리했습니다. 비로그인 사용자는 게시물 열람만 가능하며, 핵심 기능은 로그인 후 이용할 수 있습니다.",
+                img: bookjeokbookjeokFeature1Img,
+                icon: "user-key",
+            },
+            {
+                title: "게시물 & 댓글 작성 및 좋아요",
+                body: "독서 다이어리 또는 자유 게시판에 게시물을 작성할 수 있으며, 댓글 및 대댓글, 좋아요 기능을 통해 사용자 간 자유로운 의견 교환이 가능합니다.",
+                img: bookjeokbookjeokFeature2Img,
+                icon: "heart-handshake",
+            },
+            {
+                title: "도서 상세 정보 제공",
+                body: "알라딘 API 및 자체 데이터베이스를 활용해 도서에 대한 후기와 평균 별점, 관련 도서, 해당 도서로 작성된 게시물 등의 정보를 제공합니다.",
+                img: bookjeokbookjeokFeature3Img,
+                icon: "book-open-text",
+            },
+            {
+                title: "북클럽 및 실시간 채팅",
+                body: "원하는 주제로 활동하는 독서모임인 북클럽에서 승인된 유저들끼리 소통할 수 있으며, 실시간 채팅을 할 수 있는 단체 채팅방을 제공합니다.",
+                img: bookjeokbookjeok5Img,
+                icon: "message-circle-more",
+            },
+            {
+                title: "유저 페이지",
+                body: "개인 유저 페이지에서 작성한 글, 댓글, 좋아요 내역을 한눈에 모아볼 수 있습니다. 관심 있는 사용자를 팔로우/언팔로우하며 네트워킹을 형성할 수 있습니다.",
+                img: bookjeokbookjeokFeature4Img,
+                icon: "user-plus",
+            },
+            {
+                title: "알림",
+                body: "내 게시물에 달린 댓글, 좋아요, 새로운 팔로우 등 서비스 내 주요 상호작용 발생 시 사용자에게 알림을 제공합니다.",
+                img: bookjeokbookjeokFeature5Img,
+                icon: "bell",
+            },
+        ],
+        contributionSummary: [
+            {
+                title: "기획 및 설계",
+                percent: 40,
+                body: `◦ 프로젝트 기획 참여
+◦ 데이터 구조 설계`,
+            },
+            {
+                title: "개발 구현",
+                percent: 25,
+                body: `◦ React 기반 프론트엔드 구현
+◦ Supabase 기반 백엔드 구축 및 API 연동`,
+            },
+        ],
+        contributions: [
+            {
+                title: "기획 및 설계",
+                icon: "drafting-compass",
+                list: [
+                    {
+                        title: "기획",
+                        body: `◦ 프로젝트 기획 참여`,
+                    },
+                ],
+            },
+            {
+                title: "프론트엔드 개발",
+                icon: "layout-template",
+                list: [
+                    {
+                        title: "프론트엔드 구현",
+                        body: `◦ TypeScript 기반 React 환경에서 채팅 페이지, 알림 모달 퍼블리싱
+◦ 북클럽 페이지 리팩토링 및 북클럽 생성, 수정, 삭제 로직 구현
+◦ 북클럽 모집글 등록, 신청/승인/거절/탈퇴 등 북클럽 참여 및 탈퇴 기능 구현
+◦ 알림 읽음 처리 / 모두 읽음 처리 / 알림 유형별 멘트 출력 및 링크 이동 등 전반적인 알림 시스템 구현`,
+                    },
+                    {
+                        title: "실시간 채팅 기능 구현",
+                        body: `◦ Supabase의 Realtime 기능을 활용해 실시간 단체 채팅 기능 구현
+◦ 채팅 출력 및 전송 로직 구현으로 실시간 커뮤니케이션 환경 구축`,
+                    },
+                ],
+            },
+            {
+                title: "백엔드 설계 및 구축",
+                icon: "database",
+                list: [
+                    {
+                        title: "데이터베이스 설계 및 구축",
+                        body: `◦ 서비스에 필요한 데이터베이스 테이블 구조 설계
+◦ Supabase Database를 활용해 데이터베이스 구축
+◦ RLS(Row Level Security)를 적용해 사용자 권한에 따라 데이터 접근이 제한되도록 설정하여 보안 강화
+◦ 데이터 출력 및 제어를 위한 SQL 쿼리문 작성`,
+                    },
+                    {
+                        title: "소셜 로그인 구현",
+                        body: `◦ Oauth 기능을 활용해 구글, 카카오 소셜 로그인 구현
+◦ 소셜 로그인 시, 이미 해당 이메일을 사용하고 있는 서비스 내 계정이 있다면 연동되게끔 구현`,
+                    },
+                ],
+            },
+        ],
+        learn: [
+            {
+                title: "데이터베이스와 데이터통신의 이해",
+                badge: "Learn",
+                learn: `◦ Supabase를 처음 사용해보면서 데이터베이스 아키텍처 설계부터 쿼리 작성까지의 RDBMS 기반 데이터베이스를 구축하며 데이터 흐름에 대한 이해도 향상
+◦ Realtime 기능을 적용하며 실시간 데이터 동기화 및 반영에 대한 경험`,
+            },
+            {
+                title: "레거시 코드의 존중과 개선",
+                badge: "Refactoring",
+                problem: `다른 팀원이 작성한 퍼블리싱 코드의 컴포넌트화 부재 및 잦은 코드 중복으로 인해, 기능 수정 시 어려움 발생`,
+                solution: `◦ 코드를 전면 재작성하기보다 기존 구현 의도와 코드를 최대한 존중하면서 반복되는 부분을 컴포넌트 단위로 분리
+◦ 불필요하게 중복된 코드을 제거하고 전체 구조를 단순화하여 코드의 가독성과 재사용성 향상`,
+                learn: `◦ 타인의 코드를 분석하고 이해하는 코드 리뷰 및 협업 역량 강화
+◦ 단순히 '작동하는 코드'를 넘어 '유지보수하기 좋은 코드'로 개선하는 리팩토링의 가치 체득`,
+            },
+            {
+                title: "데이터 접근 권한 이슈",
+                badge: "Security",
+                problem: `프론트엔드 로직 및 네트워크 호출에 이상이 없음에도 데이터 패칭이 거부되거나 조회가 되지 않는 문제 발생`,
+                solution: `◦ Supabase에서 사용자 권한에 맞는 RLS(Row Level Security) Policy 추가`,
+                learn: `◦ 백엔드에서 제공되는 데이터의 구조와 권한 설정에 대한 깊은 이해
+◦ 데이터 접근 권한과 인증/인가 프로세스에 대한 실무적 감각 습득`,
+            },
+        ],
     },
     {
         id: "de-caffeine",
@@ -592,9 +821,6 @@ export const MAIN_PROJECTS = [
                         name: "Figma",
                     },
                     {
-                        name: "ESLint",
-                    },
-                    {
                         name: "Slack",
                     },
                     {
@@ -635,14 +861,14 @@ export const MAIN_PROJECTS = [
                 icon: "bell",
             },
             {
-                title: "채팅",
+                title: "실시간 채팅",
                 body: "실시간 채팅 기능을 도입하여, 다른 사용자들과 즉각적이고 원활한 1:1 또는 그룹 소통이 가능하도록 지원합니다.",
                 img: deCaffeineFeature4Img,
                 icon: "message-circle-more",
             },
             {
-                title: "유저 팔로우",
-                body: "개인 프로필 페이지에서 작성한 글, 댓글, 좋아요 내역을 한눈에 모아볼 수 있습니다. 관심 있는 사용자를 팔로우/언팔로우하며 네트워킹을 형성할 수 있습니다.",
+                title: "유저 페이지",
+                body: "개인 유저 페이지에서 작성한 글, 댓글, 좋아요 내역을 한눈에 모아볼 수 있습니다. 관심 있는 사용자를 팔로우/언팔로우하며 네트워킹을 형성할 수 있습니다.",
                 img: deCaffeineFeature5Img,
                 icon: "user-plus",
             },
