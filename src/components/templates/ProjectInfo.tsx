@@ -94,36 +94,38 @@ export default function ProjectInfo({
                             </span>
                         )}
                     </p>
-                    <div className="flex flex-col gap-5 mt-5">
-                        <div className="flex gap-2 text-4xl font-semibold items-center">
-                            <Star size={40} className="text-main" />
-                            핵심 기능
+                    {project.features && (
+                        <div className="flex flex-col gap-5 mt-5">
+                            <div className="flex gap-2 text-4xl font-semibold items-center">
+                                <Star size={40} className="text-main" />
+                                핵심 기능
+                            </div>
+                            <Swiper
+                                modules={[Autoplay, EffectCoverflow]}
+                                effect="coverflow"
+                                slidesPerView={1.7}
+                                spaceBetween={20}
+                                centeredSlides
+                                loop={true}
+                                speed={1000}
+                                autoplay={{
+                                    delay: 10000,
+                                }}
+                                coverflowEffect={{
+                                    rotate: -25,
+                                    depth: 500,
+                                    slideShadows: false,
+                                }}
+                                className="w-full"
+                            >
+                                {project.features.map((f, i) => (
+                                    <SwiperSlide key={i}>
+                                        <FeatureCard feature={f} />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
                         </div>
-                        <Swiper
-                            modules={[Autoplay, EffectCoverflow]}
-                            effect="coverflow"
-                            slidesPerView={1.7}
-                            spaceBetween={20}
-                            centeredSlides
-                            loop={true}
-                            speed={1000}
-                            autoplay={{
-                                delay: 10000,
-                            }}
-                            coverflowEffect={{
-                                rotate: -25,
-                                depth: 500,
-                                slideShadows: false,
-                            }}
-                            className="w-full"
-                        >
-                            {project.features.map((f, i) => (
-                                <SwiperSlide key={i}>
-                                    <FeatureCard feature={f} />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
+                    )}
                 </div>
                 <TechStackCard stacks={project.stacks} />
             </div>

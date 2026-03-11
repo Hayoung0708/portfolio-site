@@ -93,8 +93,17 @@ export const MAIN_PROJECTS = [
         title: "Portfolio Site",
         image: [portfolioSiteImg],
         intro: "강하영 포트폴리오 사이트",
-        period: "2026.02.26 - 개발중",
-        description: "",
+        period: "2026.02.26 - 2026.03.12",
+        description: `안녕하세요 신입 프론트엔드 개발자 강하영입니다.
+
+프론트엔드 개발자의 진정한 역량은 정적인 문서가 아닌, 사용자가 직접 경험할 수 있는 '웹' 그 자체로 보여주어야 한다고 생각합니다.
+
+기존의 PDF 포트폴리오는 규격과 페이지 제한으로 인해 다채로운 프로젝트 경험을 담아내기 어렵고, GIF나 영상을 첨부할 수 없어 제가 고민했던 디테일한 UI/UX 인터랙션을 온전히 전달하기에 한계가 있었습니다.
+이에, 저만의 기술적 고민과 매끄러운 인터랙션을 어떠한 제약 없이 자유롭게 펼쳐 보이고자 이 웹 포트폴리오를 기획하고 개발했습니다.
+
+특히 이번 프로젝트에서는 AI 디자인 툴인 Stitch를 활용해 UI 기획 및 디자인 과정을 단축함으로써, 개발에 집중하여 단기간에 완성도 높은 결과물을 만들어낼 수 있었습니다.
+
+귀중한 시간을 내어 제 포트폴리오 사이트에 방문해 주셔서 감사합니다.`,
         type: "Solo Project",
         stacks: [
             {
@@ -109,14 +118,6 @@ export const MAIN_PROJECTS = [
                 ],
             },
             {
-                group: "Routing",
-                list: [
-                    {
-                        name: "React Router",
-                    },
-                ],
-            },
-            {
                 group: "Styling",
                 list: [
                     {
@@ -125,10 +126,26 @@ export const MAIN_PROJECTS = [
                 ],
             },
             {
-                group: "Deployment",
+                group: "Routing",
+                list: [
+                    {
+                        name: "React Router",
+                    },
+                ],
+            },
+            {
+                group: "Build",
                 list: [
                     {
                         name: "Vite",
+                    },
+                ],
+            },
+            {
+                group: "Deployment",
+                list: [
+                    {
+                        name: "Vercel",
                     },
                 ],
             },
@@ -136,17 +153,33 @@ export const MAIN_PROJECTS = [
                 group: "Tools",
                 list: [
                     {
-                        name: "Vite",
-                        description: "Deployment",
+                        name: "VSCode",
+                    },
+                    {
+                        name: "Git / GitHub",
+                    },
+                    {
+                        name: "Stitch",
                     },
                 ],
             },
             {
-                group: "Librarys",
+                group: "Library",
                 list: [
                     {
-                        name: "Vite",
-                        description: "Deployment",
+                        name: "lucide-react",
+                    },
+                    {
+                        name: "swiper",
+                    },
+                    {
+                        name: "animate.css",
+                    },
+                    {
+                        name: "react-hangul-motion",
+                    },
+                    {
+                        name: "aos",
                     },
                 ],
             },
@@ -155,10 +188,85 @@ export const MAIN_PROJECTS = [
             github: "",
             deploy: "",
         },
-        features: [],
-        contributionSummary: [],
-        contributions: [],
-        learn: [],
+        contributionSummary: [
+            {
+                title: "기획 및 설계",
+                percent: 100,
+                body: `◦ 프로젝트 기획 및 AI를 활용한 UI/UX 디자인
+◦ 프로젝트 아키텍쳐 설계`,
+            },
+            {
+                title: "개발 구현",
+                percent: 100,
+                body: `◦ React 기반 프론트엔드 전반 구현
+◦ Vercel을 활용한 프론트엔드 배포`,
+            },
+        ],
+        contributions: [
+            {
+                title: "기획 및 설계",
+                icon: "drafting-compass",
+                list: [
+                    {
+                        title: "기획 및 AI 디자인",
+                        body: `◦ 프로젝트 전체 기획
+◦ AI 디자인 툴 Stitch를 활용해 UI/UX 디자인`,
+                    },
+                    {
+                        title: "프로젝트 구조 설계",
+                        body: `◦ 소규모 프로젝트로 빠른 개발 속도가 중요했기 때문에 기본적으로 Layer-based Structure를 채택, components 영역은 재사용성을 극대화하기 위해 Atomic Design 패턴을 도입한 하이브리드 구조로 프로젝트 구조 설계`,
+                    },
+                ],
+            },
+            {
+                title: "프론트엔드 개발 및 배포",
+                icon: "layout-template",
+                list: [
+                    {
+                        title: "프론트엔드 구현",
+                        body: `◦ TypeScript 기반 React 환경에서 모든 페이지 퍼블리싱
+◦ Swiper, Animate.css, Aos 등의 라이브러리를 활용하여 애니메이션 및 인터랙티브한 UI 구현`,
+                    },
+                    {
+                        title: "프로젝트 배포",
+                        body: `◦ Vercel을 활용해 프론트엔드 배포`,
+                    },
+                ],
+            },
+            //             {
+            //                 title: "코드 리팩토링",
+            //                 icon: "layout-template",
+            //                 list: [
+            //                     {
+            //                         title: "컴포넌트 분리 및 코드 복잡도 개선",
+            //                         body: `◦ 단일 책임 원칙(SRP)에 따라 비대한 컴포넌트의 UI와 Custom Hook 분리
+            // ◦ VSCode Code Metrics 확장을 활용해 파일당 코드 라인 수와 복잡도 측정`,
+            //                     },
+            //                 ],
+            //             },
+            //             {
+            //                 title: "Lighthouse 기반 웹 성능 및 접근성 최적화",
+            //                 icon: "layout-template",
+            //                 list: [
+            //                     {
+            //                         title: "렌더링 성능 최적화",
+            //                         body: ``,
+            //                     },
+            //                     {
+            //                         title: "시맨틱 마크업을 통한 웹 접근성 강화",
+            //                         body: ``,
+            //                     },
+            //                 ],
+            //             },
+        ],
+        learn: [
+            {
+                title: "Make It Work",
+                badge: "Learn",
+                learn: `◦ 처음부터 완벽한 코드를 목표로 하기보다, 핵심 기능을 빠르게 구현해 '동작하는 프로토타입'을 우선 확보하는 것의 중요성 체감
+◦ 오버엔지니어링을 지양하고, 기능 구현과 코드 최적화의 단계를 분리하는 애자일한 마인드셋 학습`,
+            },
+        ],
     },
     {
         id: "duncop",

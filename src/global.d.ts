@@ -57,7 +57,7 @@ export declare global {
             deploy: string;
             preview?: string;
         };
-        features: Feature[];
+        features?: Feature[];
         contributionSummary: ContributionSummary[];
         contributions: Contribution[];
         learn: Learn[];
