@@ -80,7 +80,20 @@ export default function ProjectInfo({
                         <FileText size={40} className="text-main" />
                         프로젝트 소개
                     </div>
-                    <p className="text-base">{project.description}</p>
+                    <p className="text-base">
+                        {project.description}
+                        {project.link.preview && (
+                            <span className="text-base text-white">
+                                {"\n"}◦ 시연영상 링크 :{" "}
+                                <Link
+                                    to={project.link.preview}
+                                    className="underline text-main hover:text-main-hover"
+                                >
+                                    {project.link.preview}
+                                </Link>
+                            </span>
+                        )}
+                    </p>
                     <div className="flex flex-col gap-5 mt-5">
                         <div className="flex gap-2 text-4xl font-semibold items-center">
                             <Star size={40} className="text-main" />
