@@ -934,8 +934,13 @@ export const MAIN_PROJECTS = [
                 icon: "drafting-compass",
                 list: [
                     {
-                        title: "기획",
-                        body: `◦ 프로젝트 기획 참여`,
+                        title: "기획 및 UI/UX 디자인",
+                        body: `◦ 프로젝트 기획 참여
+◦ 디자인 참여`,
+                    },
+                    {
+                        title: "데이터 구조 설계",
+                        body: `◦ 서비스에 필요한 데이터베이스 테이블 구조 설계`,
                     },
                 ],
             },
