@@ -6,13 +6,15 @@ export default function ProjectCard({ project }: { project: Project }) {
 
     return (
         <div
-            className="w-full border border-gray100/10 bg-gray600/50 rounded-3xl shadow-[0_0_10px_var(--color-shadow)]"
+            className="group w-full border border-gray100/10 bg-gray600/50 rounded-3xl shadow-[0_0_10px_var(--color-shadow)] hover:-translate-y-2"
             onClick={() => navigate(`/project/${project.id}`)}
         >
-            <img
-                src={project.image[0]}
-                className="w-full aspect-video object-cover rounded-t-3xl"
-            />
+            <div className="overflow-hidden rounded-t-3xl">
+                <img
+                    src={project.image[0]}
+                    className="w-full aspect-video object-cover group-hover:scale-102"
+                />
+            </div>
             <div className="flex flex-col p-5">
                 <div className="flex justify-between items-center">
                     <div className="flex gap-2">
