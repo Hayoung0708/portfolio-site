@@ -117,7 +117,7 @@ export default function ProjectNav({
                 {project.learn.map((c, i) => (
                     <button
                         key={i}
-                        className={`ml-5 hover:scale-105 ${
+                        className={`ml-5 hover:scale-105 text-start break-keep ${
                             activeIndex ===
                             contributionRefs.current.length + i + 3
                                 ? "text-white"
