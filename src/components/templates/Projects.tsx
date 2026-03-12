@@ -1,9 +1,13 @@
 import ProjectCard from "../organisms/ProjectCard";
 import { MAIN_PROJECTS } from "@/constants/projects";
 
-export default function Projects() {
+export default function Projects({
+    projectsRef,
+}: {
+    projectsRef: React.RefObject<HTMLDivElement | null>;
+}) {
     return (
-        <div className="template pt-0">
+        <div className="template pt-0" ref={projectsRef}>
             <h2 className="mb-5" data-aos="fade-right" id="main-projects">
                 Main Projects
             </h2>

@@ -47,7 +47,7 @@ export default function Title() {
                         <span>{title4.displayText}</span>
                         {title5.displayText}
                     </h1>
-                    <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-sub animate__animated animate__fadeInUp animate__delay-3s">
+                    <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-sub animate__animated animate__fadeInUp animate__delay-2s">
                         사용자 피드백과 고민을 통해 끊임없이 개선하며 더 나은
                         서비스를 만들어갑니다.
                     </p>

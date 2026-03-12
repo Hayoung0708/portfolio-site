@@ -4,14 +4,32 @@ import { Link } from "react-router";
 import VsCode from "../organisms/VsCode";
 import Title from "../atoms/Title";
 
-export default function Home() {
+export default function Home({
+    aboutMeRef,
+    TechStackRef,
+    projectsRef,
+}: {
+    aboutMeRef: React.RefObject<HTMLDivElement | null>;
+    TechStackRef: React.RefObject<HTMLDivElement | null>;
+    projectsRef: React.RefObject<HTMLDivElement | null>;
+}) {
     return (
         <div className="template h-screen sm:items-center flex">
             <div className="flex flex-col gap-5 pb-10">
                 <OpenToWorkBadge />
                 <Title />
                 <div className="flex gap-3 sm:mt-3 lg:mt-5">
-                    <button className="main-button gap-1 bg-main text-gray1000 hover:bg-main-hover animate__animated animate__bounceInUpCustom delay1">
+                    <button
+                        className="main-button gap-1 bg-main text-gray1000 hover:bg-main-hover animate__animated animate__bounceInUpCustom delay1"
+                        onClick={() => {
+                            if (!projectsRef.current) return;
+
+                            window.scrollTo({
+                                top: projectsRef.current.offsetTop - 40,
+                                behavior: "smooth",
+                            });
+                        }}
+                    >
                         프로젝트 보러가기
                         <ArrowRight />
                     </button>
@@ -31,7 +49,11 @@ export default function Home() {
                     </Link>
                 </div>
             </div>
-            <VsCode />
+            <VsCode
+                aboutMeRef={aboutMeRef}
+                TechStackRef={TechStackRef}
+                projectsRef={projectsRef}
+            />
 
             <ArrowDown
                 strokeWidth={1}

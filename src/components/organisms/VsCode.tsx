@@ -15,7 +15,15 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-export default function VsCode() {
+export default function VsCode({
+    aboutMeRef,
+    TechStackRef,
+    projectsRef,
+}: {
+    aboutMeRef: React.RefObject<HTMLDivElement | null>;
+    TechStackRef: React.RefObject<HTMLDivElement | null>;
+    projectsRef: React.RefObject<HTMLDivElement | null>;
+}) {
     const [isFolderOpen, setIsFolderOpen] = useState(true);
 
     return (
@@ -58,23 +66,65 @@ export default function VsCode() {
                                     <Braces className="w-[1vw] text-yellow-400" />
                                     intro.json
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
+                                <button
+                                    className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]"
+                                    onClick={() => {
+                                        if (!aboutMeRef.current) return;
+
+                                        window.scrollTo({
+                                            top: aboutMeRef.current.offsetTop,
+                                            behavior: "smooth",
+                                        });
+                                    }}
+                                >
                                     <CodeXml className="w-[1vw] text-blue-400" />
                                     AboutMe.tsx
-                                </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
+                                </button>
+                                <button
+                                    className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]"
+                                    onClick={() => {
+                                        if (!TechStackRef.current) return;
+
+                                        window.scrollTo({
+                                            top:
+                                                TechStackRef.current.offsetTop -
+                                                40,
+                                            behavior: "smooth",
+                                        });
+                                    }}
+                                >
                                     <CodeXml className="w-[1vw] text-blue-400" />
                                     TechStack.tsx
-                                </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
+                                </button>
+                                <button
+                                    className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]"
+                                    onClick={() => {
+                                        if (!projectsRef.current) return;
+
+                                        window.scrollTo({
+                                            top:
+                                                projectsRef.current.offsetTop -
+                                                40,
+                                            behavior: "smooth",
+                                        });
+                                    }}
+                                >
                                     <ChevronRight className="w-[1vw]" />
                                     <Folder className="w-[1vw] text-main/50" />
                                     projects
-                                </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
+                                </button>
+                                <button
+                                    className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]"
+                                    onClick={() =>
+                                        window.scrollTo({
+                                            top: document.body.scrollHeight,
+                                            behavior: "smooth",
+                                        })
+                                    }
+                                >
                                     <Info className="w-[1vw] text-blue-300" />
                                     PeerReview.md
-                                </div>
+                                </button>
                             </>
                         )}
                     </div>
