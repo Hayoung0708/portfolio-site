@@ -8,7 +8,12 @@ export default function AboutMeListItem({
     body: string;
 }) {
     return (
-        <li className="group w-full border flex flex-col gap-0 hover:gap-5 p-5 border-gray100/10 bg-gray600/50 rounded-3xl">
+        <li
+            className="group w-full border flex flex-col gap-0 hover:gap-5 p-5 border-gray100/10 bg-gray600/50 rounded-3xl"
+            data-aos="fade-right"
+            data-aos-anchor="#about-me"
+            data-aos-delay={+id * 100 + 400}
+        >
             <div className="flex items-center gap-5">
                 <div className="p-2 bg-main/15 text-lg font-bold rounded-full text-gray100">
                     {id}

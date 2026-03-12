@@ -2,7 +2,7 @@ import { useHangulMotion } from "react-hangul-motion";
 import { useEffect } from "react";
 
 export default function Title() {
-    const speed = 60;
+    const speed = 40;
 
     const title1 = useHangulMotion("안녕하세요,", { speed });
     const title2 = useHangulMotion("사용자 경험을 생각하는", { speed });
@@ -15,12 +15,12 @@ export default function Title() {
         if (title1.isComplete) {
             setTimeout(() => {
                 title2.start();
-            }, speed - 20);
+            }, speed);
         }
         if (title2.isComplete) {
             setTimeout(() => {
                 title3.start();
-            }, speed - 20);
+            }, speed);
         }
         if (title3.isComplete) {
             title4.start();
@@ -47,7 +47,7 @@ export default function Title() {
                         <span>{title4.displayText}</span>
                         {title5.displayText}
                     </h1>
-                    <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-sub animate__animated animate__fadeInUp animate__delay-4s">
+                    <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-sub animate__animated animate__fadeInUp animate__delay-3s">
                         사용자 피드백과 고민을 통해 끊임없이 개선하며 더 나은
                         서비스를 만들어갑니다.
                     </p>

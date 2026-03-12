@@ -25,13 +25,23 @@ export default function ChronologyCard({
     position: "left" | "right";
 }) {
     return (
-        <div className={`relative ${id === 0 && "my-50"}`}>
-            <div className="w-5 h-5 bg-main rounded-full flex justify-center items-center">
+        <div
+            className={`relative ${id === 0 && "my-50"}`}
+            id={"chronology-card-" + id}
+        >
+            <div
+                className="w-5 h-5 bg-main rounded-full flex justify-center items-center"
+                data-aos="zoom-in"
+                data-aos-anchor={"#chronology-card-" + id}
+            >
                 <div className="w-3 h-3 bg-gray1000 rounded-full" />
             </div>
             <div
                 className={`absolute top-3 w-[40vw] p-5 flex flex-col gap-3 bg-gray600/50 border border-gray100/10 rounded-4xl
                 ${position === "left" ? "right-10 -translate-y-1/2" : "left-10 -translate-y-1/2"}`}
+                data-aos={`zoom-in-${position}`}
+                data-aos-anchor={"#chronology-card-" + id}
+                data-aos-delay={100}
             >
                 <span className="-mb-3">{node.date}</span>
                 <h4>{node.title}</h4>

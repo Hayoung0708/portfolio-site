@@ -15,7 +15,7 @@ export default function ProjectInfo({
     return (
         <div className="template flex flex-col items-center gap-5 px-[20%] py-10">
             <h2>{project.title}</h2>
-            <p className="text-main -mt-5">{project.intro}</p>
+            <p className="text-main -mt-8">{project.intro}</p>
             <Swiper
                 modules={[Autoplay, Pagination]}
                 slidesPerView={1}
@@ -28,9 +28,8 @@ export default function ProjectInfo({
                 className="w-full rounded-4xl"
             >
                 {project.image.map((src, i) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={i}>
                         <img
-                            key={i}
                             src={src}
                             className="w-full aspect-video object-cover"
                         />

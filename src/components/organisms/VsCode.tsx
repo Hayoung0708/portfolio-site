@@ -9,6 +9,7 @@ import {
     Folder,
     FolderOpen,
     GitPullRequest,
+    Info,
     TriangleAlert,
     X,
 } from "lucide-react";
@@ -38,7 +39,7 @@ export default function VsCode() {
                             <Ellipsis className="w-[0.8vw]" />
                         </div>
                         <div
-                            className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[0.8vw] hover:bg-gray800 text-white/50 text-[0.8vw]"
+                            className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[0.8vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]"
                             onClick={() => setIsFolderOpen(!isFolderOpen)}
                         >
                             <ChevronDown
@@ -57,22 +58,22 @@ export default function VsCode() {
                                     <Braces className="w-[1vw] text-yellow-400" />
                                     intro.json
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
                                     <CodeXml className="w-[1vw] text-blue-400" />
                                     AboutMe.tsx
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
                                     <CodeXml className="w-[1vw] text-blue-400" />
                                     TechStack.tsx
                                 </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center pl-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
-                                    <CodeXml className="w-[1vw] text-blue-400" />
-                                    CoreCompetence.tsx
-                                </div>
-                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 text-[0.8vw]">
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
                                     <ChevronRight className="w-[1vw]" />
                                     <Folder className="w-[1vw] text-main/50" />
                                     projects
+                                </div>
+                                <div className="w-full h-[2vw] flex gap-[0.5vw] items-center px-[2.3vw] hover:bg-gray800 text-white/50 hover:text-white/75 text-[0.8vw]">
+                                    <Info className="w-[1vw] text-blue-300" />
+                                    PeerReview.md
                                 </div>
                             </>
                         )}
