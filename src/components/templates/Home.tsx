@@ -1,6 +1,5 @@
 import { ArrowDown, ArrowRight, Github } from "lucide-react";
 import OpenToWorkBadge from "../atoms/OpenToWorkBadge";
-import { Link } from "react-router";
 import VsCode from "../organisms/VsCode";
 import Title from "../atoms/Title";
 
@@ -33,9 +32,11 @@ export default function Home({
                         프로젝트 보러가기
                         <ArrowRight />
                     </button>
-                    <Link
-                        to="https://github.com/Hayoung0708"
+                    <button
                         className="main-button group gap-2 bg-github text-white hover:bg-github-hover animate__animated animate__bounceInUpCustom delay2"
+                        onClick={() =>
+                            window.open("https://github.com/Hayoung0708")
+                        }
                     >
                         <div className="w-6 h-6 p-1 bg-white rounded-full">
                             <Github
@@ -46,7 +47,7 @@ export default function Home({
                             />
                         </div>
                         Github
-                    </Link>
+                    </button>
                 </div>
             </div>
             <VsCode

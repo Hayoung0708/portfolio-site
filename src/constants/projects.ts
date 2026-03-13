@@ -188,8 +188,8 @@ export const MAIN_PROJECTS = [
             },
         ],
         link: {
-            github: "",
-            deploy: "",
+            github: "https://github.com/Hayoung0708/portfolio-site",
+            deploy: "https://portfolio-site-xi-virid.vercel.app/",
         },
         contributionSummary: [
             {

@@ -1,5 +1,4 @@
 import { ArrowRight, Code2, FileText, Star } from "lucide-react";
-import { Link } from "react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectCoverflow } from "swiper/modules";
 import TechStackCard from "../organisms/TechStackCard";
@@ -56,20 +55,20 @@ export default function ProjectInfo({
                     </div>
                 </div>
                 <div className="flex gap-5">
-                    <Link
-                        to={project.link.deploy}
+                    <button
                         className="main-button gap-1 bg-main text-gray1000 hover:bg-main-hover"
+                        onClick={() => window.open(project.link.deploy)}
                     >
                         Live Demo
                         <ArrowRight />
-                    </Link>
-                    <Link
-                        to={project.link.github}
+                    </button>
+                    <button
                         className="main-button group gap-2 bg-gray1000 text-white hover:bg-gray900"
+                        onClick={() => window.open(project.link.github)}
                     >
                         <Code2 className="mt-px -ml-0.5 text-white" />
                         Github
-                    </Link>
+                    </button>
                 </div>
             </div>
 
@@ -84,12 +83,14 @@ export default function ProjectInfo({
                         {project.link.preview && (
                             <span className="text-base text-white">
                                 {"\n"}◦ 시연영상 링크 :{" "}
-                                <Link
-                                    to={project.link.preview}
+                                <button
                                     className="underline text-main hover:text-main-hover"
+                                    onClick={() =>
+                                        window.open(project.link.preview)
+                                    }
                                 >
                                     {project.link.preview}
-                                </Link>
+                                </button>
                             </span>
                         )}
                     </p>
