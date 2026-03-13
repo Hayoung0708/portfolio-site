@@ -38,6 +38,10 @@ export declare global {
         learn: string;
         img?: Image[];
     }
+    interface Nav {
+        prev?: string;
+        next?: string;
+    }
     interface Project {
         id: string;
         title: string;
@@ -45,6 +49,7 @@ export declare global {
         intro: string;
         period: string;
         description: string;
+        nav: Nav;
         type: string;
         team?: {
             frontend: number;

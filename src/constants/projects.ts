@@ -104,6 +104,9 @@ export const MAIN_PROJECTS = [
 특히 이번 프로젝트에서는 AI 디자인 툴인 Stitch를 활용해 UI 기획 및 디자인 과정을 단축함으로써, 개발에 집중하여 단기간에 완성도 높은 결과물을 만들어낼 수 있었습니다.
 
 귀중한 시간을 내어 제 포트폴리오 사이트에 방문해 주셔서 감사합니다.`,
+        nav: {
+            next: "duncop",
+        },
         type: "Solo Project",
         stacks: [
             {
@@ -284,6 +287,10 @@ export const MAIN_PROJECTS = [
 이러한 문제를 해결하기 위해 DUNCOP은 던담 기반 전투력 데이터와 자체 신고 DB를 결합하여 다음과 같은 기능을 제공합니다 :
     ◦ 입력한 딜러컷 / 버퍼컷 충족 여부 검증
     ◦ 신고 및 박제 이력 기반 불량 유저 식별`,
+        nav: {
+            prev: "portfolio-site",
+            next: "studium",
+        },
         type: "Solo Project",
         stacks: [
             {
@@ -587,6 +594,10 @@ export const MAIN_PROJECTS = [
 출석 체크, 목표 달성, 리워드 시스템, 서바이벌 스터디 등을 통해 스터디의 몰입도와 지속성을 높이는 데 중점을 둡니다.
 
 ◦ 현재는 서버 제공 기간이 끝나 데이터가 보여지지 않습니다`,
+        nav: {
+            prev: "duncop",
+            next: "bookjeokbookjeok",
+        },
         type: "Team Project",
         team: {
             frontend: 4,
@@ -870,6 +881,10 @@ export const MAIN_PROJECTS = [
 알라딘 오픈 API를 활용해 실시간 베스트셀러, 연관 도서, 도서 검색 기능을 제공하여 사용자들이 다양한 책 정보를 손쉽게 확인하고 공유할 수 있도록 지원합니다.
 
 ◦ 현재는 알라딘 API KEY 및 Supabase 플랜이 만료돼 데이터가 보여지지 않습니다`,
+        nav: {
+            prev: "studium",
+            next: "de-caffeine",
+        },
         type: "Team Project",
         team: {
             frontend: 5,
@@ -1124,6 +1139,9 @@ export const MAIN_PROJECTS = [
         description: `de:caffeine(디:카페인)은 개발자들이 자신의 개발 일지를 SNS처럼 공유하고, 서로의 질문과 답변을 주고받을 수 있는 개발자 커뮤니티 플랫폼입니다.
 
 ◦ 프로그래머스 OPEN API 사용 (현재는 프로그래머스 API 제공 기간이 끝나 데이터가 보여지지 않습니다)`,
+        nav: {
+            prev: "bookjeokbookjeok",
+        },
         type: "Team Project",
         team: {
             frontend: 5,

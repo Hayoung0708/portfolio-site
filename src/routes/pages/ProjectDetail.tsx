@@ -33,6 +33,7 @@ export default function ProjectDetail() {
                 infoRef={infoRef}
                 contributionRefs={contributionRefs}
                 learnRefs={learnRefs}
+                nav={project.nav}
             />
         </>
     );

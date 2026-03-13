@@ -1,17 +1,22 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function ProjectNav({
     project,
     infoRef,
     contributionRefs,
     learnRefs,
+    nav,
 }: {
     project: Project;
     infoRef: React.RefObject<HTMLDivElement | null>;
     contributionRefs: React.RefObject<(HTMLDivElement | null)[]>;
     learnRefs: React.RefObject<(HTMLDivElement | null)[]>;
+    nav: Nav;
 }) {
     const [activeIndex, setActiveIndex] = useState<number>(0);
+    const navigate = useNavigate();
 
     const scrollTo = (ref: HTMLDivElement | null, index: number) => {
         if (!ref) return;
@@ -133,6 +138,28 @@ export default function ProjectNav({
                         {c.title}
                     </button>
                 ))}
+                <div className="w-full flex justify-center gap-5 mt-5">
+                    <button
+                        className={`card w-12 h-12 rounded-full flex items-center justify-center
+                            ${nav.prev ? "text-white/75 hover:text-white" : "text-gray100/10"}`}
+                        onClick={() => {
+                            if (!nav.prev) return;
+                            navigate(`/project/${nav.prev}`);
+                        }}
+                    >
+                        <ChevronLeft />
+                    </button>
+                    <button
+                        className={`card w-12 h-12 rounded-full flex items-center justify-center
+                            ${nav.next ? "text-white/75 hover:text-white" : "text-gray100/10"}`}
+                        onClick={() => {
+                            if (!nav.next) return;
+                            navigate(`/project/${nav.next}`);
+                        }}
+                    >
+                        <ChevronRight />
+                    </button>
+                </div>
             </div>
         </div>
     );
