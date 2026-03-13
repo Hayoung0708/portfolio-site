@@ -41,6 +41,7 @@ export default function ProjectLearn({
                             <div className="flex gap-5 justify-center items-center">
                                 {l.img.map((img, i) => (
                                     <div
+                                        key={i}
                                         className={`flex flex-col items-center gap-2 text-sub ${l.img!.length >= 3 ? "w-[30%] min-w-[30%]" : "w-[40%] min-w-[40%]"}`}
                                     >
                                         <img

@@ -20,8 +20,8 @@ export default function PeerReview() {
                 className="relative left-0 w-screen swiper-wrapper"
             >
                 {PEER_REVIEWS.map((r, i) => (
-                    <SwiperSlide>
-                        <ReviewCard key={i} review={r} />
+                    <SwiperSlide key={i}>
+                        <ReviewCard review={r} />
                     </SwiperSlide>
                 ))}
             </Swiper>

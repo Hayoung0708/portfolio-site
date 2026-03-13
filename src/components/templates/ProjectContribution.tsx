@@ -58,7 +58,10 @@ export default function ProjectContribution({
                         {c.img && (
                             <div className="flex gap-5 justify-center items-center">
                                 {c.img.map((img, i) => (
-                                    <div className="w-[40%] min-w-[40%] flex flex-col items-center gap-2 text-sub">
+                                    <div
+                                        key={i}
+                                        className="w-[40%] min-w-[40%] flex flex-col items-center gap-2 text-sub"
+                                    >
                                         <img
                                             src={img.src}
                                             key={i}

@@ -3,7 +3,7 @@ import ProjectContribution from "@/components/templates/ProjectContribution";
 import ProjectInfo from "@/components/templates/ProjectInfo";
 import ProjectLearn from "@/components/templates/ProjectLearn";
 import { MAIN_PROJECTS } from "@/constants/projects";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router";
 
 export default function ProjectDetail() {
@@ -13,6 +13,10 @@ export default function ProjectDetail() {
     const infoRef = useRef<HTMLDivElement>(null);
     const contributionRefs = useRef<HTMLDivElement[]>([]);
     const learnRefs = useRef<HTMLDivElement[]>([]);
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [project]);
 
     if (!project) {
         return <h1>Project not found</h1>;
