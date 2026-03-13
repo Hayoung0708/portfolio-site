@@ -34,8 +34,11 @@ export default function ProjectNav({
         const handleScroll = () => {
             const elements = [
                 infoRef.current,
-                ...contributionRefs.current,
-                ...learnRefs.current,
+                ...contributionRefs.current.slice(
+                    0,
+                    project.contributions.length + 1,
+                ),
+                ...learnRefs.current.slice(0, project.learn.length + 1),
             ];
             let lastIndex = -1;
 
@@ -53,9 +56,8 @@ export default function ProjectNav({
         };
 
         window.addEventListener("scroll", handleScroll);
-        handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [infoRef, contributionRefs, learnRefs]);
+    }, [project, infoRef, contributionRefs, learnRefs]);
 
     return (
         <div className="fixed top-0 right-0 h-screen w-[20%] flex justify-center items-center">
