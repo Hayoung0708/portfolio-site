@@ -3,9 +3,11 @@ import {
     ActivityIcon,
     Bell,
     BookOpenText,
+    Bot,
     Calculator,
     Database,
     DraftingCompass,
+    Flag,
     HeartHandshake,
     LayoutTemplate,
     MessageCircleMore,
@@ -62,6 +64,8 @@ export default function IconBox({
             {icon === "swords" && <Swords size={Iconsize} />}
             {icon === "store" && <Store size={Iconsize} />}
             {icon === "palette" && <Palette size={Iconsize} />}
+            {icon === "bot" && <Bot size={Iconsize} />}
+            {icon === "flag" && <Flag size={Iconsize} />}
         </div>
     );
 }

@@ -2,7 +2,7 @@ import portfolioSiteImg from "@/assets/images/portfolio-site.png";
 import duncop1Img from "@/assets/images/duncop1.png";
 import duncop2Img from "@/assets/images/duncop2.png";
 import duncop3Img from "@/assets/images/duncop3.png";
-import duncopFeature1Img from "@/assets/images/duncop_feature1.gif";
+import duncopFeature1Img from "@/assets/images/duncop_feature1.png";
 import duncopFeature2Img from "@/assets/images/duncop_feature2.gif";
 import duncopFeature3Img from "@/assets/images/duncop_feature3.png";
 import duncopFeature4Img from "@/assets/images/duncop_feature4.gif";
@@ -552,6 +552,17 @@ export const MAIN_PROJECTS = [
                 ],
                 img: [{ title: "Google Analytics 그래프", src: duncopEx3Img }],
             },
+            {
+                title: "AI 코드 리뷰 도입",
+                icon: "bot",
+                list: [
+                    {
+                        title: "AI 코드 리뷰 자동화",
+                        body: `◦ Gemini Code Assistants를 활용한 Pull Request 자동 코드 리뷰 파이프라인 구축
+◦ 휴먼 에러 사전 필터링 및 코드 품질 향상`,
+                    },
+                ],
+            },
         ],
         learn: [
             {
@@ -631,6 +642,14 @@ export const MAIN_PROJECTS = [
                 list: [
                     {
                         name: "App Route",
+                    },
+                ],
+            },
+            {
+                group: "State Management",
+                list: [
+                    {
+                        name: "Zustand",
                     },
                 ],
             },
@@ -833,13 +852,18 @@ export const MAIN_PROJECTS = [
             {
                 title: "커뮤니케이션 프로세스 개선",
                 icon: "message-circle-more",
+                img: [
+                    {
+                        title: "디스코드에서의 담당자 지정 커뮤니케이션",
+                        src: studiumExImg,
+                    },
+                ],
                 list: [
                     {
                         title: "담당자 지정 및 소통 규칙 정립",
                         body: `◦ 불특정 다수에게 질문하던 기존 방식을 개선하여, 디스코드에 기능별 담당자를 명시하고 해당 담당자만 태그하여 소통하는 프로세스 제안
 ◦ 구두로 진행되던 모호한 논의를 글로 명확히 정리하여 질문하도록 소통 규칙 정립
 ◦ 관련 없는 팀원의 불필요한 시간 소모를 방지하고, 문제 해결에 드는 소통 비용과 시간을 크게 단축`,
-                        img: studiumExImg,
                     },
                 ],
             },
@@ -1040,7 +1064,7 @@ export const MAIN_PROJECTS = [
         contributionSummary: [
             {
                 title: "기획 및 설계",
-                percent: 40,
+                percent: 30,
                 body: `◦ 프로젝트 기획 참여
 ◦ 데이터 구조 설계`,
             },
@@ -1286,13 +1310,13 @@ export const MAIN_PROJECTS = [
         contributionSummary: [
             {
                 title: "기획 및 설계",
-                percent: 90,
+                percent: 80,
                 body: `◦ 프로젝트 기획 및 UI/UX 디자인
 ◦ 프로젝트 아키텍쳐 설계`,
             },
             {
                 title: "개발 구현",
-                percent: 40,
+                percent: 50,
                 body: `◦ React 기반 프론트엔드 구현
 ◦ UX 개선 및 배포`,
             },
@@ -1354,6 +1378,22 @@ export const MAIN_PROJECTS = [
                         title: "동적 레이아웃 구현",
                         body: `◦ 브라우저 화면 너비(Viewport) 변화를 감지해 한 줄에 렌더링할 포스트 개수를 동적으로 계산하는 로직을 구현하여, 더 매끄러운 반응형 화면 구현`,
                         img: deCaffeineFeature6Img,
+                    },
+                ],
+            },
+            {
+                title: "개발 문화 정립 및 팀 성장 주도",
+                icon: "flag",
+                list: [
+                    {
+                        title: "협업 프로세스 체계화",
+                        body: `◦ 커밋 메시지 규칙 및 브랜치 전략 컨벤션 수립
+◦ Pull Request 기반 협업 문화 도입 및 코드 리뷰 의무화를 통한 코드 품질 상향 평준화`,
+                    },
+                    {
+                        title: "동반 성장 주도",
+                        body: `◦ 기술적 어려움을 겪는 비전공자 팀원 1:1 멘토링
+◦ 업무 대행이 아닌 지식 공유를 통해 팀원의 기술적 자립과 프로젝트 기여도 향상 유도`,
                     },
                 ],
             },
