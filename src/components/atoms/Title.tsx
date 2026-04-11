@@ -5,7 +5,7 @@ export default function Title() {
     const speed = 40;
 
     const title1 = useHangulMotion("안녕하세요,", { speed });
-    const title2 = useHangulMotion("경험을 만들어가는", { speed });
+    const title2 = useHangulMotion("사용자 경험을 생각하는", { speed });
     const title3 = useHangulMotion("프론트엔드 ", { speed });
     const title4 = useHangulMotion("강하영", { speed });
     const title5 = useHangulMotion("입니다.", { speed });
@@ -33,7 +33,7 @@ export default function Title() {
         <>
             <div className="relative">
                 <h1 className="text-gray700">안녕하세요,</h1>
-                <h1 className="text-gray700">경험을 만들어가는</h1>
+                <h1 className="text-gray700">사용자 경험을 생각하는</h1>
                 <h1 className="text-gray700">프론트엔드 강하영입니다.</h1>
                 <p className="mt-2 lg:w-[47vw] xl:w-[40vw] text-gray1000/0">
                     사용자 피드백과 디테일에 대한 고민을 통해 끊임없이 개선하며
