@@ -1,4 +1,18 @@
-export const CHRONOLOGY_NODES = [
+export interface ChronologyNode {
+    date: string;
+    title: string;
+    body: string;
+    list?: Array<string>;
+    projects?: Array<{
+        title: string;
+        name: string;
+        body: string;
+        lead?: string;
+    }>;
+    badges?: Array<string>;
+}
+
+export const CHRONOLOGY_NODES: Array<ChronologyNode> = [
     {
         date: "2025.03 - 2025.08",
         title: "Programmers 데브코스 웹프론트엔드 4기",

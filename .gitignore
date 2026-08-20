@@ -27,3 +27,9 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
+
+# OMC 상태 파일
+.omc/
+
+# Git Bash 크래시 덤프
+sh.exe.stackdump
