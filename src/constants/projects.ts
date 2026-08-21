@@ -1407,6 +1407,7 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
     {
         id: "de-caffeine",
         title: "De:caffeine",
+        video: "/videos/de-caffeine.webm",
         image: [deCaffeine1Img, deCaffeine2Img, deCaffeine3Img],
         intro: "개발자들을 위한 커뮤니티 플랫폼",
         tags: ["React", "UX 개선"],

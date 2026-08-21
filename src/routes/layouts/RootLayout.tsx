@@ -20,8 +20,16 @@ export default function RootLayout() {
      * 같은 페이지 안에서의 앵커 클릭은 부드럽게, 페이지 진입은 즉시.
      */
     useEffect(() => {
+        const firstLoad = previousPath.current === null;
         const samePage = previousPath.current === pathname;
         previousPath.current = pathname;
+
+        /* 새로고침·직접 진입은 해시가 있어도 무조건 맨 위에서 시작한다 */
+        if (firstLoad) {
+            if (hash) history.replaceState(null, "", pathname);
+            scrollToY(0, false);
+            return;
+        }
 
         if (!hash) {
             scrollToY(0, false);

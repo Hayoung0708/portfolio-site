@@ -376,7 +376,7 @@ export default function Works() {
                                     to={`/project/${project.id}`}
                                     aria-label={`${project.title} 자세히 보기`}
                                     tabIndex={-1}
-                                    className="mt-10 block overflow-hidden rounded-[1.5rem] shadow-[0_10px_28px_-18px_rgba(47,47,47,0.16)] md:hidden"
+                                    className="mt-10 block overflow-hidden rounded-[1.5rem] border border-line shadow-[0_10px_28px_-18px_rgba(47,47,47,0.16)] md:hidden"
                                 >
                                     <div className="flex aspect-video items-center justify-center overflow-hidden bg-pink-wash">
                                         {project.video ? (
@@ -413,7 +413,7 @@ export default function Works() {
                         <div className="w-full [perspective:1400px]">
                             <div
                                 ref={frameRef}
-                                className="relative aspect-video w-full overflow-hidden rounded-[2rem] bg-pink-wash shadow-[0_10px_28px_-18px_rgba(47,47,47,0.16)]"
+                                className="relative aspect-video w-full overflow-hidden rounded-[2rem] border border-line bg-pink-wash shadow-[0_10px_28px_-18px_rgba(47,47,47,0.16)]"
                             >
                                 {FEATURED.map((project, index) => (
                                     <div

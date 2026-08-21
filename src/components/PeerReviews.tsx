@@ -28,10 +28,10 @@ export default function PeerReviews() {
     return (
         <section
             id="review"
-            className="scroll-mt-16 py-24 md:h-[180svh] md:py-0"
+            className="scroll-mt-16 py-24 md:h-[230svh] md:py-0"
         >
             {/* 배경이 물드는 동안 화면이 잠시 붙잡힌다 */}
-            <div className="md:sticky md:top-0 md:flex md:min-h-svh md:flex-col md:justify-center md:pt-16">
+            <div className="md:sticky md:top-0 md:flex md:min-h-svh md:flex-col md:justify-center md:pt-16 md:pb-32">
                 <div className="shell">
                     <Fade className="eyebrow">Peer Review</Fade>
                     <TitleReveal className="mt-4">

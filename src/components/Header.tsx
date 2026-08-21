@@ -23,7 +23,6 @@ export default function Header() {
         if (!section) return;
         event.preventDefault();
         scrollToY(section.getBoundingClientRect().top + window.scrollY - 64);
-        history.replaceState(null, "", `#${id}`);
     };
 
     /* 보고 있는 섹션의 메뉴 글자에 색을 준다 */

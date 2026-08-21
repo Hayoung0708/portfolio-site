@@ -13,7 +13,8 @@ import {
     type RouteKey,
 } from "@/lib/ask";
 
-type Ready = "checking" | "ready" | "downloading" | "unavailable";
+type Ready =
+    "checking" | "ready" | "downloadable" | "downloading" | "unavailable";
 
 interface Message {
     id: number;
@@ -23,10 +24,11 @@ interface Message {
     failed?: boolean;
 }
 
+// my-little-agent 파이프라인 순서 그대로: 분류(router) → 자료 주입(step) → 생성(agent)
 const STAGE_TEXT = {
-    classify: "질문을 분류하는 중",
-    lookup: "자료를 찾는 중",
-    write: "답변을 쓰는 중",
+    classify: "질문이 어떤 주제인지 분류하는 중",
+    lookup: "주제에 맞는 자료만 골라 담는 중",
+    write: "자료를 바탕으로 답변을 쓰는 중",
 } as const;
 
 type Stage = keyof typeof STAGE_TEXT | null;
@@ -44,6 +46,8 @@ export default function AskHayoung() {
     const [messages, setMessages] = useState<Array<Message>>([GREETING]);
     const [input, setInput] = useState("");
     const [stage, setStage] = useState<Stage>(null);
+    // 첫 실행은 모델을 메모리에 올리느라 오래 걸린다. 5초 넘으면 이유를 보여준다
+    const [slow, setSlow] = useState(false);
     const [route, setRoute] = useState<RouteKey | null>(null);
 
     const handleRef = useRef<AskHandle | null>(null);
@@ -51,6 +55,8 @@ export default function AskHayoung() {
     // 답변이 끝난 시점에 어떤 라우트였는지 알아야 해서, state와 별개로 ref에도 담는다.
     const routeRef = useRef<RouteKey | null>(null);
     const logRef = useRef<HTMLDivElement>(null);
+    // 다운로드가 진행 중이면 타임아웃을 미룬다
+    const lastActivityRef = useRef(0);
 
     useEffect(() => {
         const log = logRef.current;
@@ -60,10 +66,68 @@ export default function AskHayoung() {
     useEffect(() => {
         let alive = true;
 
+        /*
+         * 다운로드 가능 상태면 질문을 기다리지 않고 페이지 진입 때 바로 받는다.
+         * 이미 기기에 있으면 Chrome이 그대로 재사용하므로 중복 다운로드는 없다.
+         */
+        const prefetchModel = () => {
+            const languageModel = (
+                window as unknown as {
+                    LanguageModel?: {
+                        create(options?: {
+                            monitor?(monitor: {
+                                addEventListener(
+                                    type: "downloadprogress",
+                                    listener: (event: {
+                                        loaded: number;
+                                    }) => void,
+                                ): void;
+                            }): void;
+                        }): Promise<{ destroy(): void }>;
+                    };
+                }
+            ).LanguageModel;
+            if (!languageModel) return;
+
+            languageModel
+                .create({
+                    monitor(monitor) {
+                        monitor.addEventListener(
+                            "downloadprogress",
+                            (event) => {
+                                if (!alive) return;
+                                lastActivityRef.current = Date.now();
+                                // 이미 받아진 모델은 loaded=1만 와서 표시할 게 없다
+                                if (event.loaded >= 1) return;
+                                setReady("downloading");
+                                setProgress(event.loaded);
+                            },
+                        );
+                    },
+                })
+                .then((session) => {
+                    session.destroy();
+                    if (alive) setReady("ready");
+                })
+                .catch(() => {
+                    // 사용자 제스처 필요·공간 부족 등. 첫 질문 때 다시 시도된다
+                    if (alive) setReady("downloadable");
+                });
+        };
+
         checkAvailability()
             .then((state) => {
                 if (!alive) return;
-                setReady(state === "unavailable" ? "unavailable" : "ready");
+                setReady(
+                    state === "available"
+                        ? "ready"
+                        : state === "unavailable"
+                          ? "unavailable"
+                          : "downloadable",
+                );
+                if (state === "downloadable" || state === "downloading") {
+                    prefetchModel();
+                }
             })
             .catch(() => alive && setReady("unavailable"));
 
@@ -98,29 +162,44 @@ export default function AskHayoung() {
 
         if (!handleRef.current) {
             handleRef.current = createAsk({
+                // router가 주제를 고르면 step이 자료를 주입하고, 곧 생성이 시작된다
                 onRoute: (key) => {
+                    lastActivityRef.current = Date.now();
                     routeRef.current = key;
                     setRoute(key);
-                    setStage("write");
+                    setStage("lookup");
+                    window.setTimeout(
+                        () =>
+                            setStage((current) =>
+                                current === "lookup" ? "write" : current,
+                            ),
+                        600,
+                    );
                 },
-                onDownloadProgress: (loaded) => {
-                    setReady("downloading");
-                    setProgress(loaded);
+                // 질문 중에는 다운로드 표시를 하지 않는다. 워치독 연장용으로만 쓴다
+                onDownloadProgress: () => {
+                    lastActivityRef.current = Date.now();
                 },
             });
         }
 
         setStage("classify");
+        setSlow(false);
+        const slowTimer = window.setTimeout(() => setSlow(true), 5_000);
+        lastActivityRef.current = Date.now();
+        // 25초간 아무 진행(라우팅·다운로드)이 없으면 준비된 답변으로 넘어간다
+        let watchdogTimer: ReturnType<typeof setInterval> | undefined;
+        const watchdog = new Promise<never>((_, reject) => {
+            watchdogTimer = setInterval(() => {
+                if (Date.now() - lastActivityRef.current > 25_000) {
+                    reject(new Error("응답 시간 초과"));
+                }
+            }, 1_000);
+        });
         try {
-            // 온디바이스 모델이 응답을 못 주는 경우 무한 대기하지 않는다
             const answer = await Promise.race([
                 handleRef.current.ask(trimmed),
-                new Promise<never>((_, reject) =>
-                    setTimeout(
-                        () => reject(new Error("응답 시간 초과")),
-                        60_000,
-                    ),
-                ),
+                watchdog,
             ]);
             setReady("ready");
             push({
@@ -137,6 +216,9 @@ export default function AskHayoung() {
             setReady("unavailable");
             push({ role: "bot", text: fallbackAnswer(trimmed) });
         } finally {
+            clearInterval(watchdogTimer);
+            clearTimeout(slowTimer);
+            setSlow(false);
             setStage(null);
         }
     }
@@ -189,6 +271,12 @@ export default function AskHayoung() {
                                             className="animate-spin text-pink"
                                         />
                                         {STAGE_TEXT[stage]}
+                                        {slow && stage === "classify" && (
+                                            <span className="text-xs text-muted/70">
+                                                — 첫 실행은 모델을 깨우느라 오래
+                                                걸릴 수 있어요
+                                            </span>
+                                        )}
                                         {route && stage === "write" && (
                                             <span className="pill">
                                                 {ROUTE_LABEL[route]}
@@ -301,9 +389,10 @@ function Bubble({ message }: { message: Message }) {
 function StatusCard({ ready, progress }: { ready: Ready; progress: number }) {
     const label: Record<Ready, string> = {
         checking: "브라우저 확인 중",
-        ready: "온디바이스 모델 사용 중",
-        downloading: `모델 내려받는 중 ${Math.round(progress * 100)}%`,
-        unavailable: "미리 준비한 답변으로 응답",
+        ready: "온디바이스 모델 사용 가능",
+        downloadable: "모델 다운로드 대기",
+        downloading: `모델 다운로드 중 ${Math.round(progress * 100)}%`,
+        unavailable: "온디바이스 모델 사용 불가능",
     };
 
     return (
@@ -324,8 +413,12 @@ function StatusCard({ ready, progress }: { ready: Ready; progress: number }) {
 
             <p className="mt-3 text-xs leading-relaxed break-keep whitespace-pre-line text-muted">
                 {ready === "unavailable"
-                    ? "Chrome 138 이상 데스크톱에서 열면 실제 온디바이스 모델이 답변합니다. 지금은 준비된 답변을 보여드릴게요."
-                    : "질문과 답변이 기기 밖으로 나가지 않습니다.\n서버 요청 0회, 토큰 비용 0원."}
+                    ? "Chrome 버전(138 미만)이나 기기 용량 문제로 온디바이스 모델을 쓸 수 없는 환경이에요. 모델은 약 4GB지만 다운로드에는 여유 공간 22GB가 필요하고, 여유가 10GB 아래로 내려가면 자동 삭제돼요.\n지금은 미리 준비한 답변으로 응답할게요."
+                    : ready === "downloadable"
+                      ? "이 브라우저는 온디바이스 AI를 지원해요. Gemini Nano(약 4GB) 다운로드를 시작합니다 — 기기 여유 공간이 22GB 이상일 때만 받아져요.\n진행이 없으면 준비된 답변으로 자동 전환돼요."
+                      : ready === "downloading"
+                        ? "Chrome이 Gemini Nano(약 4GB)를 다운로드하고 있어요. 다운로드에는 여유 공간 22GB가 필요해요.\n받은 뒤에도 여유가 10GB 아래로 내려가면 모델이 자동 삭제돼요."
+                        : "질문과 답변이 기기 밖으로 나가지 않습니다.\n서버 요청 0회, 토큰 비용 0원."}
             </p>
         </div>
     );

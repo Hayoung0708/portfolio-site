@@ -51,12 +51,11 @@ export const CHRONOLOGY_NODES: Array<ChronologyNode> = [
         date: "2021.03 - 2025.08",
         title: "인천대학교 컴퓨터공학부",
         body: "인천대학교 컴퓨터공학부 학사 졸업",
+        list: [
+            "Python, C, C++, C#, Java, JSP, Kotlin, R 등 프로그래밍 언어 기초 학습",
+            "자료구조, 데이터베이스, 알고리즘, 웹프로그래밍 등 핵심 전공 과목 이수",
+        ],
         projects: [
-            {
-                title: "EARN CREDITS",
-                name: "자료구조, 데이터베이스, 알고리즘, 웹프로그래밍",
-                body: "",
-            },
             {
                 title: "GRADUATION PROJECT",
                 name: "INUsed",
