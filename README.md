@@ -1,4 +1,7 @@
-# 강하영 포트폴리오
+# Portfoilo Site  
+
+
+![](orca-paste-1787333267288-690eed28-8556-4086-8185-89aa0ecf7f16.png)
 
 경험을 만드는 프론트엔드 개발자 강하영의 포트폴리오 사이트입니다.
 첫 버전은 Stitch AI로 디자인해 직접 구현했고, 현재 버전은 Claude Code와 협업해 전면 개편했습니다.
@@ -45,7 +48,7 @@ src/
 ├── components/          # 메인 페이지 섹션 단위 컴포넌트
 │   └── project/         # 프로젝트 상세 페이지 컴포넌트
 ├── constants/           # 프로젝트·경력·리뷰 등 콘텐츠 데이터
-├── lib/                 # my-little-agent 워크플로, 스크롤 유틸
+├── lib/                 # my-little-agent 워크플로우, 스크롤 유틸
 └── routes/              # react-router 라우트
 api/                     # 카카오톡 문의 서버리스 함수
 ```
