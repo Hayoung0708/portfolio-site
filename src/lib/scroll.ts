@@ -21,6 +21,8 @@ export function destroySmoothScroll() {
 /** 관성 스크롤과 충돌하지 않는 스크롤 이동 */
 export function scrollToY(top: number, smooth = true) {
     if (lenis) {
+        // 페이지 전환 직후에는 이전 페이지 높이가 캐시돼 목표가 잘린다. 먼저 재계산
+        lenis.resize();
         lenis.scrollTo(top, smooth ? undefined : { immediate: true });
         return;
     }

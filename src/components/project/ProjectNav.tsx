@@ -1,6 +1,7 @@
-import { ArrowLeft, ArrowRight, LayoutGrid } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 
+import Fade from "@/components/Fade";
 import { MAIN_PROJECTS } from "@/constants/projects";
 
 export default function ProjectNav({
@@ -15,53 +16,69 @@ export default function ProjectNav({
     const next = find(nav.next);
 
     return (
-        <nav className="border-t border-line bg-wash py-14">
-            <div className="shell grid gap-3 md:grid-cols-3">
-                {prev ? (
-                    <Link
-                        to={`/project/${prev.id}`}
-                        className="card flex items-center gap-3 p-5 transition-colors hover:border-pink-soft"
-                    >
-                        <ArrowLeft size={18} className="shrink-0 text-pink" />
-                        <span className="min-w-0">
-                            <span className="block text-xs text-muted">
-                                이전 프로젝트
-                            </span>
-                            <span className="block truncate font-semibold">
-                                {prev.title}
-                            </span>
-                        </span>
-                    </Link>
-                ) : (
-                    <span />
-                )}
+        <nav className="py-20 md:py-28">
+            <div className="shell">
+                {/* 이전은 왼쪽, 다음은 오른쪽. 없으면 자리만 비워 둔다 */}
+                <div className="grid border-y border-line md:grid-cols-2">
+                    {prev ? (
+                        <Fade once>
+                            <Link
+                                to={`/project/${prev.id}`}
+                                className="group block py-10 md:py-14 md:pr-10"
+                            >
+                                <p className="text-sm font-semibold text-muted">
+                                    이전 프로젝트
+                                </p>
+                                <p className="mt-1.5 flex items-center gap-3 text-2xl font-bold tracking-tight break-keep transition-colors group-hover:text-pink md:text-4xl">
+                                    <ArrowLeft
+                                        className="shrink-0 transition-transform group-hover:-translate-x-2"
+                                        size={26}
+                                    />
+                                    {prev.title}
+                                </p>
+                                <p className="mt-1 pl-10 text-sm text-ink-soft md:text-base">
+                                    {prev.intro}
+                                </p>
+                            </Link>
+                        </Fade>
+                    ) : (
+                        <span />
+                    )}
 
-                <Link
-                    to="/#works"
-                    className="card flex items-center justify-center gap-2 p-5 font-semibold transition-colors hover:border-pink-soft"
-                >
-                    <LayoutGrid size={17} className="text-pink" />
-                    전체 프로젝트
-                </Link>
+                    {next ? (
+                        <Fade once>
+                            <Link
+                                to={`/project/${next.id}`}
+                                className="group block border-t border-line py-10 text-right md:border-t-0 md:py-14 md:pl-10"
+                            >
+                                <p className="text-sm font-semibold text-muted">
+                                    다음 프로젝트
+                                </p>
+                                <p className="mt-1.5 flex items-center justify-end gap-3 text-2xl font-bold tracking-tight break-keep transition-colors group-hover:text-pink md:text-4xl">
+                                    {next.title}
+                                    <ArrowRight
+                                        className="shrink-0 transition-transform group-hover:translate-x-2"
+                                        size={26}
+                                    />
+                                </p>
+                                <p className="mt-1 pr-10 text-sm text-ink-soft md:text-base">
+                                    {next.intro}
+                                </p>
+                            </Link>
+                        </Fade>
+                    ) : (
+                        <span />
+                    )}
+                </div>
 
-                {next ? (
+                <Fade once delay={0.1} className="mt-8 text-center">
                     <Link
-                        to={`/project/${next.id}`}
-                        className="card flex items-center justify-end gap-3 p-5 text-right transition-colors hover:border-pink-soft"
+                        to="/#works"
+                        className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-semibold transition-colors hover:border-pink hover:text-pink"
                     >
-                        <span className="min-w-0">
-                            <span className="block text-xs text-muted">
-                                다음 프로젝트
-                            </span>
-                            <span className="block truncate font-semibold">
-                                {next.title}
-                            </span>
-                        </span>
-                        <ArrowRight size={18} className="shrink-0 text-pink" />
+                        모든 프로젝트 보기
                     </Link>
-                ) : (
-                    <span />
-                )}
+                </Fade>
             </div>
         </nav>
     );

@@ -292,6 +292,7 @@ export default function Works() {
                         /* 텍스트가 중앙에 앉아 홀딩됐다가 다음 프로젝트에 밀려난다 */
                         <div
                             key={project.id}
+                            id={`work-${project.id}`}
                             data-block
                             className="md:h-[150svh]"
                         >

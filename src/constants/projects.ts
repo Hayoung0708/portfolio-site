@@ -326,7 +326,7 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
             "CSS 스크롤 타임라인과 GSAP으로 스크롤 연출 구현",
             "Chrome Built-in AI 기반 포트폴리오 질의응답 기능 탑재",
         ],
-        period: "2026.02.26 - 2026.03.12",
+        period: "2026.02 - 2026.08",
         description: `안녕하세요 신입 프론트엔드 개발자 강하영입니다.
 
 프론트엔드 개발자의 진정한 역량은 정적인 문서가 아닌, 사용자가 직접 경험할 수 있는 '웹' 그 자체로 보여주어야 한다고 생각합니다.
@@ -337,7 +337,10 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
 특히 이번 프로젝트에서는 AI 디자인 툴인 Stitch를 활용해 UI 기획 및 디자인 과정을 단축함으로써, 개발에 집중하여 단기간에 완성도 높은 결과물을 만들어낼 수 있었습니다.
 
 귀중한 시간을 내어 제 포트폴리오 사이트에 방문해 주셔서 감사합니다.`,
-        nav: {},
+        nav: {
+            prev: "de-caffeine",
+            next: "bookjeokbookjeok",
+        },
         type: "Solo Project",
         stacks: [
             {
@@ -1158,7 +1161,9 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
 알라딘 오픈 API를 활용해 실시간 베스트셀러, 연관 도서, 도서 검색 기능을 제공하여 사용자들이 다양한 책 정보를 손쉽게 확인하고 공유할 수 있도록 지원합니다.
 
 ◦ 현재는 알라딘 API KEY 및 Supabase 플랜이 만료돼 데이터가 보여지지 않습니다`,
-        nav: {},
+        nav: {
+            prev: "portfolio-site",
+        },
         type: "Team Project",
         team: {
             frontend: 5,
@@ -1423,6 +1428,7 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
 ◦ 프로그래머스 OPEN API 사용 (현재는 프로그래머스 API 제공 기간이 끝나 데이터가 보여지지 않습니다)`,
         nav: {
             prev: "studium",
+            next: "portfolio-site",
         },
         type: "Team Project",
         team: {
@@ -1685,7 +1691,7 @@ export const SIDE_WORKS: Array<SideWork> = [
     {
         title: "Portfolio Site",
         intro: "지금 보고 계신 포트폴리오 사이트",
-        period: "2026.02 - 2026.03",
+        period: "2026.02 - 2026.08",
         tags: ["TypeScript", "React", "TailwindCSS", "Vite"],
         github: "https://github.com/Hayoung0708/portfolio-site",
         to: "/project/portfolio-site",

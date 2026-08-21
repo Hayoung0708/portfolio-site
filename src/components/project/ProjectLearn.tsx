@@ -1,70 +1,77 @@
+import { CircleAlert, Lightbulb, Wrench } from "lucide-react";
+
+import Fade from "@/components/Fade";
+import TitleReveal from "@/components/TitleReveal";
 import type { Learn } from "@/types/project";
 
 const BLOCKS = [
-    { key: "problem", label: "Problem" },
-    { key: "solution", label: "Solution" },
-    { key: "learn", label: "Learn" },
+    { key: "problem", label: "Problem", icon: CircleAlert },
+    { key: "solution", label: "Solution", icon: Wrench },
+    { key: "learn", label: "Learn", icon: Lightbulb },
 ] as const;
 
 export default function ProjectLearn({ learn }: { learn: Array<Learn> }) {
     if (learn.length === 0) return null;
 
     return (
-        <section className="bg-paper py-20 md:py-28">
+        <section id="learn" className="scroll-mt-16 py-20 md:py-28">
             <div className="shell">
-                <p className="eyebrow">Trouble Shooting</p>
-                <h2 className="headline mt-3 text-3xl md:text-4xl">
-                    막힌 곳과 배운 것
-                </h2>
+                <Fade once className="eyebrow">
+                    Trouble Shooting
+                </Fade>
+                <TitleReveal once className="mt-3 text-2xl md:text-3xl">
+                    트러블 슈팅
+                </TitleReveal>
 
                 <div className="mt-12 space-y-6">
-                    {learn.map((item) => (
-                        <article key={item.title} className="card reveal p-6 md:p-8">
-                            <div className="flex flex-wrap items-center gap-3">
-                                <span className="rounded-full bg-pink px-3 py-1 text-xs font-semibold text-white">
+                    {learn.map((item, index) => (
+                        <Fade once key={item.title} delay={(index % 2) * 0.06}>
+                            <article className="card p-6 md:p-8">
+                                <span className="inline-flex items-center rounded-lg bg-pink-wash px-3 py-1.5 text-xs font-semibold text-pink-strong">
                                     {item.badge}
                                 </span>
-                                <h3 className="text-lg font-bold break-keep md:text-xl">
+                                <h3 className="mt-3 text-lg font-bold break-keep md:text-xl">
                                     {item.title}
                                 </h3>
-                            </div>
 
-                            <div className="mt-6 grid gap-6 md:grid-cols-3">
-                                {BLOCKS.filter((block) => item[block.key]).map(
-                                    (block) => (
+                                <div className="mt-6 grid gap-6 md:grid-cols-3">
+                                    {BLOCKS.filter(
+                                        (block) => item[block.key],
+                                    ).map((block) => (
                                         <div key={block.key}>
-                                            <h4 className="text-xs font-semibold tracking-[0.16em] text-pink uppercase">
+                                            <h4 className="flex items-center gap-1.5 text-xs font-semibold tracking-[0.16em] text-pink uppercase">
+                                                <block.icon size={14} />
                                                 {block.label}
                                             </h4>
                                             <p className="mt-2.5 text-sm leading-relaxed break-keep whitespace-pre-line text-ink-soft">
                                                 {item[block.key]}
                                             </p>
                                         </div>
-                                    ),
-                                )}
-                            </div>
-
-                            {item.img && (
-                                <div className="snap-row mt-6">
-                                    {item.img.map((shot) => (
-                                        <figure
-                                            key={shot.src}
-                                            className="w-[18rem] md:w-[24rem]"
-                                        >
-                                            <img
-                                                src={shot.src}
-                                                alt={shot.title}
-                                                loading="lazy"
-                                                className="rounded-xl border border-line"
-                                            />
-                                            <figcaption className="mt-2 text-xs text-muted">
-                                                {shot.title}
-                                            </figcaption>
-                                        </figure>
                                     ))}
                                 </div>
-                            )}
-                        </article>
+
+                                {item.img && (
+                                    <div className="snap-row mt-6">
+                                        {item.img.map((shot) => (
+                                            <figure
+                                                key={shot.src}
+                                                className="shrink-0"
+                                            >
+                                                <img
+                                                    src={shot.src}
+                                                    alt={shot.title}
+                                                    loading="lazy"
+                                                    className="h-44 w-auto max-w-full rounded-xl border border-line md:h-56"
+                                                />
+                                                <figcaption className="mt-2 text-center text-xs text-muted">
+                                                    {shot.title}
+                                                </figcaption>
+                                            </figure>
+                                        ))}
+                                    </div>
+                                )}
+                            </article>
+                        </Fade>
                     ))}
                 </div>
             </div>

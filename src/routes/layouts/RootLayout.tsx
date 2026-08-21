@@ -37,11 +37,17 @@ export default function RootLayout() {
         }
 
         const jump = (smooth: boolean) => {
-            const target = document.querySelector(hash);
+            // 프로젝트 계열 해시는 해당 블록이 홀딩되는 지점(블록 최상단)으로 보낸다
+            const isWork = hash === "#works" || hash.startsWith("#work-");
+            const target = document.querySelector(
+                hash === "#works" ? "#works [data-block]" : hash,
+            );
             if (!target) return;
-            // 섹션의 scroll-mt-16(64px)을 수동 계산에도 반영한다
+            // 일반 섹션은 scroll-mt-16(64px)을 수동 계산에도 반영한다
             scrollToY(
-                target.getBoundingClientRect().top + window.scrollY - 64,
+                target.getBoundingClientRect().top +
+                    window.scrollY -
+                    (isWork ? 0 : 64),
                 smooth,
             );
         };
@@ -51,9 +57,10 @@ export default function RootLayout() {
             return;
         }
 
-        jump(false);
-        // 폰트가 늦게 붙으면 텍스트가 리플로우되면서 위치가 어긋난다. 한 번 더 맞춘다.
-        void document.fonts.ready.then(() => jump(false));
+        /* 페이지 전환: 최상단을 먼저 보여준 뒤 부드럽게 목적지로 내려간다 */
+        scrollToY(0, false);
+        const timer = window.setTimeout(() => jump(true), 350);
+        return () => clearTimeout(timer);
     }, [pathname, hash]);
 
     return (

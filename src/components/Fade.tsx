@@ -10,11 +10,14 @@ export default function Fade({
     className,
     delay = 0,
     y = 22,
+    once = false,
 }: {
     children: React.ReactNode;
     className?: string;
     delay?: number;
     y?: number;
+    /** true면 한 번 나타난 뒤 스크롤을 되돌려도 사라지지 않는다 */
+    once?: boolean;
 }) {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -37,14 +40,16 @@ export default function Fade({
                     scrollTrigger: {
                         trigger: ref.current,
                         start: "top 85%",
-                        toggleActions: "play none none reverse",
+                        toggleActions: once
+                            ? "play none none none"
+                            : "play none none reverse",
                     },
                 },
             );
         }, ref);
 
         return () => context.revert();
-    }, [delay, y]);
+    }, [delay, y, once]);
 
     return (
         <div ref={ref} className={className}>

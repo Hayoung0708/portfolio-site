@@ -9,9 +9,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function TitleReveal({
     children,
     className,
+    once = false,
 }: {
     children: React.ReactNode;
     className?: string;
+    /** true면 한 번 나타난 뒤 스크롤을 되돌려도 사라지지 않는다 */
+    once?: boolean;
 }) {
     const ref = useRef<HTMLHeadingElement>(null);
 
@@ -41,7 +44,9 @@ export default function TitleReveal({
                         scrollTrigger: {
                             trigger: ref.current,
                             start: "top 82%",
-                            toggleActions: "play none none reverse",
+                            toggleActions: once
+                                ? "play none none none"
+                                : "play none none reverse",
                         },
                     },
                 );
@@ -51,7 +56,7 @@ export default function TitleReveal({
         }, ref);
 
         return () => context.revert();
-    }, []);
+    }, [once]);
 
     return (
         <h2 ref={ref} className={`headline ${className ?? ""}`}>
