@@ -51,61 +51,340 @@ import deCaffeineEx1Img from "@/assets/images/de-caffeine_ex1.gif";
 import deCaffeineEx2Img from "@/assets/images/de-caffeine_ex2.png";
 import deCaffeineEx3Img from "@/assets/images/de-caffeine_ex3.png";
 import deCaffeineEx4Img from "@/assets/images/de-caffeine_ex4.png";
+import type { Project, SideWork } from "@/types/project";
 
-export const MAIN_PROJECTS = [
-    // {
-    //     id: "jjimkong",
-    //     title: "찜콩",
-    //     image: [jjimkongImg],
-    //     intro: "리뷰 클렌징 없는 나만의 솔직 리뷰 저장소",
-    //     period: "2025.10.02 - 개발중",
-    //     description: "",
-    //     type: "Team Project",
-    //     team: {
-    //         frontend: 1,
-    //         backend: 1,
-    //     },
-    //     lead: "Project",
-    //     stacks: [
-    //         {
-    //             group: "Programming",
-    //             list: [
-    //                 {
-    //                     name: "TypeScript",
-    //                 },
-    //                 {
-    //                     name: "React",
-    //                 },
-    //             ],
-    //         },
-    //     ],
-    //     link: {
-    //         github: "",
-    //         deploy: "",
-    //     },
-    //     features: [],
-    //     contributionSummary: [],
-    //     contributions: [],
-    //     learn: [],
-    // },
+export const MAIN_PROJECTS: Array<Project> = [
+    {
+        id: "tabletop-online",
+        title: "테이블탑 온라인",
+        image: [],
+        video: "/videos/tabletop-online.webm",
+        intro: "브라우저에서 즐기는 클래식 테이블탑 게임",
+        tags: ["바이브 코딩", "Next.js"],
+        highlights: [
+            "Claude 기반 바이브 코딩으로 Next.js·Node.js 환경에서 개발",
+            "AI가 만든 애니메이션의 어색한 부분을 잡아 자연스러운 움직임으로 개선",
+            "코딩 컨벤션을 문서화해 AI 산출물에도 일관된 코드 스타일 유지",
+            "프로젝트 기획 및 설계",
+        ],
+        period: "2026.08.05 - 운영중",
+        description: `평소 카드게임을 즐겨 했지만, 카드게임은 사람이 한자리에 모여야 한다는 제약이 있었습니다. 기존 온라인 서비스들은 원하는 게임이 없거나, 화면 구성과 조작 흐름이 불편해 오래 붙잡고 있기 어려웠습니다.
+
+이러한 생각에서 시작된 테이블탑 온라인은 가볍게 브라우저에서 접속해 바로 함께 게임을 즐기는 것을 목표로 만든 서비스입니다.
+오프라인에서 마주 앉아 하던 경험을 옮겨오는 것이 목적이었기에, 화면 안에서 발생하는 반응과 몰입감을 중요하게 다뤘습니다.`,
+        features: [
+            {
+                title: "회원가입 없는 게스트 입장",
+                icon: "user-plus",
+                img: "/features/tabletop-guest.gif",
+                body: "회원가입 없이 쿠키 기반 익명 ID로 바로 입장해 게임을 시작할 수 있습니다.",
+            },
+            {
+                title: "Socket.IO 기반 실시간 멀티플레이",
+                icon: "activity",
+                img: "/features/tabletop-multiplay.gif",
+                body: "Socket.IO 기반으로 모든 플레이어의 화면이 즉시 동기화되어, 야찌·싯헤드·원카드 등 여러 게임을 함께 즐길 수 있습니다.",
+            },
+            {
+                title: "실시간 감정표현",
+                icon: "message-circle-more",
+                img: "/features/tabletop-emotion.gif",
+                body: "버튼 하나로 영상·이미지·효과음 리액션을 주고받고, 재사용 대기 시간으로 도배를 막습니다.",
+            },
+            {
+                title: "인터렉티브 경험",
+                icon: "sparkles",
+                img: "/features/tabletop-interaction.gif",
+                body: "카드가 실제로 날아가는 애니메이션과 효과음으로 오프라인의 손맛을 재현했습니다.",
+            },
+        ],
+        nav: {
+            prev: "my-little-agent",
+            next: "duncop",
+        },
+        type: "Solo Project",
+        stacks: [
+            {
+                group: "Programming",
+                list: [
+                    { name: "TypeScript", description: "language" },
+                    { name: "Next.js", description: "framework" },
+                    { name: "Node.js", description: "runtime" },
+                ],
+            },
+            { group: "Database", list: [{ name: "Prisma" }] },
+            { group: "Styling", list: [{ name: "TailwindCSS" }] },
+            {
+                group: "AI",
+                list: [{ name: "Claude", description: "vibe coding" }],
+            },
+            { group: "Library", list: [{ name: "animate.css" }] },
+            {
+                group: "Tools",
+                list: [{ name: "VSCode" }, { name: "Git / GitHub" }],
+            },
+        ],
+        link: {
+            github: "https://github.com/Hayoung0708/tabletop-online",
+            deploy: "https://tabletop-online-ppzz.onrender.com/lobby",
+        },
+        contributionSummary: [
+            {
+                title: "기획 및 개발",
+                percent: 100,
+                body: `◦ 서비스 기획 및 구조 설계
+◦ Claude 기반 바이브 코딩으로 전체 구현`,
+            },
+            {
+                title: "운영",
+                percent: 100,
+                body: `◦ 운영 중인 서비스에 영향이 없도록 브랜치를 분리해 순차 확장`,
+            },
+        ],
+        contributions: [
+            {
+                title: "바이브 코딩 환경 구성",
+                icon: "bot",
+                list: [
+                    {
+                        title: "AI를 중심에 둔 개발 방식",
+                        body: `◦ Claude를 활용해 TypeScript 기반 Next.js, Node.js 환경에서 프로젝트를 개발
+◦ 운영 중인 서비스에 영향이 가지 않도록 브랜치를 분리해 게임을 순차적으로 확장`,
+                    },
+                    {
+                        title: "생성 코드의 일관성 확보",
+                        body: `◦ 프로젝트 구조와 코드 컨벤션을 문서로 정리해, 생성되는 코드가 기존 코드베이스와 일관성을 유지하도록 환경 구성`,
+                    },
+                ],
+            },
+            {
+                title: "몰입감을 위한 인터랙션 개선",
+                icon: "sparkles",
+                list: [
+                    {
+                        title: "생성된 애니메이션의 어색함 보정",
+                        body: `◦ AI가 생성한 애니메이션의 어색한 부분을 파악해 카드 이동 방향과 순서, z-index를 세밀하게 조정하며 자연스러운 움직임으로 개선`,
+                    },
+                    {
+                        title: "실시간 감정 표현",
+                        body: `◦ 텍스트 입력 없이도 반응을 주고받을 수 있도록 실시간 감정 표현 기능을 추가해, 상대의 리액션이 화면에 전달되도록 구현`,
+                    },
+                ],
+            },
+            {
+                title: "요청 처리 및 개발 리소스 관리",
+                icon: "gauge",
+                list: [
+                    {
+                        title: "요청 단위 분해",
+                        body: `◦ AI 도구 활용 시 추상적인 요청보다 방향·순서·CSS 속성 등 구체적인 기준을 제시할수록 결과 품질이 높아지는 것을 확인
+◦ 요구사항을 구현 단위로 분해해 전달하는 방식으로 전환`,
+                    },
+                    {
+                        title: "정형화된 작업은 라이브러리로",
+                        body: `◦ 세부 조정을 반복하는 것이 오히려 시간과 토큰 비용을 늘린다고 판단하고, 정형화된 효과는 animate.css 등 이미 만들어진 라이브러리를 도입하는 방식으로 개발 리소스 절약`,
+                    },
+                    {
+                        title: "요청 빈도 제한",
+                        body: `◦ 감정 표현은 짧은 시간에 반복 입력되기 쉬운 기능이라 요청이 과도하게 발생할 수 있다고 판단하고, 재사용 대기 시간을 두어 서버로 전달되는 요청 빈도 제한`,
+                    },
+                ],
+            },
+        ],
+        learn: [
+            {
+                title: "AI 도구를 다루는 기준 세우기",
+                badge: "Learn",
+                problem: `AI에 추상적인 요청을 넘길수록 결과물이 기대에서 멀어지고, 세부 조정을 반복하면서 시간과 토큰 비용이 함께 늘어나는 문제가 반복됐습니다.`,
+                solution: `◦ 방향·순서·CSS 속성처럼 구체적인 기준을 함께 제시하고, 요구사항을 구현 단위로 분해해 전달하는 방식으로 전환
+◦ 정형화된 효과는 직접 조정하지 않고 검증된 라이브러리를 도입해 반복 작업 제거`,
+                learn: `◦ AI는 결과를 맡기는 대상이 아니라, 기준을 세워 쓰는 도구라는 점을 체감
+◦ 요청을 얼마나 잘게 쪼개는지가 결과 품질과 비용을 동시에 결정한다는 것을 학습`,
+            },
+        ],
+    },
+    {
+        id: "my-little-agent",
+        title: "my little agent",
+        image: [],
+        video: "/videos/my-little-agent.webm",
+        intro: "브라우저 안에서 도는 멀티 에이전트 프레임워크",
+        tags: ["No Server", "No API Key", "No Cost"],
+        highlights: [
+            "Chrome Built-in AI(Gemini Nano) 기반 동작",
+            "에이전트·도구·워크플로우를 하나의 인터페이스로 합성하도록 설계",
+            "데이터를 브라우저 스토리지에 저장해 서버 없이 컨텍스트 유지",
+            "Claude 기반 바이브 코딩으로 설계부터 npm 배포까지 진행",
+        ],
+        period: "2026.08.17 - 운영중",
+        description: `LLM을 붙이려면 서버, API 키, 토큰 비용, 사용량 관리가 함께 따라옵니다. 개인 프로젝트나 작은 기능 하나를 붙이는 데에는 이 준비 비용이 기능 자체보다 큽니다.
+
+my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이전트 워크플로우를 구성할 수 있게 만든 프레임워크입니다.
+서버도, 키도, 비용도 없이 사용자의 기기에서 전부 돌아가며, 데이터가 기기 밖으로 나가지 않고 오프라인에서도 동작합니다.
+
+지금 보고 계신 포트폴리오 사이트의 "하영에게 물어보기"도 이 프레임워크로 만들었습니다.`,
+        features: [
+            {
+                title: "Chrome Built-in AI 기반 온디바이스 실행",
+                icon: "bot",
+                img: "/features/mla-ondevice.gif",
+                body: "서버·API 키·비용 없이 모든 추론이 브라우저 안에서 끝나고, 오프라인에서도 동작합니다.",
+            },
+            {
+                title: "Agent · Tool · Runnable 통합 인터페이스",
+                icon: "layout-template",
+                img: "/features/mla-runnable.gif",
+                body: "에이전트·도구·워크플로우가 전부 같은 모양(Runnable)이라, chain·parallel·router·refine·step 조합자로 레고처럼 조립할 수 있습니다.",
+            },
+            {
+                title: "브라우저 스토리지 기반 메모리",
+                icon: "database",
+                img: "/features/mla-memory.gif",
+                body: "localStorage 저장소를 도구로 노출해 새로고침 뒤에도 컨텍스트를 이어 갑니다.",
+            },
+        ],
+        nav: {
+            next: "tabletop-online",
+        },
+        type: "Open Source",
+        stacks: [
+            {
+                group: "Programming",
+                list: [{ name: "TypeScript", description: "language" }],
+            },
+            {
+                group: "AI",
+                list: [
+                    {
+                        name: "Chrome Built-in AI",
+                        description: "Prompt API / Gemini Nano",
+                    },
+                ],
+            },
+            {
+                group: "Build",
+                list: [{ name: "Vite" }, { name: "esbuild" }],
+            },
+            {
+                group: "Test",
+                list: [{ name: "Vitest" }, { name: "Playwright" }],
+            },
+            {
+                group: "Distribution",
+                list: [{ name: "npm" }, { name: "publint" }],
+            },
+            {
+                group: "Tools",
+                list: [{ name: "VSCode" }, { name: "Git / GitHub" }],
+            },
+        ],
+        link: {
+            github: "https://github.com/Hayoung0708/my-little-agent",
+            npm: "https://www.npmjs.com/package/my-little-agent",
+        },
+        contributionSummary: [
+            {
+                title: "설계 및 구현",
+                percent: 100,
+                body: `◦ API 설계, 구현, 문서화, npm 배포까지 전 과정 단독 진행`,
+            },
+        ],
+        contributions: [
+            {
+                title: "API 설계",
+                icon: "drafting-compass",
+                list: [
+                    {
+                        title: "하나의 인터페이스로 합성 가능한 구조",
+                        body: `◦ 에이전트, 도구, 워크플로우가 전부 \`{ name, run(input) }\` 하나만 만족하도록 설계해 어댑터 없이 서로를 감쌀 수 있도록 구현
+◦ chain(순차) / parallel(병렬) / router(분기) / refine(평가-개선 루프) / step(순수 함수) 조합자를 제공해, 워크플로우를 다시 워크플로우의 한 단계로 넣을 수 있도록 구성`,
+                    },
+                    {
+                        title: "온디바이스 모델에 맞춘 출력 강제",
+                        body: `◦ 툴 호출과 라우팅 결과를 JSON Schema 제약 디코딩으로 강제해, 정의된 값 밖의 출력이 나오지 않도록 처리
+◦ 자유 형태 object보다 문자열 디코딩이 안정적인 점을 확인하고, 툴 인자를 문자열로 받아 파싱하는 구조로 변경`,
+                    },
+                ],
+            },
+            {
+                title: "컨텍스트 관리",
+                icon: "database",
+                list: [
+                    {
+                        title: "에이전트별 독립 컨텍스트",
+                        body: `◦ 온디바이스 모델의 컨텍스트 창이 수천 토큰뿐인 점을 고려해, 에이전트마다 세션을 분리하고 문자열 출력만 주고받도록 설계
+◦ 결과적으로 N개의 에이전트가 N개의 독립된 창을 갖게 되어, 하나의 창을 나눠 쓰는 구조보다 실질 용량이 커지도록 구성`,
+                    },
+                    {
+                        title: "컨텍스트 오버플로 방어",
+                        body: `◦ 워크플로우 단계로 쓰이는 에이전트를 위한 \`stateless\` 옵션으로 반복 실행 시 이전 대화가 창을 갉아먹지 않도록 처리
+◦ 큰 도구 결과가 대화를 밀어내지 않도록 \`maxToolResultChars\`로 잘라내되, 잘렸다는 사실을 모델이 알 수 있도록 표시를 남기도록 구현
+◦ 세션이 새로고침으로 사라지는 점을 고려해, 모델 밖 저장소(localStorage)를 도구로 노출하는 memory 계층 제공`,
+                    },
+                ],
+            },
+            {
+                title: "번들 크기와 배포",
+                icon: "package",
+                list: [
+                    {
+                        title: "의존성 0, 3.63kB gzip",
+                        body: `◦ 런타임 의존성 없이 617줄(주석 제외)로 구현해 gzip 3.63kB로 유지
+◦ \`sideEffects: false\`와 ESM 단일 엔트리로 트리셰이킹이 동작하도록 패키지 구성`,
+                    },
+                    {
+                        title: "배포 파이프라인",
+                        body: `◦ publint로 패키지 엔트리·타입 경로를 검증하고, Vitest 단위/타입 테스트와 Playwright E2E를 거쳐 npm에 배포
+◦ 한국어·영어 README를 함께 제공`,
+                    },
+                ],
+            },
+        ],
+        learn: [
+            {
+                title: "작은 모델의 한계를 구조로 메우기",
+                badge: "Learn",
+                problem: `노트북 GPU에 들어가는 모델은 데이터센터 모델과 체급이 다릅니다. 사실 정확도와 다단계 추론이 약해, 모델의 기억에 의존하는 순간 답이 틀어졌습니다.`,
+                solution: `◦ 사실은 모델이 아니라 도구가 공급하도록 역할을 분리하고, 모델은 분류·추출·변환 같은 언어 처리에만 쓰도록 설계
+◦ 긴 입력은 step()으로 쪼개 parallel로 나눠 처리하도록 구조화
+◦ 로컬로 처리하기 어려운 요청은 step() 안에서 서버 LLM으로 넘길 수 있도록 하이브리드 경로를 열어둠`,
+                learn: `◦ 모델 성능을 프롬프트로 끌어올리는 것보다, 못하는 일을 구조에서 빼는 편이 확실하다는 점을 체감
+◦ 제약(3천 토큰, 오프라인, 서버 없음)이 오히려 설계를 단순하게 만든다는 것을 학습`,
+            },
+            {
+                title: "미지원 환경을 기본값으로 두기",
+                badge: "Trouble Shooting",
+                problem: `Prompt API는 Chrome 138 이상 데스크톱에서만 노출되고, 모델도 처음에는 다운로드되어 있지 않습니다. 전역이 없는 환경에서 라이브러리가 그대로 터지면 사용하는 쪽이 매번 try/catch를 감싸야 했습니다.`,
+                solution: `◦ 전역이 없으면 예외 대신 \`'unavailable'\`을 돌려주는 \`availability()\`를 제공해 호출부가 분기만으로 폴백할 수 있도록 처리
+◦ 미지원 상황은 \`UnavailableError\`로 좁혀 \`instanceof\`로 구분 가능하게 하고, 모델 다운로드는 진행률 콜백으로 노출`,
+                learn: `◦ 라이브러리의 실패는 사용하는 쪽에서 분기 가능한 형태로 돌려줘야 한다는 것을 학습
+◦ "지원되지 않는 환경"을 예외가 아니라 하나의 정상 상태로 다루는 설계 경험`,
+            },
+        ],
+    },
     {
         id: "portfolio-site",
         title: "Portfolio Site",
         image: [portfolioSiteImg],
+        video: "/videos/portfolio-site.webm",
         intro: "강하영 포트폴리오 사이트",
-        period: "2026.02.26 - 2026.03.12",
-        description: `안녕하세요 신입 프론트엔드 개발자 강하영입니다.
-
-프론트엔드 개발자의 진정한 역량은 정적인 문서가 아닌, 사용자가 직접 경험할 수 있는 '웹' 그 자체로 보여주어야 한다고 생각합니다.
+        highlights: [
+            "Stitch AI로 디자인하고 직접 구현한 첫 버전 제작",
+            "Claude Code와 협업해 스크롤 인터렉션 중심으로 전면 개편",
+            "CSS 스크롤 타임라인과 GSAP으로 스크롤 연출 구현",
+            "Chrome Built-in AI 기반 포트폴리오 질의응답 기능 탑재",
+        ],
+        period: "2026.02 - 2026.08",
+        description: `프론트엔드 개발자의 진정한 역량은 정적인 문서가 아닌, 사용자가 직접 경험할 수 있는 '웹' 그 자체로 보여주어야 한다고 생각합니다.
 
 기존의 PDF 포트폴리오는 규격과 페이지 제한으로 인해 다채로운 프로젝트 경험을 담아내기 어렵고, GIF나 영상을 첨부할 수 없어 제가 고민했던 디테일한 UI/UX 인터랙션을 온전히 전달하기에 한계가 있었습니다.
 이에, 저만의 기술적 고민과 매끄러운 인터랙션을 어떠한 제약 없이 자유롭게 펼쳐 보이고자 이 웹 포트폴리오를 기획하고 개발했습니다.
 
-특히 이번 프로젝트에서는 AI 디자인 툴인 Stitch를 활용해 UI 기획 및 디자인 과정을 단축함으로써, 개발에 집중하여 단기간에 완성도 높은 결과물을 만들어낼 수 있었습니다.
-
-귀중한 시간을 내어 제 포트폴리오 사이트에 방문해 주셔서 감사합니다.`,
+첫 버전은 AI 디자인 툴 Stitch로 UI를 잡고 직접 구현해 단기간에 완성했습니다.
+이후 Claude Code와 협업해 스크롤 기반 인터렉션과 온디바이스 AI 챗봇을 더한 지금의 버전으로 전면 개편했습니다. 기획·디자인·개발 전 과정에서 AI를 도구로 활용하는 워크플로우를 직접 검증한 프로젝트입니다.`,
         nav: {
-            next: "duncop",
+            prev: "de-caffeine",
+            next: "bookjeokbookjeok",
         },
         type: "Solo Project",
         stacks: [
@@ -162,6 +441,9 @@ export const MAIN_PROJECTS = [
                         name: "Git / GitHub",
                     },
                     {
+                        name: "Claude Code",
+                    },
+                    {
                         name: "Stitch",
                     },
                 ],
@@ -170,19 +452,19 @@ export const MAIN_PROJECTS = [
                 group: "Library",
                 list: [
                     {
+                        name: "gsap",
+                    },
+                    {
+                        name: "lenis",
+                    },
+                    {
+                        name: "my-little-agent",
+                    },
+                    {
                         name: "lucide-react",
                     },
                     {
-                        name: "swiper",
-                    },
-                    {
-                        name: "animate.css",
-                    },
-                    {
                         name: "react-hangul-motion",
-                    },
-                    {
-                        name: "aos",
                     },
                 ],
             },
@@ -196,39 +478,71 @@ export const MAIN_PROJECTS = [
                 title: "기획 및 설계",
                 percent: 100,
                 body: `◦ 프로젝트 기획 및 AI를 활용한 UI/UX 디자인
-◦ 프로젝트 아키텍쳐 설계`,
+◦ 콘텐츠·인터렉션 설계`,
             },
             {
-                title: "개발 구현",
+                title: "개발 및 배포",
                 percent: 100,
                 body: `◦ React 기반 프론트엔드 전반 구현
-◦ Vercel을 활용한 프론트엔드 배포`,
+◦ Claude 기반 바이브 코딩으로 개편`,
             },
         ],
         contributions: [
             {
-                title: "기획 및 설계",
+                title: "기획 및 AI 워크플로우",
                 icon: "drafting-compass",
                 list: [
                     {
-                        title: "기획 및 AI 디자인",
-                        body: `◦ 프로젝트 전체 기획
-◦ AI 디자인 툴 Stitch를 활용해 UI/UX 디자인`,
+                        title: "기획",
+                        body: `◦ 프로젝트 전체 기획`,
                     },
                     {
-                        title: "프로젝트 구조 설계",
-                        body: `◦ 소규모 프로젝트로 빠른 개발 속도가 중요했기 때문에 기본적으로 Layer-based Structure를 채택, components 영역은 재사용성을 극대화하기 위해 Atomic Design 패턴을 도입한 하이브리드 구조로 프로젝트 구조 설계`,
+                        title: "Claude Code 협업 전면 개편",
+                        body: `◦ 스크롤 인터렉션 중심의 현재 버전으로 Claude Code와 협업해 전면 개편
+◦ 디자인 방향·우선순위 결정과 결과물 검수는 직접, 구현은 AI와 분담
+◦ 프로젝트 소개 문구와 시연 영상까지 AI로 제작해 기획-디자인-개발-콘텐츠 전 과정을 AI 워크플로우로 완결`,
                     },
                 ],
             },
             {
-                title: "프론트엔드 개발 및 배포",
-                icon: "layout-template",
+                title: "스크롤 인터렉션 구현",
+                icon: "sparkles",
                 list: [
                     {
-                        title: "프론트엔드 구현",
-                        body: `◦ TypeScript 기반 React 환경에서 모든 페이지 퍼블리싱
-◦ Swiper, Animate.css, Aos 등의 라이브러리를 활용하여 애니메이션 및 인터랙티브한 UI 구현`,
+                        title: "GSAP 기반 섹션 연출",
+                        body: `◦ GSAP ScrollTrigger와 CSS sticky로 섹션 고정, 시차, 크로스페이드 등 스크롤 연출 구현
+◦ Lenis 관성 스크롤과 앵커 이동 통합`,
+                    },
+                    {
+                        title: "모션 접근성과 성능",
+                        body: `◦ prefers-reduced-motion 사용자를 위한 애니메이션 비활성화 전면 대응
+◦ 시연 영상을 webm으로 압축해 로딩 부담 최소화`,
+                    },
+                ],
+            },
+            {
+                title: "온디바이스 AI 챗봇",
+                icon: "bot",
+                list: [
+                    {
+                        title: "my-little-agent 파이프라인",
+                        body: `◦ 직접 만든 오픈소스 my-little-agent로 질문 분류 → 자료 주입 → 답변 생성 파이프라인 구성
+◦ 서버 요청과 API 키 없이 모든 추론을 브라우저 안에서 처리`,
+                    },
+                    {
+                        title: "폴백 설계",
+                        body: `◦ 모델 미지원 환경은 키워드 기반 준비 답변으로 자동 전환
+◦ 모델 다운로드 상태와 기기 요건을 안내하는 UI 제공`,
+                    },
+                ],
+            },
+            {
+                title: "문의 파이프라인 및 배포",
+                icon: "message-circle-more",
+                list: [
+                    {
+                        title: "카카오톡 문의 수신",
+                        body: `◦ Vercel 서버리스 함수와 카카오 "나에게 보내기" API로 문의 폼 내용을 카카오톡으로 수신`,
                     },
                     {
                         title: "프로젝트 배포",
@@ -236,31 +550,6 @@ export const MAIN_PROJECTS = [
                     },
                 ],
             },
-            //             {
-            //                 title: "코드 리팩토링",
-            //                 icon: "layout-template",
-            //                 list: [
-            //                     {
-            //                         title: "컴포넌트 분리 및 코드 복잡도 개선",
-            //                         body: `◦ 단일 책임 원칙(SRP)에 따라 비대한 컴포넌트의 UI와 Custom Hook 분리
-            // ◦ VSCode Code Metrics 확장을 활용해 파일당 코드 라인 수와 복잡도 측정`,
-            //                     },
-            //                 ],
-            //             },
-            //             {
-            //                 title: "Lighthouse 기반 웹 성능 및 접근성 최적화",
-            //                 icon: "layout-template",
-            //                 list: [
-            //                     {
-            //                         title: "렌더링 성능 최적화",
-            //                         body: ``,
-            //                     },
-            //                     {
-            //                         title: "시맨틱 마크업을 통한 웹 접근성 강화",
-            //                         body: ``,
-            //                     },
-            //                 ],
-            //             },
         ],
         learn: [
             {
@@ -269,13 +558,27 @@ export const MAIN_PROJECTS = [
                 learn: `◦ 처음부터 완벽한 코드를 목표로 하기보다, 핵심 기능을 빠르게 구현해 '동작하는 프로토타입'을 우선 확보하는 것의 중요성 체감
 ◦ 오버엔지니어링을 지양하고, 기능 구현과 코드 최적화의 단계를 분리하는 애자일한 마인드셋 학습`,
             },
+            {
+                title: "AI와 협업하는 법",
+                badge: "Learn",
+                learn: `◦ AI에게 맡길 일과 직접 결정할 일(디자인 방향, 문구 톤, 우선순위)을 구분하는 것이 결과물의 품질을 결정한다는 점을 체감
+◦ 스크린샷 검증처럼 AI 산출물을 눈으로 직접 확인하는 검수 루프의 중요성 학습`,
+            },
         ],
     },
     {
         id: "duncop",
         title: "DUNCOP",
         image: [duncop1Img, duncop2Img, duncop3Img],
+        video: "/videos/duncop.webm",
         intro: "던전앤파이터 유저들을 위한 파티 컷 확인 서비스",
+        tags: ["Next.js", "외부 API"],
+        highlights: [
+            "외부 API를 서버 프록시로 우회해 CORS 제약 없이 안정적으로 연동",
+            "Supabase 기반 데이터베이스 설계 및 구축",
+            "사용자 테마 감지, FOUC 제거, 반응형 UI와 데이터 양 조절로 UX 개선",
+            "Next.js SSR·Open Graph로 SEO 개선 - 하루 500명 유입",
+        ],
         period: "2026.02.02 - 2026.02.25",
         description: `DUNCOP(던캅) 은 던전앤파이터 유저들이 벞교(버프 교환) 파티를 구성할 때 발생하는 문제를 해결하기 위해 만들어진 서비스입니다.
 던전앤파이터 유저들은 일반적으로 DUNDAM(던담) 데이터를 기준으로 캐릭터의 전투력(딜/버프력)을 확인한 뒤 구인·구직을 진행합니다.
@@ -288,7 +591,7 @@ export const MAIN_PROJECTS = [
     ◦ 입력한 딜러컷 / 버퍼컷 충족 여부 검증
     ◦ 신고 및 박제 이력 기반 불량 유저 식별`,
         nav: {
-            prev: "portfolio-site",
+            prev: "tabletop-online",
             next: "studium",
         },
         type: "Solo Project",
@@ -590,6 +893,7 @@ export const MAIN_PROJECTS = [
     {
         id: "studium",
         title: "Studium",
+        video: "/videos/studium.webm",
         image: [
             studium1Img,
             studium2Img,
@@ -599,6 +903,13 @@ export const MAIN_PROJECTS = [
             studium6Img,
         ],
         intro: "목표 기반 스터디 관리 플랫폼",
+        tags: ["Next.js", "프론트엔드 리드"],
+        highlights: [
+            "SSE 기반 실시간 알림 시스템 구축",
+            "퍼널 모델, 낙관적 업데이트, 알림 수신 즉각 피드백 UI로 UX 개선",
+            "Auth 기반 세션 관리 구현",
+            "담당자 태그와 텍스트 기록 중심의 커뮤니케이션 프로세스 구축",
+        ],
         period: "2025.06.27 - 2025.08.04",
         description: `스터디움 Studium은 공통의 목표를 설정하고, 구성원과 함께 꾸준히 학습할 수 있도록 돕는 🎯 목표 기반 스터디 관리 플랫폼입니다!
 
@@ -607,7 +918,7 @@ export const MAIN_PROJECTS = [
 ◦ 현재는 서버 제공 기간이 끝나 데이터가 보여지지 않습니다`,
         nav: {
             prev: "duncop",
-            next: "bookjeokbookjeok",
+            next: "de-caffeine",
         },
         type: "Team Project",
         team: {
@@ -899,6 +1210,12 @@ export const MAIN_PROJECTS = [
             bookjeokbookjeok5Img,
         ],
         intro: "독서를 기록하고 공유하는 독서 커뮤니티 플랫폼",
+        highlights: [
+            "Vue 기반으로 게시물·댓글·좋아요, 북클럽, 유저 페이지 퍼블리싱",
+            "실시간 채팅 기능 구현",
+            "데이터베이스 설계와 소셜 로그인 구축",
+            "레거시 코드를 존중하며 점진적으로 개선",
+        ],
         period: "2025.05.30 - 2025.06.19",
         description: `북적북적은 독서 다이어리를 작성하고, 관심사에 맞는 북클럽을 개설하거나 참여하며, 자유롭게 의견을 나누는 게시판 활동을 통해 다른 독자들과 소통할 수 있는 독서 커뮤니티 플랫폼입니다.
 
@@ -906,8 +1223,7 @@ export const MAIN_PROJECTS = [
 
 ◦ 현재는 알라딘 API KEY 및 Supabase 플랜이 만료돼 데이터가 보여지지 않습니다`,
         nav: {
-            prev: "studium",
-            next: "de-caffeine",
+            prev: "portfolio-site",
         },
         type: "Team Project",
         team: {
@@ -1157,14 +1473,23 @@ export const MAIN_PROJECTS = [
     {
         id: "de-caffeine",
         title: "De:caffeine",
+        video: "/videos/de-caffeine.webm",
         image: [deCaffeine1Img, deCaffeine2Img, deCaffeine3Img],
         intro: "개발자들을 위한 커뮤니티 플랫폼",
+        tags: ["React", "UX 개선"],
+        highlights: [
+            "react-router 기반 동적 라우팅과 페이지 구조 설계",
+            "Viewport 변화를 감지해 한 줄 렌더링 개수를 계산하는 동적 레이아웃 구현",
+            "스켈레톤 UI와 낙관적 업데이트로 로딩 스트레스 감소",
+            "OS별 폰트 렌더링 차이를 안티앨리어싱으로 완화",
+        ],
         period: "2025.04.25 - 2025.05.19",
         description: `de:caffeine(디:카페인)은 개발자들이 자신의 개발 일지를 SNS처럼 공유하고, 서로의 질문과 답변을 주고받을 수 있는 개발자 커뮤니티 플랫폼입니다.
 
 ◦ 프로그래머스 OPEN API 사용 (현재는 프로그래머스 API 제공 기간이 끝나 데이터가 보여지지 않습니다)`,
         nav: {
-            prev: "bookjeokbookjeok",
+            prev: "studium",
+            next: "portfolio-site",
         },
         type: "Team Project",
         team: {
@@ -1419,5 +1744,69 @@ export const MAIN_PROJECTS = [
                 ],
             },
         ],
+    },
+];
+
+/** 상세 페이지 없이 목록으로만 노출하는 작업물. 시작한 순서의 역순 */
+export const SIDE_WORKS: Array<SideWork> = [
+    {
+        title: "Portfolio Site",
+        intro: "지금 보고 계신 포트폴리오 사이트",
+        period: "2026.02 - 2026.08",
+        tags: ["TypeScript", "React", "TailwindCSS", "Vite"],
+        github: "https://github.com/Hayoung0708/portfolio-site",
+        to: "/project/portfolio-site",
+    },
+    {
+        title: "찜콩",
+        intro: "리뷰 클렌징 없는 나만의 솔직 리뷰 저장소",
+        period: "2025.10 - 진행중",
+        tags: ["TypeScript", "React", "Team Project"],
+        github: "https://github.com/JjimKong/Frontend",
+        deploy: "https://jjimkong.vercel.app/",
+    },
+    {
+        title: "북적북적",
+        intro: "독서를 기록하고 공유하는 독서 커뮤니티 플랫폼",
+        period: "2025.05 - 2025.06",
+        tags: ["Vue", "Team Project"],
+        github: "https://github.com/Programmers-FE5-VueFinder/bookjeokbookjeok",
+        deploy: "https://bookjeokbookjeok.netlify.app/",
+        to: "/project/bookjeokbookjeok",
+    },
+    {
+        title: "Devtion",
+        intro: "Notion 클론 코딩",
+        period: "2025.04",
+        tags: ["React", "Team Project"],
+        github: "https://github.com/Hayoung0708/devcourse-fe5-project1",
+    },
+    {
+        title: "basic pink theme",
+        intro: "VSCode Light+, Dark+ 테마 기반 핑크 테마",
+        period: "2025.04 - 운영중",
+        tags: ["VSCode", "Theme"],
+        github: "https://github.com/Hayoung0708/basic-pink-theme",
+    },
+    {
+        title: "베누스 파티 메이커",
+        intro: "던전앤파이터 유저들을 위한 베누스 던전 파티 자동 생성 서비스",
+        period: "2025.03 - 2025.09",
+        tags: ["React", "Team Project"],
+        github: "https://github.com/VenusPartyMaker/venus-party-maker-FE",
+        deploy: "https://venus-party-maker.vercel.app/",
+    },
+    {
+        title: "Filly",
+        intro: "감정을 담아 다같이 만드는 플레이리스트 · 한국공학대학교 무박 2일 해커톤",
+        period: "2024.06",
+        tags: ["ChatGPT API", "JavaScript", "Team Project"],
+    },
+    {
+        title: "INUsed",
+        intro: "인천대학교 학생들을 위한 중고거래 웹 애플리케이션 · 졸업 프로젝트",
+        period: "2024.03 - 2024.06",
+        tags: ["TypeScript", "React", "Redux", "Emotion", "MUI"],
+        github: "https://github.com/C-KOMACHI/INUsed",
     },
 ];

@@ -1,84 +1,303 @@
 @import "tailwindcss";
-@import "aos/dist/aos.css";
 @import "./font.css";
-@import "./animation.css";
-@import "./swiper.css";
-
-@utility pretendard {
-    font-family: "Pretendard", sans-serif;
-}
 
 @theme {
-    --color-gray1000: #1a1617;
-    --color-gray900: #1e181a;
-    --color-gray800: #251e20;
-    --color-gray700: #292325;
-    --color-gray600: #2f282a;
-    --color-gray500: #;
-    --color-gray400: #;
-    --color-gray300: #;
-    --color-gray200: #;
-    --color-gray100: #ffd7d2;
+    --font-sans: "Pretendard", system-ui, sans-serif;
 
-    --color-shadow: #0f0d0d;
+    --color-ink: #2f2f2f;
+    --color-ink-soft: #4b4245;
+    --color-muted: #857b7e;
+    --color-line: #f0e7e9;
+    --color-paper: #ffffff;
+    --color-wash: #fff5f7;
 
-    --color-sub: #64748b;
+    --color-pink: #ff6b8a;
+    --color-pink-strong: #e8446c;
+    --color-pink-soft: #ffd6de;
+    --color-pink-wash: #fff0f3;
 
-    --color-stroke: #523d41;
-    --color-main: #fbb6ad;
-    --color-main-hover: #f69e93;
-    --color-github: #1e293b;
-    --color-github-hover: #232f41;
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
-    * {
-        @apply duration-200 cursor-none z-1;
+    /* 브라우저 스크롤바 숨김. 진행은 헤더의 진행바로 보여준다 */
+    html {
+        scrollbar-width: none;
     }
+    html::-webkit-scrollbar {
+        display: none;
+    }
+
     body {
-        @apply pretendard bg-gray1000 text-white antialiased select-none;
+        @apply bg-paper text-ink antialiased;
+        font-family: var(--font-sans);
     }
-    h1 {
-        @apply text-[8vw] lg:text-[4.7vw] xl:text-[4vw] leading-[1.1] font-bold mb-[0.5vw];
+
+    ::selection {
+        @apply bg-pink-soft text-ink;
     }
-    h2 {
-        @apply text-[6vw] lg:text-[3vw] xl:text-[2.5vw] leading-[1.1] font-bold mb-[0.5vw];
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-pink;
     }
-    h3 {
-        @apply text-[3vw] lg:text-[1.5vw] xl:text-[1.2vw] text-main font-medium tracking-wider;
-    }
-    h4 {
-        @apply text-[4vw] lg:text-[2vw] xl:text-[1.5vw] font-bold;
-    }
-    p {
-        @apply text-sm sm:text-base lg:text-lg whitespace-pre-wrap break-keep;
-    }
-    span {
-        @apply text-main;
-    }
-}
-@layer components {
-    .template {
-        @apply relative w-screen p-5 sm:p-10 md:p-15 lg:p-[5%] 2xl:p-[10%] pt-[20%];
-    }
-    .main-button {
-        @apply w-fit px-5 py-3 flex items-center font-semibold rounded-2xl hover:-translate-y-2 hover:scale-101 text-sm sm:text-base md:text-lg 2xl:text-xl;
-    }
-    .card {
-        @apply bg-gray600/50 border border-gray100/10;
+
+    /* 누를 수 있는 것 위에서는 손가락 커서 */
+    button:not(:disabled),
+    [role="button"] {
+        cursor: pointer;
     }
 }
 
-*::-webkit-scrollbar {
+@layer components {
+    /* 섹션 공통 좌우 여백 */
+    .shell {
+        @apply mx-auto w-full max-w-[1200px] px-6 md:px-10;
+    }
+
+    .eyebrow {
+        @apply text-xs font-semibold uppercase tracking-[0.2em] text-pink md:text-sm;
+    }
+
+    .headline {
+        @apply text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.15] font-bold tracking-tight break-keep;
+    }
+
+    .body-text {
+        @apply text-base leading-[1.8] text-ink-soft break-keep md:text-lg;
+    }
+
+    .pill {
+        @apply inline-flex items-center rounded-full border border-line bg-wash px-3 py-1 text-xs font-medium text-ink-soft;
+    }
+
+    .card {
+        @apply rounded-3xl border border-line bg-paper;
+    }
+}
+
+/*
+ * 스크롤 연출 — CSS scroll-driven animation 사용.
+ * Chrome/Edge/Safari 26+ 는 네이티브로 돌고, 미지원 브라우저에서는
+ * @supports 밖의 기본 상태(= 최종 상태)가 그대로 보인다. JS 폴백 없음.
+ */
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes grow-x {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes draw-y {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes draw-underline {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* 배경에 떠 있는 벚꽃 */
+@keyframes blossom-float {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(8px, -16px, 0) rotate(10deg);
+    }
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes pop-in {
+    from {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes word-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.5em);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes drift-y {
+    from {
+        transform: translateY(36px);
+    }
+    to {
+        transform: translateY(-36px);
+    }
+}
+
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .reveal {
+            animation: reveal-up linear both;
+            animation-timeline: view();
+            animation-range: entry 5% cover 28%;
+        }
+
+        .reveal-fade {
+            animation: fade-in linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 25%;
+        }
+
+        .grow-x {
+            transform-origin: left;
+            animation: grow-x linear both;
+            animation-timeline: view();
+            animation-range: entry 20% cover 45%;
+        }
+
+        .draw-y {
+            transform-origin: top;
+            animation: draw-y linear both;
+            animation-timeline: view();
+            animation-range: entry 30% cover 70%;
+        }
+
+        /* 스크롤에 따라 위아래로 흐르는 시차 효과 */
+        .drift {
+            animation: drift-y linear both;
+            animation-timeline: view();
+            animation-range: entry 0% exit 100%;
+        }
+
+        /* 섹션 제목을 단어 단위로 올려 보낸다. 범위는 컴포넌트에서 단어마다 다르게 준다 */
+        .word-reveal {
+            display: inline-block;
+            animation: word-in linear both;
+            animation-timeline: view();
+        }
+
+        /* 상단 스크롤 진행률 바 */
+        .scroll-progress {
+            transform-origin: left;
+            animation: grow-x linear both;
+            animation-timeline: scroll(root block);
+        }
+    }
+}
+
+/*
+ * 첫 진입 시퀀스. 지연 시간은 컴포넌트에서 animationDelay로 준다.
+ * 애니메이션을 끈 환경에서는 이 블록이 통째로 빠져 전부 처음부터 보인다.
+ */
+@media (prefers-reduced-motion: no-preference) {
+    /* 마스크 뒤에서 통째로 올라온다. 부모에 overflow-hidden이 필요하다 */
+    .rise {
+        animation: rise-in 0.8s var(--ease-out-quint) both;
+    }
+
+    /* 살짝 떠오르며 나타난다 */
+    .fade-up {
+        animation: fade-up 0.7s var(--ease-out-quint) both;
+    }
+
+    /* 조금 작았다가 제 크기로 */
+    .pop-in {
+        animation: pop-in 0.8s var(--ease-out-quint) both;
+    }
+
+    /* 벚꽃이 아주 느리게 오르내린다. 주기는 컴포넌트에서 준다 */
+    .blossom {
+        animation: blossom-float linear infinite;
+    }
+
+    /* 글자가 다 올라온 뒤에 밑줄이 그어진다 */
+    .underline-draw {
+        stroke-dasharray: 320;
+        stroke-dashoffset: 320;
+        animation: draw-underline 0.85s var(--ease-out-quint) 0.75s forwards;
+    }
+}
+
+/* 가로 스크롤 스냅 캐러셀 — swiper 대체 */
+.snap-row {
+    @apply flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain;
+    scrollbar-width: none;
+}
+.snap-row::-webkit-scrollbar {
     display: none;
 }
-
-[data-aos="draw-line"] {
-    transform: scaleY(0);
-    transform-origin: top;
-    transition-property: transform;
+.snap-row > * {
+    @apply shrink-0 snap-center;
 }
 
-[data-aos="draw-line"].aos-animate {
-    transform: scaleY(1);
+/* 리뷰 마퀴 틀. 움직임은 GSAP horizontalLoop가 담당 */
+.marquee {
+    overflow: hidden;
 }
