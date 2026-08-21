@@ -15,7 +15,7 @@ import { MAIN_PROJECTS, SIDE_WORKS } from "@/constants/projects";
 import { TECH_STACKS } from "@/constants/techStack";
 
 /**
- * "하영에게 물어보기" — Chrome Built-in AI 위에서 도는 라우팅 워크플로.
+ * "하영에게 물어보기" — Chrome Built-in AI 위에서 도는 라우팅 워크플로우.
  *
  * 온디바이스 모델은 사실 정확도가 약하다. 그래서 모델에게 기억을 맡기지 않고
  * 분류(router)로 필요한 자료만 고른 뒤, step()으로 그 자료를 프롬프트에 넣어
@@ -137,7 +137,7 @@ export interface AskHandle {
 }
 
 /**
- * 워크플로를 만든다. 세션은 첫 질문 때 lazy 생성되므로,
+ * 워크플로우를 만든다. 세션은 첫 질문 때 lazy 생성되므로,
  * 이 함수를 호출하는 것만으로는 모델을 붙잡지 않는다.
  */
 export function createAsk(handlers: {

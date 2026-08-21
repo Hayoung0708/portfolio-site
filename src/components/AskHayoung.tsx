@@ -33,6 +33,9 @@ const STAGE_TEXT = {
 
 type Stage = keyof typeof STAGE_TEXT | null;
 
+/** 기능 정비 중에는 채팅 UI 대신 안내만 보여준다 */
+const MAINTENANCE = true;
+
 const GREETING: Message = {
     id: 0,
     role: "bot",
@@ -251,94 +254,110 @@ export default function AskHayoung() {
                         </p>
                     </Fade>
 
-                    <div className="reveal mt-10 grid gap-4 lg:grid-cols-[1fr_18rem]">
-                        <div className="card flex h-[30rem] flex-col overflow-hidden">
-                            <div
-                                ref={logRef}
-                                className="flex-1 space-y-4 overflow-y-auto p-5 md:p-6"
-                            >
-                                {messages.map((message) => (
-                                    <Bubble
-                                        key={message.id}
-                                        message={message}
-                                    />
-                                ))}
-
-                                {stage && (
-                                    <div className="flex items-center gap-2 text-sm text-muted">
-                                        <Loader2
-                                            size={15}
-                                            className="animate-spin text-pink"
-                                        />
-                                        {STAGE_TEXT[stage]}
-                                        {slow && stage === "classify" && (
-                                            <span className="text-xs text-muted/70">
-                                                — 첫 실행은 모델을 깨우느라 오래
-                                                걸릴 수 있어요
-                                            </span>
-                                        )}
-                                        {route && stage === "write" && (
-                                            <span className="pill">
-                                                {ROUTE_LABEL[route]}
-                                            </span>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-
-                            <form
-                                className="flex items-center gap-2 border-t border-line p-3"
-                                onSubmit={(event) => {
-                                    event.preventDefault();
-                                    void submit(input);
-                                }}
-                            >
-                                <input
-                                    value={input}
-                                    onChange={(event) =>
-                                        setInput(event.target.value)
-                                    }
-                                    placeholder="예) React 경험이 얼마나 되나요?"
-                                    aria-label="질문 입력"
-                                    className="min-w-0 flex-1 rounded-xl bg-wash px-4 py-3 text-sm outline-none placeholder:text-muted"
-                                />
-                                <button
-                                    type="submit"
-                                    disabled={!input.trim() || Boolean(stage)}
-                                    aria-label="질문 보내기"
-                                    className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-pink text-white transition-colors hover:bg-pink-strong disabled:cursor-not-allowed disabled:bg-pink-soft"
-                                >
-                                    <ArrowUp size={18} />
-                                </button>
-                            </form>
+                    {MAINTENANCE ? (
+                        <div className="card mt-10 flex flex-col items-center gap-3 px-6 py-14 text-center">
+                            <span className="grid h-11 w-11 place-items-center rounded-full bg-pink-wash text-pink">
+                                <Bot size={22} />
+                            </span>
+                            <p className="font-semibold">
+                                챗봇 기능을 정비하고 있어요
+                            </p>
+                            <p className="text-sm text-muted">
+                                더 나은 답변으로 곧 다시 열게요.
+                            </p>
                         </div>
-
-                        <aside className="flex flex-col gap-4">
-                            <StatusCard ready={ready} progress={progress} />
-
-                            <div className="card p-5">
-                                <p className="text-xs font-semibold tracking-[0.14em] text-muted uppercase">
-                                    이런 걸 물어보세요
-                                </p>
-                                <ul className="mt-3 space-y-2">
-                                    {SUGGESTED_QUESTIONS.map((question) => (
-                                        <li key={question}>
-                                            <button
-                                                type="button"
-                                                disabled={Boolean(stage)}
-                                                onClick={() =>
-                                                    void submit(question)
-                                                }
-                                                className="w-full rounded-xl border border-line px-3 py-2 text-left text-sm break-keep transition-colors hover:border-pink-soft hover:bg-pink-wash disabled:opacity-50"
-                                            >
-                                                {question}
-                                            </button>
-                                        </li>
+                    ) : (
+                        <div className="reveal mt-10 grid gap-4 lg:grid-cols-[1fr_18rem]">
+                            <div className="card flex h-[30rem] flex-col overflow-hidden">
+                                <div
+                                    ref={logRef}
+                                    className="flex-1 space-y-4 overflow-y-auto p-5 md:p-6"
+                                >
+                                    {messages.map((message) => (
+                                        <Bubble
+                                            key={message.id}
+                                            message={message}
+                                        />
                                     ))}
-                                </ul>
+
+                                    {stage && (
+                                        <div className="flex items-center gap-2 text-sm text-muted">
+                                            <Loader2
+                                                size={15}
+                                                className="animate-spin text-pink"
+                                            />
+                                            {STAGE_TEXT[stage]}
+                                            {slow && stage === "classify" && (
+                                                <span className="text-xs text-muted/70">
+                                                    — 첫 실행은 모델을 깨우느라
+                                                    오래 걸릴 수 있어요
+                                                </span>
+                                            )}
+                                            {route && stage === "write" && (
+                                                <span className="pill">
+                                                    {ROUTE_LABEL[route]}
+                                                </span>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <form
+                                    className="flex items-center gap-2 border-t border-line p-3"
+                                    onSubmit={(event) => {
+                                        event.preventDefault();
+                                        void submit(input);
+                                    }}
+                                >
+                                    <input
+                                        value={input}
+                                        onChange={(event) =>
+                                            setInput(event.target.value)
+                                        }
+                                        placeholder="예) React 경험이 얼마나 되나요?"
+                                        aria-label="질문 입력"
+                                        className="min-w-0 flex-1 rounded-xl bg-wash px-4 py-3 text-sm outline-none placeholder:text-muted"
+                                    />
+                                    <button
+                                        type="submit"
+                                        disabled={
+                                            !input.trim() || Boolean(stage)
+                                        }
+                                        aria-label="질문 보내기"
+                                        className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-pink text-white transition-colors hover:bg-pink-strong disabled:cursor-not-allowed disabled:bg-pink-soft"
+                                    >
+                                        <ArrowUp size={18} />
+                                    </button>
+                                </form>
                             </div>
-                        </aside>
-                    </div>
+
+                            <aside className="flex flex-col gap-4">
+                                <StatusCard ready={ready} progress={progress} />
+
+                                <div className="card p-5">
+                                    <p className="text-xs font-semibold tracking-[0.14em] text-muted uppercase">
+                                        이런 걸 물어보세요
+                                    </p>
+                                    <ul className="mt-3 space-y-2">
+                                        {SUGGESTED_QUESTIONS.map((question) => (
+                                            <li key={question}>
+                                                <button
+                                                    type="button"
+                                                    disabled={Boolean(stage)}
+                                                    onClick={() =>
+                                                        void submit(question)
+                                                    }
+                                                    className="w-full rounded-xl border border-line px-3 py-2 text-left text-sm break-keep transition-colors hover:border-pink-soft hover:bg-pink-wash disabled:opacity-50"
+                                                >
+                                                    {question}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </aside>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

@@ -62,16 +62,42 @@ export const MAIN_PROJECTS: Array<Project> = [
         intro: "브라우저에서 즐기는 클래식 테이블탑 게임",
         tags: ["바이브 코딩", "Next.js"],
         highlights: [
-            "Claude 기반 바이브 코딩으로 TypeScript·Next.js 환경에서 개발",
-            "AI가 만든 애니메이션의 어색한 부분을 잡아 카드 움직임 개선",
-            "텍스트 없이 반응을 주고받는 실시간 감정 표현 추가",
-            "재사용 대기 시간을 두어 서버로 가는 요청 빈도 제한",
+            "Claude 기반 바이브 코딩으로 Next.js·Node.js 환경에서 개발",
+            "AI가 만든 애니메이션의 어색한 부분을 잡아 자연스러운 움직임으로 개선",
+            "코딩 컨벤션을 문서화해 AI 산출물에도 일관된 코드 스타일 유지",
+            "프로젝트 기획 및 설계",
         ],
         period: "2026.08.05 - 운영중",
         description: `평소 카드게임을 즐겨 했지만, 카드게임은 사람이 한자리에 모여야 한다는 제약이 있었습니다. 기존 온라인 서비스들은 원하는 게임이 없거나, 화면 구성과 조작 흐름이 불편해 오래 붙잡고 있기 어려웠습니다.
 
 이러한 생각에서 시작된 테이블탑 온라인은 가볍게 브라우저에서 접속해 바로 함께 게임을 즐기는 것을 목표로 만든 서비스입니다.
 오프라인에서 마주 앉아 하던 경험을 옮겨오는 것이 목적이었기에, 화면 안에서 발생하는 반응과 몰입감을 중요하게 다뤘습니다.`,
+        features: [
+            {
+                title: "회원가입 없는 게스트 입장",
+                icon: "user-plus",
+                img: "/features/tabletop-guest.gif",
+                body: "회원가입 없이 쿠키 기반 익명 ID로 바로 입장해 게임을 시작할 수 있습니다.",
+            },
+            {
+                title: "Socket.IO 기반 실시간 멀티플레이",
+                icon: "activity",
+                img: "/features/tabletop-multiplay.gif",
+                body: "Socket.IO 기반으로 모든 플레이어의 화면이 즉시 동기화되어, 야찌·싯헤드·원카드 등 여러 게임을 함께 즐길 수 있습니다.",
+            },
+            {
+                title: "실시간 감정표현",
+                icon: "message-circle-more",
+                img: "/features/tabletop-emotion.gif",
+                body: "버튼 하나로 영상·이미지·효과음 리액션을 주고받고, 재사용 대기 시간으로 도배를 막습니다.",
+            },
+            {
+                title: "인터렉티브 경험",
+                icon: "sparkles",
+                img: "/features/tabletop-interaction.gif",
+                body: "카드가 실제로 날아가는 애니메이션과 효과음으로 오프라인의 손맛을 재현했습니다.",
+            },
+        ],
         nav: {
             prev: "my-little-agent",
             next: "duncop",
@@ -186,17 +212,37 @@ export const MAIN_PROJECTS: Array<Project> = [
         tags: ["No Server", "No API Key", "No Cost"],
         highlights: [
             "Chrome Built-in AI(Gemini Nano) 기반 동작",
-            "에이전트·도구·워크플로를 하나의 인터페이스로 합성하도록 설계",
-            "대화 기록을 브라우저 스토리지에 저장해 서버 없이 컨텍스트 유지",
+            "에이전트·도구·워크플로우를 하나의 인터페이스로 합성하도록 설계",
+            "데이터를 브라우저 스토리지에 저장해 서버 없이 컨텍스트 유지",
             "Claude 기반 바이브 코딩으로 설계부터 npm 배포까지 진행",
         ],
         period: "2026.08.17 - 운영중",
         description: `LLM을 붙이려면 서버, API 키, 토큰 비용, 사용량 관리가 함께 따라옵니다. 개인 프로젝트나 작은 기능 하나를 붙이는 데에는 이 준비 비용이 기능 자체보다 큽니다.
 
-my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이전트 워크플로를 구성할 수 있게 만든 프레임워크입니다.
+my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이전트 워크플로우를 구성할 수 있게 만든 프레임워크입니다.
 서버도, 키도, 비용도 없이 사용자의 기기에서 전부 돌아가며, 데이터가 기기 밖으로 나가지 않고 오프라인에서도 동작합니다.
 
 지금 보고 계신 포트폴리오 사이트의 "하영에게 물어보기"도 이 프레임워크로 만들었습니다.`,
+        features: [
+            {
+                title: "Chrome Built-in AI 기반 온디바이스 실행",
+                icon: "bot",
+                img: "/features/mla-ondevice.gif",
+                body: "서버·API 키·비용 없이 모든 추론이 브라우저 안에서 끝나고, 오프라인에서도 동작합니다.",
+            },
+            {
+                title: "Agent · Tool · Runnable 통합 인터페이스",
+                icon: "layout-template",
+                img: "/features/mla-runnable.gif",
+                body: "에이전트·도구·워크플로우가 전부 같은 모양(Runnable)이라, chain·parallel·router·refine·step 조합자로 레고처럼 조립할 수 있습니다.",
+            },
+            {
+                title: "브라우저 스토리지 기반 메모리",
+                icon: "database",
+                img: "/features/mla-memory.gif",
+                body: "localStorage 저장소를 도구로 노출해 새로고침 뒤에도 컨텍스트를 이어 갑니다.",
+            },
+        ],
         nav: {
             next: "tabletop-online",
         },
@@ -250,8 +296,8 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                 list: [
                     {
                         title: "하나의 인터페이스로 합성 가능한 구조",
-                        body: `◦ 에이전트, 도구, 워크플로가 전부 \`{ name, run(input) }\` 하나만 만족하도록 설계해 어댑터 없이 서로를 감쌀 수 있도록 구현
-◦ chain(순차) / parallel(병렬) / router(분기) / refine(평가-개선 루프) / step(순수 함수) 조합자를 제공해, 워크플로를 다시 워크플로의 한 단계로 넣을 수 있도록 구성`,
+                        body: `◦ 에이전트, 도구, 워크플로우가 전부 \`{ name, run(input) }\` 하나만 만족하도록 설계해 어댑터 없이 서로를 감쌀 수 있도록 구현
+◦ chain(순차) / parallel(병렬) / router(분기) / refine(평가-개선 루프) / step(순수 함수) 조합자를 제공해, 워크플로우를 다시 워크플로우의 한 단계로 넣을 수 있도록 구성`,
                     },
                     {
                         title: "온디바이스 모델에 맞춘 출력 강제",
@@ -271,7 +317,7 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                     },
                     {
                         title: "컨텍스트 오버플로 방어",
-                        body: `◦ 워크플로 단계로 쓰이는 에이전트를 위한 \`stateless\` 옵션으로 반복 실행 시 이전 대화가 창을 갉아먹지 않도록 처리
+                        body: `◦ 워크플로우 단계로 쓰이는 에이전트를 위한 \`stateless\` 옵션으로 반복 실행 시 이전 대화가 창을 갉아먹지 않도록 처리
 ◦ 큰 도구 결과가 대화를 밀어내지 않도록 \`maxToolResultChars\`로 잘라내되, 잘렸다는 사실을 모델이 알 수 있도록 표시를 남기도록 구현
 ◦ 세션이 새로고침으로 사라지는 점을 고려해, 모델 밖 저장소(localStorage)를 도구로 노출하는 memory 계층 제공`,
                     },
@@ -320,23 +366,22 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
         id: "portfolio-site",
         title: "Portfolio Site",
         image: [portfolioSiteImg],
+        video: "/videos/portfolio-site.webm",
         intro: "강하영 포트폴리오 사이트",
         highlights: [
-            "AI 디자인 툴 Stitch로 UI 기획을 단축하고 개발에 집중",
+            "Stitch AI로 디자인하고 직접 구현한 첫 버전 제작",
+            "Claude Code와 협업해 스크롤 인터렉션 중심으로 전면 개편",
             "CSS 스크롤 타임라인과 GSAP으로 스크롤 연출 구현",
             "Chrome Built-in AI 기반 포트폴리오 질의응답 기능 탑재",
         ],
         period: "2026.02 - 2026.08",
-        description: `안녕하세요 신입 프론트엔드 개발자 강하영입니다.
-
-프론트엔드 개발자의 진정한 역량은 정적인 문서가 아닌, 사용자가 직접 경험할 수 있는 '웹' 그 자체로 보여주어야 한다고 생각합니다.
+        description: `프론트엔드 개발자의 진정한 역량은 정적인 문서가 아닌, 사용자가 직접 경험할 수 있는 '웹' 그 자체로 보여주어야 한다고 생각합니다.
 
 기존의 PDF 포트폴리오는 규격과 페이지 제한으로 인해 다채로운 프로젝트 경험을 담아내기 어렵고, GIF나 영상을 첨부할 수 없어 제가 고민했던 디테일한 UI/UX 인터랙션을 온전히 전달하기에 한계가 있었습니다.
 이에, 저만의 기술적 고민과 매끄러운 인터랙션을 어떠한 제약 없이 자유롭게 펼쳐 보이고자 이 웹 포트폴리오를 기획하고 개발했습니다.
 
-특히 이번 프로젝트에서는 AI 디자인 툴인 Stitch를 활용해 UI 기획 및 디자인 과정을 단축함으로써, 개발에 집중하여 단기간에 완성도 높은 결과물을 만들어낼 수 있었습니다.
-
-귀중한 시간을 내어 제 포트폴리오 사이트에 방문해 주셔서 감사합니다.`,
+첫 버전은 AI 디자인 툴 Stitch로 UI를 잡고 직접 구현해 단기간에 완성했습니다.
+이후 Claude Code와 협업해 스크롤 기반 인터렉션과 온디바이스 AI 챗봇을 더한 지금의 버전으로 전면 개편했습니다. 기획·디자인·개발 전 과정에서 AI를 도구로 활용하는 워크플로우를 직접 검증한 프로젝트입니다.`,
         nav: {
             prev: "de-caffeine",
             next: "bookjeokbookjeok",
@@ -396,6 +441,9 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                         name: "Git / GitHub",
                     },
                     {
+                        name: "Claude Code",
+                    },
+                    {
                         name: "Stitch",
                     },
                 ],
@@ -404,19 +452,19 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                 group: "Library",
                 list: [
                     {
+                        name: "gsap",
+                    },
+                    {
+                        name: "lenis",
+                    },
+                    {
+                        name: "my-little-agent",
+                    },
+                    {
                         name: "lucide-react",
                     },
                     {
-                        name: "swiper",
-                    },
-                    {
-                        name: "animate.css",
-                    },
-                    {
                         name: "react-hangul-motion",
-                    },
-                    {
-                        name: "aos",
                     },
                 ],
             },
@@ -430,39 +478,71 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                 title: "기획 및 설계",
                 percent: 100,
                 body: `◦ 프로젝트 기획 및 AI를 활용한 UI/UX 디자인
-◦ 프로젝트 아키텍쳐 설계`,
+◦ 콘텐츠·인터렉션 설계`,
             },
             {
-                title: "개발 구현",
+                title: "개발 및 배포",
                 percent: 100,
                 body: `◦ React 기반 프론트엔드 전반 구현
-◦ Vercel을 활용한 프론트엔드 배포`,
+◦ Claude 기반 바이브 코딩으로 개편`,
             },
         ],
         contributions: [
             {
-                title: "기획 및 설계",
+                title: "기획 및 AI 워크플로우",
                 icon: "drafting-compass",
                 list: [
                     {
-                        title: "기획 및 AI 디자인",
-                        body: `◦ 프로젝트 전체 기획
-◦ AI 디자인 툴 Stitch를 활용해 UI/UX 디자인`,
+                        title: "기획",
+                        body: `◦ 프로젝트 전체 기획`,
                     },
                     {
-                        title: "프로젝트 구조 설계",
-                        body: `◦ 소규모 프로젝트로 빠른 개발 속도가 중요했기 때문에 기본적으로 Layer-based Structure를 채택, components 영역은 재사용성을 극대화하기 위해 Atomic Design 패턴을 도입한 하이브리드 구조로 프로젝트 구조 설계`,
+                        title: "Claude Code 협업 전면 개편",
+                        body: `◦ 스크롤 인터렉션 중심의 현재 버전으로 Claude Code와 협업해 전면 개편
+◦ 디자인 방향·우선순위 결정과 결과물 검수는 직접, 구현은 AI와 분담
+◦ 프로젝트 소개 문구와 시연 영상까지 AI로 제작해 기획-디자인-개발-콘텐츠 전 과정을 AI 워크플로우로 완결`,
                     },
                 ],
             },
             {
-                title: "프론트엔드 개발 및 배포",
-                icon: "layout-template",
+                title: "스크롤 인터렉션 구현",
+                icon: "sparkles",
                 list: [
                     {
-                        title: "프론트엔드 구현",
-                        body: `◦ TypeScript 기반 React 환경에서 모든 페이지 퍼블리싱
-◦ Swiper, Animate.css, Aos 등의 라이브러리를 활용하여 애니메이션 및 인터랙티브한 UI 구현`,
+                        title: "GSAP 기반 섹션 연출",
+                        body: `◦ GSAP ScrollTrigger와 CSS sticky로 섹션 고정, 시차, 크로스페이드 등 스크롤 연출 구현
+◦ Lenis 관성 스크롤과 앵커 이동 통합`,
+                    },
+                    {
+                        title: "모션 접근성과 성능",
+                        body: `◦ prefers-reduced-motion 사용자를 위한 애니메이션 비활성화 전면 대응
+◦ 시연 영상을 webm으로 압축해 로딩 부담 최소화`,
+                    },
+                ],
+            },
+            {
+                title: "온디바이스 AI 챗봇",
+                icon: "bot",
+                list: [
+                    {
+                        title: "my-little-agent 파이프라인",
+                        body: `◦ 직접 만든 오픈소스 my-little-agent로 질문 분류 → 자료 주입 → 답변 생성 파이프라인 구성
+◦ 서버 요청과 API 키 없이 모든 추론을 브라우저 안에서 처리`,
+                    },
+                    {
+                        title: "폴백 설계",
+                        body: `◦ 모델 미지원 환경은 키워드 기반 준비 답변으로 자동 전환
+◦ 모델 다운로드 상태와 기기 요건을 안내하는 UI 제공`,
+                    },
+                ],
+            },
+            {
+                title: "문의 파이프라인 및 배포",
+                icon: "message-circle-more",
+                list: [
+                    {
+                        title: "카카오톡 문의 수신",
+                        body: `◦ Vercel 서버리스 함수와 카카오 "나에게 보내기" API로 문의 폼 내용을 카카오톡으로 수신`,
                     },
                     {
                         title: "프로젝트 배포",
@@ -470,31 +550,6 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                     },
                 ],
             },
-            //             {
-            //                 title: "코드 리팩토링",
-            //                 icon: "layout-template",
-            //                 list: [
-            //                     {
-            //                         title: "컴포넌트 분리 및 코드 복잡도 개선",
-            //                         body: `◦ 단일 책임 원칙(SRP)에 따라 비대한 컴포넌트의 UI와 Custom Hook 분리
-            // ◦ VSCode Code Metrics 확장을 활용해 파일당 코드 라인 수와 복잡도 측정`,
-            //                     },
-            //                 ],
-            //             },
-            //             {
-            //                 title: "Lighthouse 기반 웹 성능 및 접근성 최적화",
-            //                 icon: "layout-template",
-            //                 list: [
-            //                     {
-            //                         title: "렌더링 성능 최적화",
-            //                         body: ``,
-            //                     },
-            //                     {
-            //                         title: "시맨틱 마크업을 통한 웹 접근성 강화",
-            //                         body: ``,
-            //                     },
-            //                 ],
-            //             },
         ],
         learn: [
             {
@@ -502,6 +557,12 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                 badge: "Learn",
                 learn: `◦ 처음부터 완벽한 코드를 목표로 하기보다, 핵심 기능을 빠르게 구현해 '동작하는 프로토타입'을 우선 확보하는 것의 중요성 체감
 ◦ 오버엔지니어링을 지양하고, 기능 구현과 코드 최적화의 단계를 분리하는 애자일한 마인드셋 학습`,
+            },
+            {
+                title: "AI와 협업하는 법",
+                badge: "Learn",
+                learn: `◦ AI에게 맡길 일과 직접 결정할 일(디자인 방향, 문구 톤, 우선순위)을 구분하는 것이 결과물의 품질을 결정한다는 점을 체감
+◦ 스크린샷 검증처럼 AI 산출물을 눈으로 직접 확인하는 검수 루프의 중요성 학습`,
             },
         ],
     },
@@ -513,10 +574,10 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
         intro: "던전앤파이터 유저들을 위한 파티 컷 확인 서비스",
         tags: ["Next.js", "외부 API"],
         highlights: [
-            "DUNDAM API를 가공해 모험단 단위로 전투력 컷 충족 여부 검증",
-            "Supabase RLS로 사용자 권한에 따라 데이터 접근 제한",
-            "prefers-color-scheme 감지와 HTML 단계 테마 적용으로 FOUC 제거",
-            "Next.js SSR·Open Graph로 검색 노출 확보, 하루 500명 유입",
+            "외부 API를 서버 프록시로 우회해 CORS 제약 없이 안정적으로 연동",
+            "Supabase 기반 데이터베이스 설계 및 구축",
+            "사용자 테마 감지, FOUC 제거, 반응형 UI와 데이터 양 조절로 UX 개선",
+            "Next.js SSR·Open Graph로 SEO 개선 - 하루 500명 유입",
         ],
         period: "2026.02.02 - 2026.02.25",
         description: `DUNCOP(던캅) 은 던전앤파이터 유저들이 벞교(버프 교환) 파티를 구성할 때 발생하는 문제를 해결하기 위해 만들어진 서비스입니다.
@@ -844,10 +905,10 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
         intro: "목표 기반 스터디 관리 플랫폼",
         tags: ["Next.js", "프론트엔드 리드"],
         highlights: [
-            "프론트엔드 리드로 로그인·스터디 관리·알림 페이지 구현",
-            "SSE 기반 실시간 알림으로 새로고침 없이 확인 가능하도록 구축",
-            "useState로 중복 API 호출을 막고 ping 애니메이션으로 수신 표시",
-            "구두 논의를 담당자 태그 + 텍스트 기록으로 바꿔 반복 질문 감소",
+            "SSE 기반 실시간 알림 시스템 구축",
+            "퍼널 모델, 낙관적 업데이트, 알림 수신 즉각 피드백 UI로 UX 개선",
+            "Auth 기반 세션 관리 구현",
+            "담당자 태그와 텍스트 기록 중심의 커뮤니케이션 프로세스 구축",
         ],
         period: "2025.06.27 - 2025.08.04",
         description: `스터디움 Studium은 공통의 목표를 설정하고, 구성원과 함께 꾸준히 학습할 수 있도록 돕는 🎯 목표 기반 스터디 관리 플랫폼입니다!
@@ -1417,10 +1478,10 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
         intro: "개발자들을 위한 커뮤니티 플랫폼",
         tags: ["React", "UX 개선"],
         highlights: [
-            "react-router-dom으로 동적 라우팅 구조 설계",
-            "스켈레톤 UI로 체감 대기시간 단축, 낙관적 업데이트로 즉시 피드백",
-            "Viewport 변화를 감지해 한 줄 렌더링 개수를 계산하는 동적 레이아웃",
-            "OS별 폰트 렌더링 차이를 CSS transform 안티앨리어싱으로 완화",
+            "react-router 기반 동적 라우팅과 페이지 구조 설계",
+            "Viewport 변화를 감지해 한 줄 렌더링 개수를 계산하는 동적 레이아웃 구현",
+            "스켈레톤 UI와 낙관적 업데이트로 로딩 스트레스 감소",
+            "OS별 폰트 렌더링 차이를 안티앨리어싱으로 완화",
         ],
         period: "2025.04.25 - 2025.05.19",
         description: `de:caffeine(디:카페인)은 개발자들이 자신의 개발 일지를 SNS처럼 공유하고, 서로의 질문과 답변을 주고받을 수 있는 개발자 커뮤니티 플랫폼입니다.
@@ -1702,6 +1763,7 @@ export const SIDE_WORKS: Array<SideWork> = [
         period: "2025.10 - 진행중",
         tags: ["TypeScript", "React", "Team Project"],
         github: "https://github.com/JjimKong/Frontend",
+        deploy: "https://jjimkong.vercel.app/",
     },
     {
         title: "북적북적",

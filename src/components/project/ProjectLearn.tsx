@@ -34,7 +34,16 @@ export default function ProjectLearn({ learn }: { learn: Array<Learn> }) {
                                     {item.title}
                                 </h3>
 
-                                <div className="mt-6 grid gap-6 md:grid-cols-3">
+                                <div
+                                    className="mt-6 grid gap-6 md:[grid-template-columns:repeat(var(--cols),minmax(0,1fr))]"
+                                    style={
+                                        {
+                                            "--cols": BLOCKS.filter(
+                                                (block) => item[block.key],
+                                            ).length,
+                                        } as React.CSSProperties
+                                    }
+                                >
                                     {BLOCKS.filter(
                                         (block) => item[block.key],
                                     ).map((block) => (

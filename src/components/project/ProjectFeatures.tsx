@@ -135,9 +135,9 @@ export default function ProjectFeatures({
                                         }}
                                     >
                                         <article className="card flex h-full flex-col overflow-hidden text-left">
-                                            {(feature.img ||
-                                                feature.mobileImg) && (
-                                                <div className="min-h-0 flex-1 overflow-hidden border-b border-line bg-pink-wash/60">
+                                            <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden border-b border-line bg-pink-wash/60">
+                                                {feature.img ||
+                                                feature.mobileImg ? (
                                                     <img
                                                         src={
                                                             feature.img ??
@@ -147,8 +147,12 @@ export default function ProjectFeatures({
                                                         loading="lazy"
                                                         className="h-full w-full object-cover object-top"
                                                     />
-                                                </div>
-                                            )}
+                                                ) : (
+                                                    <span className="text-sm font-semibold text-pink-strong/45">
+                                                        이미지 준비 중
+                                                    </span>
+                                                )}
+                                            </div>
                                             {/* 텍스트 영역 높이를 고정해 카드마다 들쭉날쭉하지 않게 */}
                                             <div className="h-28 shrink-0 overflow-hidden p-5 md:h-32 md:p-6">
                                                 <h3 className="text-base font-bold md:text-lg">

@@ -128,7 +128,16 @@ export default function Header() {
             ) : (
                 <div className="shell flex h-16 items-center gap-5">
                     <Link
-                        to={project ? `/#work-${project.id}` : "/#works"}
+                        to={
+                            project
+                                ? [
+                                      "portfolio-site",
+                                      "bookjeokbookjeok",
+                                  ].includes(project.id)
+                                    ? "/#side-works"
+                                    : `/#work-${project.id}`
+                                : "/#works"
+                        }
                         aria-label="프로젝트 목록의 이 프로젝트 위치로 돌아가기"
                         className="-ml-2 rounded-full p-2 text-ink-soft transition-colors hover:bg-pink-wash hover:text-pink"
                     >

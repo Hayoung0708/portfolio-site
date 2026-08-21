@@ -20,6 +20,14 @@
 }
 
 @layer base {
+    /* 브라우저 스크롤바 숨김. 진행은 헤더의 진행바로 보여준다 */
+    html {
+        scrollbar-width: none;
+    }
+    html::-webkit-scrollbar {
+        display: none;
+    }
+
     body {
         @apply bg-paper text-ink antialiased;
         font-family: var(--font-sans);

@@ -146,7 +146,7 @@ export default function ProjectContribution({
                                     </h3>
                                 </div>
 
-                                <div className="mt-6 space-y-8 border-l-2 border-pink-soft pl-6 md:ml-4 md:pl-8">
+                                <div className="mt-6 space-y-5 border-l-2 border-pink-soft pl-6 md:ml-4 md:pl-8">
                                     {contribution.list.map((item) => (
                                         <div key={item.title}>
                                             <h4 className="text-sm font-semibold text-pink md:text-base">

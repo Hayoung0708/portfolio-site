@@ -466,7 +466,11 @@ export default function Works() {
                 </div>
             </div>
 
-            <div ref={sideRef} className="shell mt-20 md:mt-28">
+            <div
+                ref={sideRef}
+                id="side-works"
+                className="shell mt-20 scroll-mt-16 md:mt-28"
+            >
                 <h3 className="reveal-fade text-sm font-semibold tracking-[0.16em] text-muted uppercase">
                     그 외 프로젝트
                 </h3>
