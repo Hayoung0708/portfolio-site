@@ -1,9 +1,8 @@
 # Portfoilo Site  
 
-
-![](orca-paste-1787333267288-690eed28-8556-4086-8185-89aa0ecf7f16.png)
-
+<img width="1920" height="953" alt="image" src="https://github.com/user-attachments/assets/7032cee9-61cf-4dcb-b4ca-6933610e15b5" />
 경험을 만드는 프론트엔드 개발자 강하영의 포트폴리오 사이트입니다.
+
 첫 버전은 Stitch AI로 디자인해 직접 구현했고, 현재 버전은 Claude Code와 협업해 전면 개편했습니다.
 
 🔗 배포 주소: [https://portfolio-site-xi-virid.vercel.app/](https://portfolio-site-xi-virid.vercel.app/)
