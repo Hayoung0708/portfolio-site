@@ -1,10 +1,14 @@
-import { ExternalLink, Github, Package } from "lucide-react";
+import { ChevronDown, ExternalLink, Github, Package } from "lucide-react";
+import { useState } from "react";
 
 import Fade from "@/components/Fade";
 import TitleReveal from "@/components/TitleReveal";
 import type { Project } from "@/types/project";
 
 export default function ProjectHero({ project }: { project: Project }) {
+    // 모바일에서는 첫 스택 그룹만 보이고, 버튼으로 펼친다
+    const [stacksOpen, setStacksOpen] = useState(false);
+
     const links = [
         {
             key: "github",
@@ -108,7 +112,7 @@ export default function ProjectHero({ project }: { project: Project }) {
                 {/* 개요 + 스티키 메타 */}
                 <div
                     id="overview"
-                    className="mt-16 grid scroll-mt-24 gap-12 md:mt-20 lg:grid-cols-[1fr_20rem]"
+                    className="mt-16 grid scroll-mt-24 gap-12 md:mt-20 md:grid-cols-[1fr_17rem] md:gap-8 lg:grid-cols-[1fr_20rem] lg:gap-12"
                 >
                     <div>
                         <Fade once className="eyebrow">
@@ -130,8 +134,9 @@ export default function ProjectHero({ project }: { project: Project }) {
                                 <h3 className="text-xs font-semibold tracking-[0.16em] text-pink uppercase">
                                     Tech Stack
                                 </h3>
-                                <dl className="mt-3 space-y-4">
-                                    {project.stacks.map((group) => (
+                                <dl className="mt-3">
+                                    {/* 첫 그룹은 항상 보인다 */}
+                                    {project.stacks.slice(0, 1).map((group) => (
                                         <div key={group.group}>
                                             <dt className="text-xs font-semibold text-muted">
                                                 {group.group}
@@ -148,7 +153,72 @@ export default function ProjectHero({ project }: { project: Project }) {
                                             </dd>
                                         </div>
                                     ))}
+
+                                    {/* 나머지는 모바일에서 부드럽게 펼쳐진다 */}
+                                    {project.stacks.length > 1 && (
+                                        <div
+                                            className={`grid transition-[grid-template-rows] duration-500 ease-out md:grid-rows-[1fr] ${
+                                                stacksOpen
+                                                    ? "grid-rows-[1fr]"
+                                                    : "grid-rows-[0fr]"
+                                            }`}
+                                        >
+                                            <div className="overflow-hidden">
+                                                <div className="mt-4 space-y-4">
+                                                    {project.stacks
+                                                        .slice(1)
+                                                        .map((group) => (
+                                                            <div
+                                                                key={
+                                                                    group.group
+                                                                }
+                                                            >
+                                                                <dt className="text-xs font-semibold text-muted">
+                                                                    {
+                                                                        group.group
+                                                                    }
+                                                                </dt>
+                                                                <dd className="mt-1.5 flex flex-wrap gap-1.5">
+                                                                    {group.list.map(
+                                                                        (
+                                                                            item,
+                                                                        ) => (
+                                                                            <span
+                                                                                key={
+                                                                                    item.name
+                                                                                }
+                                                                                className="inline-flex items-center rounded-lg bg-pink-wash px-2.5 py-1 text-xs font-semibold text-pink-strong"
+                                                                            >
+                                                                                {
+                                                                                    item.name
+                                                                                }
+                                                                            </span>
+                                                                        ),
+                                                                    )}
+                                                                </dd>
+                                                            </div>
+                                                        ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </dl>
+
+                                {project.stacks.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setStacksOpen((value) => !value)
+                                        }
+                                        className="mt-4 flex w-full items-center justify-center gap-1 text-xs font-semibold text-muted transition-colors hover:text-pink md:hidden"
+                                    >
+                                        {stacksOpen ? "접기" : "전체 보기"}
+                                        <ChevronDown
+                                            size={14}
+                                            className={`transition-transform ${stacksOpen ? "rotate-180" : ""}`}
+                                        />
+                                    </button>
+                                )}
                             </div>
                         </aside>
                     </Fade>

@@ -9,6 +9,37 @@ import ProjectIcon from "./ProjectIcon";
 /** 한 기능을 보여주는 시간(ms). 지나면 자동으로 옆으로 돌아간다 */
 const AUTO_MS = 5000;
 
+/** 커버플로우에 쓰는 카드 한 장 */
+function FeatureCard({ feature }: { feature: Feature }) {
+    return (
+        <article className="card flex h-full flex-col overflow-hidden text-left">
+            <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden border-b border-line bg-pink-wash/60">
+                {feature.img || feature.mobileImg ? (
+                    <img
+                        src={feature.img ?? feature.mobileImg}
+                        alt={`${feature.title} 화면`}
+                        loading="lazy"
+                        className="h-full w-full object-cover object-top"
+                    />
+                ) : (
+                    <span className="text-sm font-semibold text-pink-strong/45">
+                        이미지 준비 중
+                    </span>
+                )}
+            </div>
+            {/* 텍스트 영역 높이를 고정해 카드마다 들쭉날쭉하지 않게 */}
+            <div className="h-28 shrink-0 overflow-hidden p-5 md:h-32 md:p-6">
+                <h3 className="text-base font-bold md:text-lg">
+                    {feature.title}
+                </h3>
+                <p className="mt-2 line-clamp-2 text-sm break-keep text-ink-soft">
+                    {feature.body}
+                </p>
+            </div>
+        </article>
+    );
+}
+
 export default function ProjectFeatures({
     features,
 }: {
@@ -47,6 +78,26 @@ export default function ProjectFeatures({
         return offset;
     };
 
+    /** 커버플로우 카드의 공통 속성. horizontal이면 좌우로, 아니면 위아래로 돈다 */
+    const flowStyle = (index: number, horizontal: boolean) => {
+        const offset = offsetOf(index);
+        const depth = Math.abs(offset);
+        const on = offset === 0;
+        return {
+            on,
+            style: {
+                transform: horizontal
+                    ? `translate(-50%, -50%) translateX(${offset * 58}%) rotateY(${offset * 22}deg) scale(${1 - depth * 0.1})`
+                    : `translate(-50%, -50%) translateY(${offset * 44}%) rotateX(${offset * -14}deg) scale(${1 - depth * 0.1})`,
+                zIndex: 20 - depth,
+                opacity: depth > 1 ? 0 : 1 - depth * 0.45,
+                pointerEvents:
+                    depth > 1 ? ("none" as const) : ("auto" as const),
+                cursor: on ? "default" : "pointer",
+            },
+        };
+    };
+
     return (
         <section
             id="features"
@@ -63,19 +114,16 @@ export default function ProjectFeatures({
                 <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-12">
                     {/* 기능 목록. 누르면 바로, 그냥 두면 자동으로 넘어간다 */}
                     <Fade once>
-                        <ul className="flex gap-2 overflow-x-auto pb-2 lg:block lg:space-y-1 lg:overflow-visible lg:pb-0">
+                        <ul className="space-y-1">
                             {features.map((feature, index) => {
                                 const on = index === active;
                                 return (
-                                    <li
-                                        key={feature.title}
-                                        className="shrink-0"
-                                    >
+                                    <li key={feature.title}>
                                         <button
                                             type="button"
                                             onClick={() => select(index)}
                                             aria-current={on}
-                                            className={`w-full rounded-xl px-4 py-3 text-left text-sm font-semibold break-keep whitespace-nowrap transition-colors md:text-base lg:whitespace-normal ${
+                                            className={`w-full rounded-xl px-4 py-3 text-left text-sm font-semibold break-keep transition-colors md:text-base ${
                                                 on
                                                     ? "bg-paper text-ink shadow-[0_6px_18px_-12px_rgba(47,47,47,0.35)]"
                                                     : "text-muted hover:text-ink"
@@ -105,14 +153,21 @@ export default function ProjectFeatures({
                         </ul>
                     </Fade>
 
-                    {/* 가운데가 제일 크고, 위아래 카드가 비스듬히 뒤로 물러나 세로로 돈다 */}
                     <Fade once delay={0.1}>
-                        <div className="relative h-[30rem] [perspective:1400px] md:h-[34rem]">
-                            {features.map((feature, index) => {
-                                const offset = offsetOf(index);
-                                const depth = Math.abs(offset);
-                                const on = offset === 0;
+                        {/* 모바일: 활성 카드 한 장만 */}
+                        <div className="h-[22rem] md:hidden">
+                            <div
+                                key={features[active].title}
+                                className="h-full"
+                            >
+                                <FeatureCard feature={features[active]} />
+                            </div>
+                        </div>
 
+                        {/* 태블릿: 가운데 크게, 양옆이 비스듬히 뒤로 물러나 좌우로 돈다 */}
+                        <div className="relative hidden h-[26rem] [perspective:1400px] md:block lg:hidden">
+                            {features.map((feature, index) => {
+                                const { on, style } = flowStyle(index, true);
                                 return (
                                     <button
                                         key={feature.title}
@@ -121,48 +176,31 @@ export default function ProjectFeatures({
                                         aria-hidden={!on}
                                         tabIndex={on ? -1 : 0}
                                         aria-label={`${feature.title} 보기`}
-                                        className="absolute top-1/2 left-1/2 h-[24rem] w-full max-w-[36rem] transition-[transform,opacity] duration-600 ease-out md:h-[27rem]"
-                                        style={{
-                                            transform: `translate(-50%, -50%) translateY(${offset * 44}%) rotateX(${offset * -14}deg) scale(${1 - depth * 0.1})`,
-                                            zIndex: 20 - depth,
-                                            opacity:
-                                                depth > 1
-                                                    ? 0
-                                                    : 1 - depth * 0.45,
-                                            pointerEvents:
-                                                depth > 1 ? "none" : "auto",
-                                            cursor: on ? "default" : "pointer",
-                                        }}
+                                        className="absolute top-1/2 left-1/2 h-[23rem] w-[26rem] max-w-[80%] transition-[transform,opacity] duration-600 ease-out"
+                                        style={style}
                                     >
-                                        <article className="card flex h-full flex-col overflow-hidden text-left">
-                                            <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden border-b border-line bg-pink-wash/60">
-                                                {feature.img ||
-                                                feature.mobileImg ? (
-                                                    <img
-                                                        src={
-                                                            feature.img ??
-                                                            feature.mobileImg
-                                                        }
-                                                        alt={`${feature.title} 화면`}
-                                                        loading="lazy"
-                                                        className="h-full w-full object-cover object-top"
-                                                    />
-                                                ) : (
-                                                    <span className="text-sm font-semibold text-pink-strong/45">
-                                                        이미지 준비 중
-                                                    </span>
-                                                )}
-                                            </div>
-                                            {/* 텍스트 영역 높이를 고정해 카드마다 들쭉날쭉하지 않게 */}
-                                            <div className="h-28 shrink-0 overflow-hidden p-5 md:h-32 md:p-6">
-                                                <h3 className="text-base font-bold md:text-lg">
-                                                    {feature.title}
-                                                </h3>
-                                                <p className="mt-2 line-clamp-2 text-sm break-keep text-ink-soft">
-                                                    {feature.body}
-                                                </p>
-                                            </div>
-                                        </article>
+                                        <FeatureCard feature={feature} />
+                                    </button>
+                                );
+                            })}
+                        </div>
+
+                        {/* 데스크톱: 가운데 크게, 위아래 카드가 비스듬히 세로로 돈다 */}
+                        <div className="relative hidden h-[34rem] [perspective:1400px] lg:block">
+                            {features.map((feature, index) => {
+                                const { on, style } = flowStyle(index, false);
+                                return (
+                                    <button
+                                        key={feature.title}
+                                        type="button"
+                                        onClick={() => select(index)}
+                                        aria-hidden={!on}
+                                        tabIndex={on ? -1 : 0}
+                                        aria-label={`${feature.title} 보기`}
+                                        className="absolute top-1/2 left-1/2 h-[27rem] w-full max-w-[36rem] transition-[transform,opacity] duration-600 ease-out"
+                                        style={style}
+                                    >
+                                        <FeatureCard feature={feature} />
                                     </button>
                                 );
                             })}

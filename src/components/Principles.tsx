@@ -191,7 +191,7 @@ export default function Principles() {
             }}
         >
             <div className="sticky top-0 h-svh overflow-hidden">
-                <div className="shell grid h-full items-center gap-8 pt-36 pb-20 lg:grid-cols-[26rem_1fr] lg:gap-16">
+                <div className="shell grid h-full content-center gap-3 pt-8 pb-6 md:content-normal md:items-center md:gap-8 md:pt-36 md:pb-20 lg:grid-cols-[26rem_1fr] lg:gap-16">
                     <div>
                         <p ref={eyebrowRef} className="eyebrow">
                             About Me
@@ -246,14 +246,14 @@ export default function Principles() {
                     </div>
 
                     {/* 카드가 지나가는 무대 */}
-                    <div className="relative h-full">
+                    <div className="relative h-[24rem] md:h-full">
                         {PRINCIPLES.map((principle, index) => (
                             <article
                                 key={principle.no}
                                 data-card
-                                className="card absolute top-1/2 right-0 left-0 p-7 md:p-11"
+                                className="card absolute top-1/2 right-0 left-0 p-5 md:p-11"
                             >
-                                <span className="text-4xl font-bold text-pink-soft md:text-6xl">
+                                <span className="text-3xl font-bold text-pink-soft md:text-6xl">
                                     {principle.no}
                                 </span>
                                 <h3 className="mt-3 text-xl leading-snug font-bold break-keep md:text-[1.7rem]">
@@ -263,11 +263,11 @@ export default function Principles() {
                                         on={index === active}
                                     />
                                 </h3>
-                                <p className="mt-5 text-[15px] leading-[1.8] break-keep whitespace-pre-line text-ink-soft md:text-base">
+                                <p className="mt-4 text-sm leading-[1.75] break-keep whitespace-pre-line text-ink-soft md:mt-5 md:text-base">
                                     {principle.body}
                                 </p>
 
-                                <div className="mt-7 flex flex-wrap gap-2 border-t border-line pt-6">
+                                <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4 md:mt-7 md:pt-6">
                                     {principle.proof
                                         .split(" · ")
                                         .map((item) => (

@@ -2,7 +2,6 @@ import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 
-import { PROFILE } from "@/constants/profile";
 import { MAIN_PROJECTS } from "@/constants/projects";
 import { scrollToY } from "@/lib/scroll";
 
@@ -96,8 +95,7 @@ export default function Header() {
                         to="/"
                         className="text-sm font-bold tracking-tight md:text-base"
                     >
-                        {PROFILE.name}
-                        <span className="ml-1.5 text-pink">.</span>
+                        FE<span className="text-pink">.</span>Hayoung
                     </Link>
 
                     <nav className="hidden items-center gap-7 md:flex">

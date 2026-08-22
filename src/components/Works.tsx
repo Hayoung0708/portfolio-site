@@ -297,6 +297,38 @@ export default function Works() {
                             className="md:h-[150svh]"
                         >
                             <div className="max-w-xl px-6 py-14 md:sticky md:top-0 md:flex md:h-svh md:flex-col md:justify-center md:py-0 md:pt-16 md:pr-10 md:pl-16 lg:pl-24">
+                                {/* 모바일은 프레임 대신 본문 위에 이미지 */}
+                                <Link
+                                    to={`/project/${project.id}`}
+                                    aria-label={`${project.title} 자세히 보기`}
+                                    tabIndex={-1}
+                                    className="mb-8 block overflow-hidden rounded-[1.5rem] border border-line shadow-[0_10px_28px_-18px_rgba(47,47,47,0.16)] md:hidden"
+                                >
+                                    <div className="flex aspect-video items-center justify-center overflow-hidden bg-pink-wash">
+                                        {project.video ? (
+                                            <video
+                                                src={project.video}
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                className="h-full w-full object-cover"
+                                            />
+                                        ) : project.image[0] ? (
+                                            <img
+                                                src={project.image[0]}
+                                                alt=""
+                                                loading="lazy"
+                                                className="h-full w-full object-cover object-top"
+                                            />
+                                        ) : (
+                                            <span className="text-2xl font-bold text-pink-strong">
+                                                {project.title}
+                                            </span>
+                                        )}
+                                    </div>
+                                </Link>
+
                                 <p className="text-sm text-muted">
                                     <span className="font-semibold text-pink">
                                         {project.type}
@@ -371,38 +403,6 @@ export default function Works() {
                                         </a>
                                     )}
                                 </div>
-
-                                {/* 모바일은 프레임 대신 본문 아래에 이미지 */}
-                                <Link
-                                    to={`/project/${project.id}`}
-                                    aria-label={`${project.title} 자세히 보기`}
-                                    tabIndex={-1}
-                                    className="mt-10 block overflow-hidden rounded-[1.5rem] border border-line shadow-[0_10px_28px_-18px_rgba(47,47,47,0.16)] md:hidden"
-                                >
-                                    <div className="flex aspect-video items-center justify-center overflow-hidden bg-pink-wash">
-                                        {project.video ? (
-                                            <video
-                                                src={project.video}
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
-                                                className="h-full w-full object-cover"
-                                            />
-                                        ) : project.image[0] ? (
-                                            <img
-                                                src={project.image[0]}
-                                                alt=""
-                                                loading="lazy"
-                                                className="h-full w-full object-cover object-top"
-                                            />
-                                        ) : (
-                                            <span className="text-2xl font-bold text-pink-strong">
-                                                {project.title}
-                                            </span>
-                                        )}
-                                    </div>
-                                </Link>
                             </div>
                         </div>
                     ))}
@@ -479,22 +479,27 @@ export default function Works() {
                         <li
                             key={work.title}
                             data-side-row
-                            className="flex flex-col gap-2 py-4 md:flex-row md:items-center md:gap-6"
+                            className="flex flex-col gap-1.5 py-4 md:flex-row md:items-center md:gap-6"
                         >
-                            <span className="w-36 shrink-0 text-sm text-muted">
+                            <span className="hidden w-36 shrink-0 text-sm text-muted md:block">
                                 {work.period}
                             </span>
-                            <span className="w-44 shrink-0 font-bold">
-                                {work.to ? (
-                                    <Link
-                                        to={work.to}
-                                        className="transition-colors hover:text-pink"
-                                    >
-                                        {work.title}
-                                    </Link>
-                                ) : (
-                                    work.title
-                                )}
+                            <span className="flex items-baseline justify-between gap-3 md:block md:w-44 md:shrink-0">
+                                <span className="font-bold">
+                                    {work.to ? (
+                                        <Link
+                                            to={work.to}
+                                            className="transition-colors hover:text-pink"
+                                        >
+                                            {work.title}
+                                        </Link>
+                                    ) : (
+                                        work.title
+                                    )}
+                                </span>
+                                <span className="shrink-0 text-xs text-muted md:hidden">
+                                    {work.period}
+                                </span>
                             </span>
                             <span className="flex-1 text-sm break-keep text-ink-soft">
                                 {work.intro}
