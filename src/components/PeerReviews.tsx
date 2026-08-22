@@ -6,66 +6,91 @@ import TitleReveal from "@/components/TitleReveal";
 import { PEER_REVIEWS } from "@/constants/peerReview";
 import { horizontalLoop } from "@/lib/horizontalLoop";
 
+/* 두 줄로 나눠 서로 반대 방향으로 돌린다 */
+const ROWS = [
+    PEER_REVIEWS.filter((_, index) => index % 2 === 0),
+    PEER_REVIEWS.filter((_, index) => index % 2 === 1),
+];
+
 export default function PeerReviews() {
-    const trackRef = useRef<HTMLDivElement>(null);
+    const firstTrackRef = useRef<HTMLDivElement>(null);
+    const secondTrackRef = useRef<HTMLDivElement>(null);
 
     /* 자동으로 흐르고, 잡아 끌면 원하는 방향으로 움직인다 */
     useLayoutEffect(() => {
-        const track = trackRef.current;
-        if (!track) return;
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             return;
         }
 
-        const loop = horizontalLoop(
-            Array.from(track.children) as Array<HTMLElement>,
-            { repeat: -1, speed: 0.55, draggable: true, paddingRight: 16 },
-        );
+        const loops = [firstTrackRef, secondTrackRef]
+            .map((ref, index) => {
+                const track = ref.current;
+                if (!track) return null;
+                const loop = horizontalLoop(
+                    Array.from(track.children) as Array<HTMLElement>,
+                    {
+                        repeat: -1,
+                        speed: 0.5,
+                        draggable: true,
+                        paddingRight: 20,
+                    },
+                );
+                // 아랫줄은 반대 방향으로 돈다. t=0에서 바로 reverse하면 멈추므로
+                // 재생 위치를 한참 앞으로 밀어 둔 뒤 되감는다
+                if (index === 1) {
+                    loop.timeline.vars.onReverseComplete?.();
+                    loop.timeline.reverse();
+                }
+                return loop;
+            })
+            .filter(Boolean);
 
-        return () => loop.kill();
+        return () => loops.forEach((loop) => loop?.kill());
     }, []);
 
-    return (
-        <section
-            id="review"
-            className="scroll-mt-16 py-24 md:h-[230svh] md:py-0"
-        >
-            {/* 배경이 물드는 동안 화면이 잠시 붙잡힌다 */}
-            <div className="md:sticky md:top-0 md:flex md:min-h-svh md:flex-col md:justify-center md:pt-16 md:pb-32">
-                <div className="shell">
-                    <Fade className="eyebrow">Peer Review</Fade>
-                    <TitleReveal className="mt-4">
-                        동료들은 이렇게 말해요
-                    </TitleReveal>
-                    <Fade delay={0.15} className="mt-4">
-                        <p className="body-text">
-                            팀 프로젝트 종료 후 팀원들에게 받은 익명
-                            피드백입니다.
-                        </p>
-                    </Fade>
-                </div>
+    const trackRefs = [firstTrackRef, secondTrackRef];
 
-                <div className="marquee mt-12">
-                    <div
-                        ref={trackRef}
-                        className="flex w-max cursor-grab select-none active:cursor-grabbing"
-                    >
-                        {PEER_REVIEWS.map((review, index) => (
-                            <figure
-                                key={`${review.project}-${index}`}
-                                className="card mr-4 flex w-[19rem] shrink-0 flex-col p-6 md:w-[23rem]"
-                            >
-                                <Quote size={20} className="text-pink-soft" />
-                                <blockquote className="mt-4 flex-1 text-sm leading-relaxed break-keep whitespace-pre-line text-ink-soft md:text-base">
-                                    {review.body}
-                                </blockquote>
-                                <figcaption className="mt-5 text-xs font-semibold text-pink">
-                                    {review.project}
-                                </figcaption>
-                            </figure>
-                        ))}
+    return (
+        <section id="review" className="scroll-mt-16 py-24 md:py-32">
+            <div className="shell">
+                <Fade className="eyebrow">Peer Review</Fade>
+                <TitleReveal className="mt-4">
+                    동료들은 이렇게 말해요
+                </TitleReveal>
+                <Fade delay={0.15} className="mt-4">
+                    <p className="body-text">
+                        팀 프로젝트 종료 후 팀원들에게 받은 익명 피드백입니다.
+                    </p>
+                </Fade>
+            </div>
+
+            <div className="mt-12 space-y-5">
+                {ROWS.map((row, rowIndex) => (
+                    <div key={rowIndex} className="marquee">
+                        <div
+                            ref={trackRefs[rowIndex]}
+                            className="flex w-max cursor-grab select-none active:cursor-grabbing"
+                        >
+                            {row.map((review, index) => (
+                                <figure
+                                    key={`${review.project}-${index}`}
+                                    className="card mr-5 flex w-[19rem] shrink-0 flex-col p-6 md:w-[23rem]"
+                                >
+                                    <Quote
+                                        size={20}
+                                        className="text-pink-soft"
+                                    />
+                                    <blockquote className="mt-4 flex-1 text-sm leading-relaxed break-keep whitespace-pre-line text-ink-soft md:text-base">
+                                        {review.body}
+                                    </blockquote>
+                                    <figcaption className="mt-5 text-xs font-semibold text-pink">
+                                        {review.project}
+                                    </figcaption>
+                                </figure>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                ))}
             </div>
         </section>
     );
