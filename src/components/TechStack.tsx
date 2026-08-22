@@ -232,17 +232,17 @@ export default function TechStack() {
                     {TECH_STACKS.map((group) => (
                         <article
                             key={group.title}
-                            className="card flex h-[26rem] w-[17rem] shrink-0 flex-col p-6 md:h-[28rem] md:w-[19rem] md:p-7"
+                            className="card flex h-[21rem] w-[14rem] shrink-0 flex-col p-5 md:h-[28rem] md:w-[19rem] md:p-7"
                         >
                             <h3 className="text-base font-medium tracking-[0.02em] text-pink/85 md:text-lg">
                                 {group.title}
                             </h3>
 
-                            <ul className="mt-7 space-y-6">
+                            <ul className="mt-5 space-y-4 md:mt-7 md:space-y-6">
                                 {group.skills.map((skill) => (
                                     <li
                                         key={skill.name}
-                                        className="text-base font-semibold break-keep md:text-lg"
+                                        className="text-sm font-semibold break-keep md:text-lg"
                                     >
                                         {skill.name}
                                     </li>
