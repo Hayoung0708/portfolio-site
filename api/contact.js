@@ -15,8 +15,8 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: "method not allowed" });
     }
 
-    const { name, email, role, purpose, message } = req.body ?? {};
-    if (!name || !email || !purpose || !message) {
+    const { email, purpose, message } = req.body ?? {};
+    if (!email || !purpose || !message) {
         return res.status(400).json({ error: "missing fields" });
     }
     if (String(message).length > MAX_MESSAGE) {
@@ -44,9 +44,7 @@ export default async function handler(req, res) {
     const full = [
         `📬 포트폴리오 문의 (${purpose})`,
         "",
-        `이름: ${name}`,
         `이메일: ${email}`,
-        `역할: ${role || "-"}`,
         "",
         String(message),
     ].join("\n");

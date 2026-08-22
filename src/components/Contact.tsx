@@ -15,9 +15,7 @@ type Status = "idle" | "sending" | "done" | "error";
 
 export default function Contact() {
     const [form, setForm] = useState({
-        name: "",
         email: "",
-        role: "",
         purpose: "",
         message: "",
     });
@@ -122,50 +120,6 @@ export default function Contact() {
                         onSubmit={submit}
                         className="mx-auto mt-6 max-w-xl space-y-4 text-left"
                     >
-                        <div data-field>
-                            <label htmlFor="contact-name" className={label}>
-                                Name{required}
-                            </label>
-                            <input
-                                id="contact-name"
-                                type="text"
-                                required
-                                value={form.name}
-                                onChange={update("name")}
-                                placeholder="이름을 입력해주세요."
-                                className={FIELD}
-                            />
-                        </div>
-
-                        <div data-field>
-                            <label htmlFor="contact-email" className={label}>
-                                Email{required}
-                            </label>
-                            <input
-                                id="contact-email"
-                                type="email"
-                                required
-                                value={form.email}
-                                onChange={update("email")}
-                                placeholder="답장을 받을 이메일을 입력해주세요."
-                                className={FIELD}
-                            />
-                        </div>
-
-                        <div data-field>
-                            <label htmlFor="contact-role" className={label}>
-                                Role | Position
-                            </label>
-                            <input
-                                id="contact-role"
-                                type="text"
-                                value={form.role}
-                                onChange={update("role")}
-                                placeholder="예: 채용 담당자, 개발자, 디자이너, 팀 리더 등"
-                                className={FIELD}
-                            />
-                        </div>
-
                         <fieldset data-field>
                             <legend className={label}>Purpose{required}</legend>
                             <div className="flex flex-wrap gap-2.5">
@@ -191,6 +145,21 @@ export default function Contact() {
                                 ))}
                             </div>
                         </fieldset>
+
+                        <div data-field>
+                            <label htmlFor="contact-email" className={label}>
+                                Email{required}
+                            </label>
+                            <input
+                                id="contact-email"
+                                type="email"
+                                required
+                                value={form.email}
+                                onChange={update("email")}
+                                placeholder="답장을 받을 이메일을 입력해주세요."
+                                className={FIELD}
+                            />
+                        </div>
 
                         <div data-field>
                             <label htmlFor="contact-message" className={label}>
@@ -236,7 +205,6 @@ export default function Contact() {
                             )}
                         </div>
                     </form>
-
                 </div>
             </div>
         </footer>
