@@ -2,11 +2,19 @@ import { useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router";
 
 import Header from "@/components/Header";
+import { track } from "@/lib/analytics";
 import { destroySmoothScroll, initSmoothScroll, scrollToY } from "@/lib/scroll";
 
 export default function RootLayout() {
     const { pathname, hash } = useLocation();
     const previousPath = useRef<string | null>(null);
+
+    /* SPA 라우트 전환도 GA 페이지뷰로 남긴다 (첫 로드는 gtag config가 집계) */
+    useEffect(() => {
+        if (previousPath.current !== null) {
+            track("page_view", { page_path: pathname });
+        }
+    }, [pathname]);
 
     /* 관성(미끄러지는) 스크롤 */
     useEffect(() => {

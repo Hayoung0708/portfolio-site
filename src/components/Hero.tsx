@@ -8,6 +8,7 @@ import profileImg from "@/assets/images/profile.jpg";
 import Blossoms from "@/components/Blossoms";
 import { BLOSSOMS } from "@/constants/blossoms";
 import { PROFILE, STATS } from "@/constants/profile";
+import { scrollToY } from "@/lib/scroll";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -150,6 +151,17 @@ export default function Hero() {
                                 </a>
                                 <a
                                     href="#ask"
+                                    onClick={(event) => {
+                                        const target =
+                                            document.getElementById("ask");
+                                        if (!target) return;
+                                        event.preventDefault();
+                                        // 헤더 Ask AI와 같은 착지 지점(챗봇 중앙 정렬)
+                                        scrollToY(
+                                            target.getBoundingClientRect().top +
+                                                window.scrollY,
+                                        );
+                                    }}
                                     className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:border-pink hover:text-pink md:text-base"
                                 >
                                     <Sparkles size={16} className="text-pink" />
