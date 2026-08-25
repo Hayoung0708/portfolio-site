@@ -219,39 +219,41 @@ export const MAIN_PROJECTS: Array<Project> = [
         title: "my little agent",
         image: [],
         video: "/videos/my-little-agent.webm",
-        intro: "브라우저 안에서 도는 멀티 에이전트 프레임워크",
+        intro: "Chrome Built-in AI 기반 멀티 에이전트 라이브러리",
         tags: ["No Server", "No API Key", "No Cost"],
         highlights: [
-            "Chrome Built-in AI(Gemini Nano) 기반 동작",
-            "에이전트·도구·워크플로우를 하나의 인터페이스로 합성하도록 설계",
-            "데이터를 브라우저 스토리지에 저장해 서버 없이 컨텍스트 유지",
-            "Claude 기반 바이브 코딩으로 설계부터 npm 배포까지 진행",
+            "Chrome Built-in AI 기반 — 서버·API 키·토큰 비용 없이 브라우저 안에서 동작",
+            "도구 호출 루프(스키마 제약·재시도·결과 재주입)를 tools 한 줄로 축약",
+            "chain·parallel·router·refine·step 조합자로 워크플로우를 중첩 조립",
+            "런타임 의존성 0, gzip 6.17kB로 npm 배포",
         ],
         period: "2026.08.17 - 운영중",
         description: `LLM을 붙이려면 서버, API 키, 토큰 비용, 사용량 관리가 함께 따라옵니다. 개인 프로젝트나 작은 기능 하나를 붙이는 데에는 이 준비 비용이 기능 자체보다 큽니다.
 
-my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이전트 워크플로우를 구성할 수 있게 만든 프레임워크입니다.
-서버도, 키도, 비용도 없이 사용자의 기기에서 전부 돌아가며, 데이터가 기기 밖으로 나가지 않고 오프라인에서도 동작합니다.
+my little agent는 Chrome에 내장된 모델(Gemini Nano)만으로 멀티 에이전트 워크플로우를 조립하는 라이브러리입니다.
+도구 호출, 순차·병렬·분기·재작성 조합, 브라우저 저장소 기반 기억까지 — 서버도, 키도, 비용도 없이 사용자의 기기에서 전부 돌아가고, 데이터가 기기 밖으로 나가지 않아 오프라인에서도 동작합니다.
 
-지금 보고 계신 포트폴리오 사이트의 "하영에게 물어보기"도 이 프레임워크로 만들었습니다.`,
+번역·요약·교정 같은 Chrome 전용 모델도 내장 Agent로 감싸 함께 조립할 수 있습니다. 전용 모델은 따로 돌기 때문에 에이전트의 컨텍스트 창을 1토큰도 쓰지 않습니다.
+
+지금 보고 계신 포트폴리오 사이트의 "챗봇에게 물어보세요"도 이 라이브러리로 만들었습니다.`,
         features: [
             {
-                title: "Chrome Built-in AI 기반 온디바이스 실행",
+                title: "온디바이스 AI",
                 icon: "bot",
                 img: "/features/mla-ondevice.gif",
                 body: "서버·API 키·비용 없이 모든 추론이 브라우저 안에서 끝나고, 오프라인에서도 동작합니다.",
             },
             {
-                title: "Agent · Tool · Runnable 통합 인터페이스",
+                title: "멀티 에이전트 조립",
                 icon: "layout-template",
                 img: "/features/mla-runnable.gif",
-                body: "에이전트·도구·워크플로우가 전부 같은 모양(Runnable)이라, chain·parallel·router·refine·step 조합자로 레고처럼 조립할 수 있습니다.",
+                body: "에이전트·도구·워크플로우가 전부 같은 모양이라, 별도의 어댑터 없이 레고처럼 중첩해 조합할 수 있습니다.",
             },
             {
-                title: "브라우저 스토리지 기반 메모리",
+                title: "컨텍스트 관리",
                 icon: "database",
                 img: "/features/mla-memory.gif",
-                body: "localStorage 저장소를 도구로 노출해 새로고침 뒤에도 컨텍스트를 이어 갑니다.",
+                body: "에이전트마다 컨텍스트 창을 따로 쓰고, 창에 담기 어려운 기억은 브라우저 저장소에 두어 새로고침 뒤에도 이어 갑니다.",
             },
         ],
         nav: {
@@ -339,8 +341,8 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                 icon: "package",
                 list: [
                     {
-                        title: "의존성 0, 3.63kB gzip",
-                        body: `◦ 런타임 의존성 없이 617줄(주석 제외)로 구현해 gzip 3.63kB로 유지
+                        title: "의존성 0, 6.17kB gzip",
+                        body: `◦ 런타임 의존성 없이 구현해 전체 API를 gzip 6.17kB로 유지
 ◦ \`sideEffects: false\`와 ESM 단일 엔트리로 트리셰이킹이 동작하도록 패키지 구성`,
                     },
                     {
@@ -456,6 +458,12 @@ my little agent는 Chrome에 내장된 모델(Prompt API)만으로 멀티 에이
                     },
                     {
                         name: "Stitch",
+                    },
+                    {
+                        name: "Google Analytics",
+                    },
+                    {
+                        name: "Microsoft Clarity",
                     },
                 ],
             },

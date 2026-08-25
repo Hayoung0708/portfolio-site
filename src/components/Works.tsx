@@ -6,6 +6,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
 import { MAIN_PROJECTS, SIDE_WORKS } from "@/constants/projects";
+import { track } from "@/lib/analytics";
 import { scrollToY } from "@/lib/scroll";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -372,6 +373,11 @@ export default function Works() {
                                 <div className="mt-9 flex flex-wrap items-center gap-3">
                                     <Link
                                         to={`/project/${project.id}`}
+                                        onClick={() =>
+                                            track("project_detail", {
+                                                project: project.id,
+                                            })
+                                        }
                                         className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-pink"
                                     >
                                         자세히 보기
@@ -385,6 +391,11 @@ export default function Works() {
                                             href={project.link.github}
                                             target="_blank"
                                             rel="noreferrer"
+                                            onClick={() =>
+                                                track("github_click", {
+                                                    project: project.id,
+                                                })
+                                            }
                                             className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:border-pink hover:text-pink"
                                         >
                                             <Github size={16} />
@@ -396,6 +407,11 @@ export default function Works() {
                                             href={project.link.deploy}
                                             target="_blank"
                                             rel="noreferrer"
+                                            onClick={() =>
+                                                track("live_demo", {
+                                                    project: project.id,
+                                                })
+                                            }
                                             className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:border-pink hover:text-pink"
                                         >
                                             <ExternalLink size={16} />

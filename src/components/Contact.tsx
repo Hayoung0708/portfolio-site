@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef, useState } from "react";
 
 import { PROFILE } from "@/constants/profile";
+import { track } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,6 +87,7 @@ export default function Contact() {
                 body: JSON.stringify(form),
             });
             if (!response.ok) throw new Error(String(response.status));
+            track("contact_submit", { purpose: form.purpose });
             setStatus("done");
         } catch {
             setStatus("error");

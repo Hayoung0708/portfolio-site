@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import Fade from "@/components/Fade";
 import TitleReveal from "@/components/TitleReveal";
+import { track } from "@/lib/analytics";
 import type { Project } from "@/types/project";
 
 export default function ProjectHero({ project }: { project: Project }) {
@@ -95,6 +96,16 @@ export default function ProjectHero({ project }: { project: Project }) {
                                     href={link.href}
                                     target="_blank"
                                     rel="noreferrer"
+                                    onClick={() =>
+                                        track(
+                                            link.key === "github"
+                                                ? "github_click"
+                                                : link.key === "deploy"
+                                                  ? "live_demo"
+                                                  : "npm_click",
+                                            { project: project.id },
+                                        )
+                                    }
                                     className={
                                         link.key === "github"
                                             ? "inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-pink"
