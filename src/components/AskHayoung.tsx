@@ -1,10 +1,11 @@
-import { ArrowUp, Bot, Cpu, Loader2, TriangleAlert } from "lucide-react";
+import { ArrowUp, Bot, Cpu, Loader2, Lock, TriangleAlert } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import Fade from "@/components/Fade";
 import TitleReveal from "@/components/TitleReveal";
 
-import { SUGGESTED_QUESTIONS, fallbackAnswer } from "@/constants/qa";
+import { SUGGESTED_QUESTIONS } from "@/constants/qa";
+import { track } from "@/lib/analytics";
 import {
     ROUTE_LABEL,
     checkAvailability,
@@ -34,7 +35,7 @@ const STAGE_TEXT = {
 type Stage = keyof typeof STAGE_TEXT | null;
 
 /** 기능 정비 중에는 채팅 UI 대신 안내만 보여준다 */
-const MAINTENANCE = true;
+const MAINTENANCE = false;
 
 const GREETING: Message = {
     id: 0,
@@ -60,11 +61,15 @@ export default function AskHayoung() {
     const logRef = useRef<HTMLDivElement>(null);
     // 다운로드가 진행 중이면 타임아웃을 미룬다
     const lastActivityRef = useRef(0);
+    // 연속 실패 횟수. 2회부터는 챗봇을 잠근다
+    const failsRef = useRef(0);
 
-    useEffect(() => {
+    function scrollLog() {
         const log = logRef.current;
         if (log) log.scrollTop = log.scrollHeight;
-    }, [messages, stage]);
+    }
+
+    useEffect(scrollLog, [messages, stage]);
 
     useEffect(() => {
         let alive = true;
@@ -128,6 +133,10 @@ export default function AskHayoung() {
                           ? "unavailable"
                           : "downloadable",
                 );
+                // 미지원 브라우저·기기가 얼마나 오는지 본다
+                if (state === "unavailable") {
+                    track("ask_locked", { reason: "unsupported" });
+                }
                 if (state === "downloadable" || state === "downloading") {
                     prefetchModel();
                 }
@@ -149,19 +158,13 @@ export default function AskHayoung() {
         const trimmed = question.trim();
         if (!trimmed || stage) return;
 
+        // 미지원 환경에서는 챗봇이 잠긴다. 준비된 답변으로 흉내 내지 않는다
+        if (ready === "unavailable") return;
+
         setInput("");
         setRoute(null);
         routeRef.current = null;
         push({ role: "user", text: trimmed });
-
-        // 미지원 환경: 모델 없이 키워드로 답한다.
-        if (ready === "unavailable") {
-            setStage("lookup");
-            await new Promise((resolve) => setTimeout(resolve, 350));
-            setStage(null);
-            push({ role: "bot", text: fallbackAnswer(trimmed) });
-            return;
-        }
 
         if (!handleRef.current) {
             handleRef.current = createAsk({
@@ -190,7 +193,7 @@ export default function AskHayoung() {
         setSlow(false);
         const slowTimer = window.setTimeout(() => setSlow(true), 5_000);
         lastActivityRef.current = Date.now();
-        // 25초간 아무 진행(라우팅·다운로드)이 없으면 준비된 답변으로 넘어간다
+        // 25초간 아무 진행(라우팅·다운로드)이 없으면 실패로 처리한다
         let watchdogTimer: ReturnType<typeof setInterval> | undefined;
         const watchdog = new Promise<never>((_, reject) => {
             watchdogTimer = setInterval(() => {
@@ -204,20 +207,39 @@ export default function AskHayoung() {
                 handleRef.current.ask(trimmed),
                 watchdog,
             ]);
+            failsRef.current = 0;
             setReady("ready");
             push({
                 role: "bot",
                 text: answer.trim(),
                 route: routeRef.current ?? undefined,
             });
+            // GA4 파라미터는 100자 제한이라 답변은 앞부분만 보낸다
+            track("ask_answer", {
+                question: trimmed.slice(0, 100),
+                route: routeRef.current ?? "none",
+                answer: answer.trim().slice(0, 100),
+            });
         } catch (error) {
             /*
-             * 모델을 못 쓰는 기기(디스크 부족 등)에서는 시도만 하다 멈추지 말고
-             * 준비된 답변으로 전환한다. 이후 질문은 곧바로 이 경로를 탄다.
+             * 한 번의 실패로 모델을 포기하지 않고 재시도를 안내한다.
+             * 연속 2회 실패면 사용 불가 환경으로 보고 챗봇을 잠근다.
              */
             console.error("on-device model failed", error);
-            setReady("unavailable");
-            push({ role: "bot", text: fallbackAnswer(trimmed) });
+            failsRef.current += 1;
+            track("ask_fail", {
+                question: trimmed.slice(0, 100),
+                fails: String(failsRef.current),
+            });
+            if (failsRef.current >= 2) {
+                setReady("unavailable");
+                track("ask_locked", { reason: "fails" });
+            }
+            push({
+                role: "bot",
+                failed: true,
+                text: "답변 생성에 실패했어요. 잠시 후 다시 시도해 주세요.",
+            });
         } finally {
             clearInterval(watchdogTimer);
             clearTimeout(slowTimer);
@@ -268,68 +290,90 @@ export default function AskHayoung() {
                         </div>
                     ) : (
                         <div className="reveal mt-10 grid gap-4 lg:grid-cols-[1fr_18rem]">
-                            <div className="card flex h-[30rem] flex-col overflow-hidden">
-                                <div
-                                    ref={logRef}
-                                    className="flex-1 space-y-4 overflow-y-auto p-5 md:p-6"
-                                >
-                                    {messages.map((message) => (
-                                        <Bubble
-                                            key={message.id}
-                                            message={message}
-                                        />
-                                    ))}
-
-                                    {stage && (
-                                        <div className="flex items-center gap-2 text-sm text-muted">
-                                            <Loader2
-                                                size={15}
-                                                className="animate-spin text-pink"
-                                            />
-                                            {STAGE_TEXT[stage]}
-                                            {slow && stage === "classify" && (
-                                                <span className="text-xs text-muted/70">
-                                                    — 첫 실행은 모델을 깨우느라
-                                                    오래 걸릴 수 있어요
-                                                </span>
-                                            )}
-                                            {route && stage === "write" && (
-                                                <span className="pill">
-                                                    {ROUTE_LABEL[route]}
-                                                </span>
-                                            )}
-                                        </div>
-                                    )}
+                            {ready === "unavailable" ? (
+                                /* 미지원 환경: 흉내 내지 않고 잠근다 */
+                                <div className="card flex h-[30rem] flex-col items-center justify-center gap-3 px-6 text-center">
+                                    <span className="grid h-11 w-11 place-items-center rounded-full bg-wash text-muted">
+                                        <Lock size={20} />
+                                    </span>
+                                    <p className="font-semibold">
+                                        이 환경에서는 챗봇을 사용할 수 없어요
+                                    </p>
+                                    <p className="text-sm break-keep text-muted">
+                                        온디바이스 AI(Gemini Nano)를 쓸 수 없는
+                                        기기·브라우저예요.
+                                        <br />
+                                        Chrome 138 이상, 여유 공간 22GB 환경에서
+                                        다시 만나요.
+                                    </p>
                                 </div>
-
-                                <form
-                                    className="flex items-center gap-2 border-t border-line p-3"
-                                    onSubmit={(event) => {
-                                        event.preventDefault();
-                                        void submit(input);
-                                    }}
-                                >
-                                    <input
-                                        value={input}
-                                        onChange={(event) =>
-                                            setInput(event.target.value)
-                                        }
-                                        placeholder="예) React 경험이 얼마나 되나요?"
-                                        aria-label="질문 입력"
-                                        className="min-w-0 flex-1 rounded-xl bg-wash px-4 py-3 text-sm outline-none placeholder:text-muted"
-                                    />
-                                    <button
-                                        type="submit"
-                                        disabled={
-                                            !input.trim() || Boolean(stage)
-                                        }
-                                        aria-label="질문 보내기"
-                                        className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-pink text-white transition-colors hover:bg-pink-strong disabled:cursor-not-allowed disabled:bg-pink-soft"
+                            ) : (
+                                <div className="card flex h-[30rem] flex-col overflow-hidden">
+                                    <div
+                                        ref={logRef}
+                                        className="flex-1 space-y-4 overflow-y-auto p-5 md:p-6"
                                     >
-                                        <ArrowUp size={18} />
-                                    </button>
-                                </form>
-                            </div>
+                                        {messages.map((message) => (
+                                            <Bubble
+                                                key={message.id}
+                                                message={message}
+                                                onGrow={scrollLog}
+                                            />
+                                        ))}
+
+                                        {stage && (
+                                            <div className="flex items-center gap-2 text-sm text-muted">
+                                                <Loader2
+                                                    size={15}
+                                                    className="animate-spin text-pink"
+                                                />
+                                                {STAGE_TEXT[stage]}
+                                                {slow &&
+                                                    stage === "classify" && (
+                                                        <span className="text-xs text-muted/70">
+                                                            — 첫 실행은 모델을
+                                                            깨우느라 오래 걸릴
+                                                            수 있어요
+                                                        </span>
+                                                    )}
+                                                {route && stage === "write" && (
+                                                    <span className="pill">
+                                                        {ROUTE_LABEL[route]}
+                                                    </span>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <form
+                                        className="flex items-center gap-2 border-t border-line p-3"
+                                        onSubmit={(event) => {
+                                            event.preventDefault();
+                                            void submit(input);
+                                        }}
+                                    >
+                                        <input
+                                            value={input}
+                                            onChange={(event) =>
+                                                setInput(event.target.value)
+                                            }
+                                            placeholder="예) React 경험이 얼마나 되나요?"
+                                            aria-label="질문 입력"
+                                            className="min-w-0 flex-1 rounded-xl bg-wash px-4 py-3 text-sm outline-none placeholder:text-muted"
+                                        />
+                                        <button
+                                            type="submit"
+                                            disabled={
+                                                !input.trim() || Boolean(stage)
+                                            }
+                                            aria-label="질문 보내기"
+                                            className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-pink text-white transition-colors hover:bg-pink-strong disabled:cursor-not-allowed disabled:bg-pink-soft"
+                                        >
+                                            <ArrowUp size={18} />
+                                        </button>
+                                    </form>
+                                </div>
+                            )}
 
                             <aside className="flex flex-col gap-4">
                                 <StatusCard ready={ready} progress={progress} />
@@ -343,7 +387,10 @@ export default function AskHayoung() {
                                             <li key={question}>
                                                 <button
                                                     type="button"
-                                                    disabled={Boolean(stage)}
+                                                    disabled={
+                                                        Boolean(stage) ||
+                                                        ready === "unavailable"
+                                                    }
                                                     onClick={() =>
                                                         void submit(question)
                                                     }
@@ -364,19 +411,35 @@ export default function AskHayoung() {
     );
 }
 
-function Bubble({ message }: { message: Message }) {
+/** 글자를 한 자씩 늘려 타이핑처럼 보이게 한다. 자랄 때마다 로그를 아래로 민다 */
+function useTyped(text: string, onGrow: () => void) {
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        if (count >= text.length) return;
+        const timer = window.setTimeout(() => {
+            setCount((current) => current + 2);
+            onGrow();
+        }, 18);
+        return () => clearTimeout(timer);
+    }, [count, text, onGrow]);
+    return text.slice(0, count);
+}
+
+function Bubble({ message, onGrow }: { message: Message; onGrow: () => void }) {
+    const text = useTyped(message.text, onGrow);
+
     if (message.role === "user") {
         return (
-            <div className="flex justify-end">
+            <div className="fade-up flex justify-end">
                 <p className="max-w-[85%] rounded-2xl rounded-br-md bg-pink px-4 py-2.5 text-sm whitespace-pre-line text-white">
-                    {message.text}
+                    {text}
                 </p>
             </div>
         );
     }
 
     return (
-        <div className="flex gap-2.5">
+        <div className="fade-up flex gap-2.5">
             <span
                 className={`mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full ${
                     message.failed
@@ -398,7 +461,7 @@ function Bubble({ message }: { message: Message }) {
                     </span>
                 )}
                 <p className="rounded-2xl rounded-tl-md border border-line bg-wash px-4 py-2.5 text-sm leading-relaxed break-keep whitespace-pre-line">
-                    {message.text}
+                    {text}
                 </p>
             </div>
         </div>
@@ -432,9 +495,9 @@ function StatusCard({ ready, progress }: { ready: Ready; progress: number }) {
 
             <p className="mt-3 text-xs leading-relaxed break-keep whitespace-pre-line text-muted">
                 {ready === "unavailable"
-                    ? "Chrome 버전(138 미만)이나 기기 용량 문제로 온디바이스 모델을 쓸 수 없는 환경이에요. 모델은 약 4GB지만 다운로드에는 여유 공간 22GB가 필요하고, 여유가 10GB 아래로 내려가면 자동 삭제돼요.\n지금은 미리 준비한 답변으로 응답할게요."
+                    ? "Chrome 버전(138 미만)이나 기기 용량 문제로 온디바이스 모델을 쓸 수 없는 환경이에요. 모델은 약 4GB지만 다운로드에는 여유 공간 22GB가 필요하고, 여유가 10GB 아래로 내려가면 자동 삭제돼요."
                     : ready === "downloadable"
-                      ? "이 브라우저는 온디바이스 AI를 지원해요. Gemini Nano(약 4GB) 다운로드를 시작합니다 — 기기 여유 공간이 22GB 이상일 때만 받아져요.\n진행이 없으면 준비된 답변으로 자동 전환돼요."
+                      ? "이 브라우저는 온디바이스 AI를 지원해요. Gemini Nano(약 4GB) 다운로드를 시작합니다 — 기기 여유 공간이 22GB 이상일 때만 받아져요.\n다운로드가 진행되지 않으면 챗봇이 잠겨요."
                       : ready === "downloading"
                         ? "Chrome이 Gemini Nano(약 4GB)를 다운로드하고 있어요. 다운로드에는 여유 공간 22GB가 필요해요.\n받은 뒤에도 여유가 10GB 아래로 내려가면 모델이 자동 삭제돼요."
                         : "질문과 답변이 기기 밖으로 나가지 않습니다.\n서버 요청 0회, 토큰 비용 0원."}
