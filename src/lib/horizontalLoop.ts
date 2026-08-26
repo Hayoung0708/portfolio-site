@@ -31,7 +31,8 @@ export function horizontalLoop(
     const widths: Array<number> = [];
     const xPercents: Array<number> = [];
     const pixelsPerSecond = (config.speed ?? 1) * 100;
-    const snap = gsap.utils.snap(1);
+    // 정수 %로 반올림하면 카드 간격이 ±2px 흔들려서 소수점까지 유지한다
+    const snap = gsap.utils.snap(0.01);
     let totalWidth = 0;
     let curX = 0;
     let distanceToStart = 0;
