@@ -285,6 +285,14 @@
     }
 }
 
+/* 스크롤은 되지만 막대는 그리지 않는다 */
+.no-scrollbar {
+    scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 /* 가로 스크롤 스냅 캐러셀 — swiper 대체 */
 .snap-row {
     @apply flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain;

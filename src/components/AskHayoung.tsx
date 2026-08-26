@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Fade from "@/components/Fade";
 import TitleReveal from "@/components/TitleReveal";
 
+import { MAIN_PROJECTS, SIDE_WORKS } from "@/constants/projects";
 import { SUGGESTED_QUESTIONS } from "@/constants/qa";
 import { track } from "@/lib/analytics";
 import {
@@ -37,6 +38,35 @@ type Stage = keyof typeof STAGE_TEXT | null;
 /** 기능 정비 중에는 채팅 UI 대신 안내만 보여준다 */
 const MAINTENANCE = false;
 
+/**
+ * 앞선 답변에 이어 더 물어보는 말들. 이 꼴로 시작하면 직전 주제를 이어간다.
+ * "두 번째는?", "다음은?"처럼 순서를 묻는 말도 같은 뜻이다.
+ */
+const FOLLOW_UP =
+    /^(또|그리고|다른|더|하나|이어|추가|다음|나머지|그\s*외|이외|둘째|셋째|넷째|[두세네다섯]\s*번째|\d\s*번째)/;
+
+/**
+ * 후속 질문에서 "이미 언급한 사례"를 찾는 데 쓴다.
+ * 프로젝트명 + 사례 키워드 — 답변에 등장하면 다음 후속 질문의 자료에서 뺀다.
+ */
+const MENTION_TERMS = [
+    ...MAIN_PROJECTS.map((project) => project.title),
+    ...SIDE_WORKS.map((work) => work.title),
+    "스켈레톤",
+    "낙관적 업데이트",
+    "다크모드",
+    "OAuth",
+    "CORS",
+    "RLS",
+    "데이터 접근 권한",
+    "조회",
+    "주사위",
+    "지식재산권",
+    "Toast",
+    "렌더링",
+    "레거시",
+];
+
 const GREETING: Message = {
     id: 0,
     role: "bot",
@@ -50,8 +80,6 @@ export default function AskHayoung() {
     const [messages, setMessages] = useState<Array<Message>>([GREETING]);
     const [input, setInput] = useState("");
     const [stage, setStage] = useState<Stage>(null);
-    // 첫 실행은 모델을 메모리에 올리느라 오래 걸린다. 5초 넘으면 이유를 보여준다
-    const [slow, setSlow] = useState(false);
     const [route, setRoute] = useState<RouteKey | null>(null);
 
     const handleRef = useRef<AskHandle | null>(null);
@@ -63,6 +91,16 @@ export default function AskHayoung() {
     const lastActivityRef = useRef(0);
     // 연속 실패 횟수. 2회부터는 챗봇을 잠근다
     const failsRef = useRef(0);
+    // 최근 문답 두 쌍. 후속 질문("또 뭐가 있나요?")의 맥락으로 쓴다
+    const historyRef = useRef<Array<{ q: string; a: string }>>([]);
+    // 마지막으로 성공한 라우트. 짧은 후속 질문은 분류 없이 여기로 간다
+    const lastRouteRef = useRef<RouteKey | null>(null);
+    // 지금까지 답변에 등장한 사례. 후속 질문에서 자료 제외에 쓴다
+    const mentionedRef = useRef<Set<string>>(new Set());
+    // 연속 후속 질문 횟수. 자료가 무한하지 않으니 2회까지만 이어 답한다
+    const followUpCountRef = useRef(0);
+    // 후속 질문이 이어지는 원래 질문. "또?"만으로는 의도가 사라진다
+    const topicQuestionRef = useRef("");
 
     function scrollLog() {
         const log = logRef.current;
@@ -166,6 +204,46 @@ export default function AskHayoung() {
         routeRef.current = null;
         push({ role: "user", text: trimmed });
 
+        /*
+         * "또", "다른 건?" 같은 짧은 후속 질문은 분류기가 헤매기 쉬우니
+         * 직전 답변과 같은 라우트로 바로 보낸다. 고정 답변 라우트는 제외.
+         */
+        const followUp =
+            trimmed.length <= 20 &&
+            FOLLOW_UP.test(trimmed) &&
+            lastRouteRef.current &&
+            lastRouteRef.current !== "offtopic" &&
+            lastRouteRef.current !== "preference"
+                ? lastRouteRef.current
+                : undefined;
+
+        followUpCountRef.current = followUp ? followUpCountRef.current + 1 : 0;
+        // 한 주제의 자료는 무한하지 않다. 더 캐물으면 솔직하게 없다고 답한다
+        if (followUpCountRef.current > 2) {
+            push({
+                role: "bot",
+                text: "이 주제로 소개할 만한 사례는 여기까지예요. 다른 게 궁금하시면 물어봐 주세요.",
+            });
+            return;
+        }
+
+        if (!followUp) topicQuestionRef.current = trimmed;
+
+        /*
+         * 후속 질문에 이전 답변 원문을 주면 모델이 그대로 복창하고,
+         * "또?"만 던지면 원래 의도를 잃는다. 그래서 원 질문을 다시 묻되
+         * 이미 말한 사례는 ask()가 자료에서 빼도록 넘긴다.
+         */
+        const history = historyRef.current;
+        const mentioned = [...mentionedRef.current];
+        const payload = followUp
+            ? `${topicQuestionRef.current} (앞서 답한 사례 말고 다른 사례를 하나 더 소개한다. "가장"이라는 표현은 쓰지 않는다)`
+            : history.length
+              ? `[이전 대화]\n${history
+                    .map((turn) => `질문: ${turn.q}\n답변: ${turn.a}`)
+                    .join("\n")}\n\n[새 질문]\n${trimmed}`
+              : trimmed;
+
         if (!handleRef.current) {
             handleRef.current = createAsk({
                 // router가 주제를 고르면 step이 자료를 주입하고, 곧 생성이 시작된다
@@ -190,8 +268,6 @@ export default function AskHayoung() {
         }
 
         setStage("classify");
-        setSlow(false);
-        const slowTimer = window.setTimeout(() => setSlow(true), 5_000);
         lastActivityRef.current = Date.now();
         // 25초간 아무 진행(라우팅·다운로드)이 없으면 실패로 처리한다
         let watchdogTimer: ReturnType<typeof setInterval> | undefined;
@@ -203,11 +279,26 @@ export default function AskHayoung() {
             }, 1_000);
         });
         try {
+            // 후속 질문이면 이미 언급한 프로젝트를 자료에서 빼서 반복을 차단한다
             const answer = await Promise.race([
-                handleRef.current.ask(trimmed),
+                handleRef.current.ask(
+                    payload,
+                    followUp,
+                    followUp ? mentioned : undefined,
+                ),
                 watchdog,
             ]);
             failsRef.current = 0;
+            historyRef.current = [
+                ...historyRef.current,
+                { q: trimmed, a: answer.trim() },
+            ].slice(-2);
+            lastRouteRef.current = routeRef.current;
+            MENTION_TERMS.forEach((term) => {
+                if (answer.toLowerCase().includes(term.toLowerCase())) {
+                    mentionedRef.current.add(term);
+                }
+            });
             setReady("ready");
             push({
                 role: "bot",
@@ -242,14 +333,12 @@ export default function AskHayoung() {
             });
         } finally {
             clearInterval(watchdogTimer);
-            clearTimeout(slowTimer);
-            setSlow(false);
             setStage(null);
         }
     }
 
     return (
-        <section id="ask" className="scroll-mt-16 py-24 md:h-[180svh] md:py-0">
+        <section id="ask" className="scroll-mt-16 py-24 md:h-[130svh] md:py-0">
             {/* 화면이 잠시 붙잡힌 채로 읽게 한다 */}
             <div className="md:sticky md:top-0 md:flex md:min-h-svh md:flex-col md:justify-center md:pt-24 md:pb-10">
                 <div className="shell">
@@ -257,7 +346,7 @@ export default function AskHayoung() {
                     <TitleReveal className="mt-4 max-w-3xl">
                         <span className="text-pink">챗봇</span>에게 물어보세요
                     </TitleReveal>
-                    <Fade delay={0.15} className="mt-5 max-w-2xl">
+                    <Fade delay={0.15} className="mt-5">
                         <p className="body-text">
                             제가 만든 오픈소스{" "}
                             <a
@@ -311,7 +400,9 @@ export default function AskHayoung() {
                                 <div className="card flex h-[30rem] flex-col overflow-hidden">
                                     <div
                                         ref={logRef}
-                                        className="flex-1 space-y-4 overflow-y-auto p-5 md:p-6"
+                                        // Lenis가 휠을 가로채지 않게 해 내부 스크롤을 살린다
+                                        data-lenis-prevent
+                                        className="no-scrollbar flex-1 space-y-4 overflow-y-auto p-5 md:p-6"
                                     >
                                         {messages.map((message) => (
                                             <Bubble
@@ -328,14 +419,6 @@ export default function AskHayoung() {
                                                     className="animate-spin text-pink"
                                                 />
                                                 {STAGE_TEXT[stage]}
-                                                {slow &&
-                                                    stage === "classify" && (
-                                                        <span className="text-xs text-muted/70">
-                                                            — 첫 실행은 모델을
-                                                            깨우느라 오래 걸릴
-                                                            수 있어요
-                                                        </span>
-                                                    )}
                                                 {route && stage === "write" && (
                                                     <span className="pill">
                                                         {ROUTE_LABEL[route]}
@@ -411,22 +494,23 @@ export default function AskHayoung() {
     );
 }
 
-/** 글자를 한 자씩 늘려 타이핑처럼 보이게 한다. 자랄 때마다 로그를 아래로 민다 */
-function useTyped(text: string, onGrow: () => void) {
+/** 글자를 조금씩 늘려 타이핑처럼 보이게 한다. 자랄 때마다 로그를 아래로 민다 */
+function useTyped(text: string, step: number, onGrow: () => void) {
     const [count, setCount] = useState(0);
     useEffect(() => {
         if (count >= text.length) return;
         const timer = window.setTimeout(() => {
-            setCount((current) => current + 2);
+            setCount((current) => current + step);
             onGrow();
         }, 18);
         return () => clearTimeout(timer);
-    }, [count, text, onGrow]);
+    }, [count, text, step, onGrow]);
     return text.slice(0, count);
 }
 
 function Bubble({ message, onGrow }: { message: Message; onGrow: () => void }) {
-    const text = useTyped(message.text, onGrow);
+    // 사용자 말은 사람 타자 속도처럼 조금 느리게, 봇 답변은 빠르게
+    const text = useTyped(message.text, message.role === "user" ? 1 : 2, onGrow);
 
     if (message.role === "user") {
         return (
