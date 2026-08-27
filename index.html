@@ -6,34 +6,67 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="theme-color" content="#ff6b8a" />
 
-        <!-- Microsoft Clarity -->
+        <!--
+            Microsoft Clarity + Google Analytics.
+            내 방문은 세지 않는다: 로컬 개발 서버와 Vercel 미리보기 배포에서는
+            아예 불러오지 않고, 그 밖의 브라우저는 ?analytics=off 로 끌 수 있다
+            (?analytics=on 로 되돌린다).
+        -->
         <script>
-            (function (c, l, a, r, i, t, y) {
-                c[a] =
-                    c[a] ||
-                    function () {
-                        (c[a].q = c[a].q || []).push(arguments);
-                    };
-                t = l.createElement(r);
-                t.async = 1;
-                t.src = "https://www.clarity.ms/tag/" + i;
-                y = l.getElementsByTagName(r)[0];
-                y.parentNode.insertBefore(t, y);
-            })(window, document, "clarity", "script", "y7sd9jnhr5");
-        </script>
+            (function () {
+                var host = location.hostname;
+                var isLocal =
+                    host === "localhost" ||
+                    host === "127.0.0.1" ||
+                    host === "" ||
+                    host.endsWith(".local") ||
+                    /^(192\.168|10)\./.test(host);
+                // 운영은 portfolio-site-xi-virid, 나머지 vercel.app은 미리보기 배포다
+                var isPreview =
+                    host.endsWith(".vercel.app") &&
+                    host !== "portfolio-site-xi-virid.vercel.app";
 
-        <!-- Google tag (gtag.js) -->
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-W5YN0E1QLR"
-        ></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-            gtag("config", "G-W5YN0E1QLR");
+                var off = false;
+                try {
+                    var choice = new URLSearchParams(location.search).get(
+                        "analytics",
+                    );
+                    if (choice === "off")
+                        localStorage.setItem("analytics-off", "1");
+                    if (choice === "on") localStorage.removeItem("analytics-off");
+                    off = localStorage.getItem("analytics-off") === "1";
+                } catch (error) {
+                    // 저장소를 막아 둔 브라우저. 기본값(수집)으로 둔다
+                }
+
+                if (isLocal || isPreview || off) return;
+
+                (function (c, l, a, r, i, t, y) {
+                    c[a] =
+                        c[a] ||
+                        function () {
+                            (c[a].q = c[a].q || []).push(arguments);
+                        };
+                    t = l.createElement(r);
+                    t.async = 1;
+                    t.src = "https://www.clarity.ms/tag/" + i;
+                    y = l.getElementsByTagName(r)[0];
+                    y.parentNode.insertBefore(t, y);
+                })(window, document, "clarity", "script", "y7sd9jnhr5");
+
+                var tag = document.createElement("script");
+                tag.async = true;
+                tag.src =
+                    "https://www.googletagmanager.com/gtag/js?id=G-W5YN0E1QLR";
+                document.head.appendChild(tag);
+
+                window.dataLayer = window.dataLayer || [];
+                window.gtag = function () {
+                    window.dataLayer.push(arguments);
+                };
+                window.gtag("js", new Date());
+                window.gtag("config", "G-W5YN0E1QLR");
+            })();
         </script>
 
         <title>강하영 · 프론트엔드 개발자 포트폴리오</title>
