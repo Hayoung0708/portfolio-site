@@ -147,12 +147,15 @@ export default function ProjectContribution({
                                 </div>
 
                                 <div className="mt-6 space-y-5 border-l-2 border-pink-soft pl-6 md:ml-4 md:pl-8">
-                                    {contribution.list.map((item) => (
-                                        <div key={item.title}>
-                                            <h4 className="text-sm font-semibold text-pink md:text-base">
-                                                {item.title}
-                                            </h4>
-                                            <p className="mt-2 text-sm leading-relaxed break-keep whitespace-pre-line text-ink-soft md:text-base">
+                                    {contribution.list.map((item, itemIndex) => (
+                                        <div key={item.title || itemIndex}>
+                                            {/* 소제목 없이 항목만 두는 프로젝트도 있다 */}
+                                            {item.title && (
+                                                <h4 className="text-sm font-semibold text-pink md:text-base">
+                                                    {item.title}
+                                                </h4>
+                                            )}
+                                            <p className="text-sm leading-relaxed break-keep whitespace-pre-line text-ink-soft not-first:mt-2 md:text-base">
                                                 {item.body}
                                             </p>
                                             {item.img && (
