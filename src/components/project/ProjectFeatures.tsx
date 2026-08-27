@@ -98,7 +98,8 @@ export default function ProjectFeatures({
             on,
             style: {
                 transform: horizontal
-                    ? `translate(-50%, -50%) translateX(${offset * 58}%) rotateY(${offset * 22}deg) scale(${1 - depth * 0.1})`
+                    ? // 좌우 간격은 화면 폭에 따라 달라져서 CSS 변수로 받는다
+                      `translate(-50%, -50%) translateX(calc(var(--flow-shift) * ${offset})) rotateY(${offset * 22}deg) scale(${1 - depth * 0.1})`
                     : `translate(-50%, -50%) translateY(${offset * 44}%) rotateX(${offset * -14}deg) scale(${1 - depth * 0.1})`,
                 zIndex: 20 - depth,
                 opacity: depth > 1 ? 0 : 1 - depth * 0.45,
@@ -176,7 +177,12 @@ export default function ProjectFeatures({
                         </div>
 
                         {/* 태블릿부터: 가운데 크게, 양옆이 비스듬히 뒤로 물러나 좌우로 돈다 */}
-                        <div className="relative hidden h-[26rem] [perspective:1400px] md:block lg:h-[34rem]">
+                        {/*
+                          * 좌우 커버플로우. 한 줄을 통째로 쓰는 md와, 목록 옆
+                          * 자리가 넉넉해지는 xl 이상에서만 쓴다. 그 사이 폭(lg)은
+                          * 옆 카드가 목록을 침범해서 아래 위아래 캐러셀로 넘긴다.
+                          */}
+                        <div className="relative hidden h-[26rem] [--flow-shift:15rem] [perspective:1400px] md:block lg:hidden xl:block xl:h-[34rem] xl:[--flow-shift:10.5rem]">
                             {features.map((feature, index) => {
                                 const { on, style } = flowStyle(index, true);
                                 return (
@@ -187,7 +193,28 @@ export default function ProjectFeatures({
                                         aria-hidden={!on}
                                         tabIndex={on ? -1 : 0}
                                         aria-label={`${feature.title} 보기`}
-                                        className="absolute top-1/2 left-1/2 h-[23rem] w-[26rem] max-w-[80%] transition-[transform,opacity] duration-600 ease-out lg:h-[30rem] lg:w-[36rem]"
+                                        className="absolute top-1/2 left-1/2 h-[23rem] w-[26rem] max-w-[80%] transition-[transform,opacity] duration-600 ease-out xl:h-[30rem] xl:w-[36rem]"
+                                        style={style}
+                                    >
+                                        <FeatureCard feature={feature} />
+                                    </button>
+                                );
+                            })}
+                        </div>
+
+                        {/* 목록 옆자리가 좁은 폭에서는 위아래로 돌린다 */}
+                        <div className="relative hidden h-[34rem] [perspective:1400px] lg:block xl:hidden">
+                            {features.map((feature, index) => {
+                                const { on, style } = flowStyle(index, false);
+                                return (
+                                    <button
+                                        key={feature.title}
+                                        type="button"
+                                        onClick={() => select(index)}
+                                        aria-hidden={!on}
+                                        tabIndex={on ? -1 : 0}
+                                        aria-label={`${feature.title} 보기`}
+                                        className="absolute top-1/2 left-1/2 h-[27rem] w-full max-w-[36rem] transition-[transform,opacity] duration-600 ease-out"
                                         style={style}
                                     >
                                         <FeatureCard feature={feature} />
