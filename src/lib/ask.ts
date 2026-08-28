@@ -125,7 +125,7 @@ const collabDigest = [careerDigest, "", "동료 리뷰:", reviewDigest].join("\n
 const aiDigest = [
     "AI 활용 방식:",
     "- AI는 결과를 맡기는 대상이 아니라 기준을 세워 쓰는 도구로 본다",
-    "- Chrome Built-in AI 기반 멀티 에이전트 라이브러리 my-little-agent를 직접 만들어 npm에 배포했고, 지금 이 챗봇도 그 라이브러리로 브라우저 안에서 동작한다",
+    "- Chrome Built-in AI 기반 멀티 에이전트 프레임워크 my-little-agent를 직접 만들어 npm에 배포했고, 지금 이 챗봇도 그 프레임워크로 브라우저 안에서 동작한다",
     "- 테이블탑 온라인과 이 포트폴리오 사이트는 Claude 기반 바이브 코딩으로 개발·개편했다",
     "- 개인 프로젝트 PR마다 Gemini Code Assist 자동 리뷰 파이프라인을 운영한다",
 ].join("\n");

@@ -56,7 +56,7 @@ export default function Header() {
             return;
         }
 
-        // works는 홀딩 지점, 기여·트러블 슈팅은 휠 한 칸 더 내려간 위치가 보기 좋다.
+        // works는 홀딩 지점, 기여와 트러블 슈팅은 휠 한 칸 더 내려간 위치가 보기 좋다.
         // Tech Stack은 제목만 걸리면 휑해서 휠 열세 칸만큼 더 내려간다
         const offset =
             id === "works" || id === "ask" || id === "contact"
