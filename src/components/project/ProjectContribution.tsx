@@ -29,32 +29,55 @@ export default function ProjectContribution({
             return;
         }
 
-        const context = gsap.context(() => {
-            gsap.utils
-                .toArray<SVGCircleElement>("[data-ring]")
-                .forEach((ring) => {
-                    const percent = Number(ring.dataset.percent ?? 0);
-                    gsap.fromTo(
-                        ring,
-                        { strokeDashoffset: CIRCUMFERENCE },
-                        {
-                            strokeDashoffset:
-                                CIRCUMFERENCE * (1 - percent / 100),
-                            duration: 1.1,
-                            delay: 0.2,
-                            ease: "power3.out",
-                            scrollTrigger: {
-                                trigger: ring,
-                                start: "top 85%",
-                                toggleActions: "play none none none",
-                            },
-                        },
-                    );
-                });
-        }, sectionRef);
+        let context: gsap.Context | undefined;
+        let frame = 0;
+        let waited = 0;
 
-        return () => context.revert();
-    }, []);
+        /*
+         * 다른 프로젝트로 넘어온 직후에는 아직 이전 스크롤 위치가 남아 있다.
+         * 그대로 걸면 트리거가 이미 지나간 것으로 계산돼 도넛이 처음부터
+         * 차 있는 채로 나온다. 관성 스크롤이 맨 위에 닿은 뒤에 건다.
+         */
+        const build = () => {
+            if (window.scrollY > 4 && waited < 30) {
+                waited += 1;
+                frame = requestAnimationFrame(build);
+                return;
+            }
+
+            context = gsap.context(() => {
+                gsap.utils
+                    .toArray<SVGCircleElement>("[data-ring]")
+                    .forEach((ring) => {
+                        const percent = Number(ring.dataset.percent ?? 0);
+                        gsap.fromTo(
+                            ring,
+                            { strokeDashoffset: CIRCUMFERENCE },
+                            {
+                                strokeDashoffset:
+                                    CIRCUMFERENCE * (1 - percent / 100),
+                                duration: 1.1,
+                                delay: 0.2,
+                                ease: "power3.out",
+                                scrollTrigger: {
+                                    trigger: ring,
+                                    start: "top 85%",
+                                    toggleActions: "play none none none",
+                                },
+                            },
+                        );
+                    });
+            }, sectionRef);
+        };
+
+        frame = requestAnimationFrame(build);
+
+        return () => {
+            cancelAnimationFrame(frame);
+            context?.revert();
+        };
+        // 프로젝트가 바뀌면 도넛 개수와 값이 달라져 다시 건다
+    }, [summary]);
 
     return (
         <section
