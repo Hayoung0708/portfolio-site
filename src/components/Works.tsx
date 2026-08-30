@@ -297,7 +297,7 @@ export default function Works() {
                             data-block
                             className="md:h-[150svh]"
                         >
-                            <div className="max-w-xl px-6 py-14 md:sticky md:top-0 md:flex md:h-svh md:flex-col md:justify-center md:py-0 md:pt-16 md:pr-10 md:pl-16 lg:pl-24">
+                            <div className="max-w-xl px-6 py-14 md:sticky md:top-0 md:flex md:h-svh md:max-w-2xl md:flex-col md:justify-center md:py-0 md:pt-16 md:pr-10 md:pl-16 lg:max-w-[718px] lg:pl-24">
                                 {/* 모바일은 프레임 대신 본문 위에 이미지 */}
                                 <Link
                                     to={`/project/${project.id}`}

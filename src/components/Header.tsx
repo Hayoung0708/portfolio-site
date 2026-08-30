@@ -2,8 +2,12 @@ import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 
+import { principleScrollY } from "@/components/Principles";
 import { MAIN_PROJECTS } from "@/constants/projects";
 import { scrollToY } from "@/lib/scroll";
+
+/** 마우스 휠 한 칸이 굴리는 거리(px) */
+const WHEEL = 100;
 
 const NAV = [
     { id: "about", label: "About Me" },
@@ -45,13 +49,23 @@ export default function Header() {
                 : document.getElementById(id);
         if (!target) return;
         event.preventDefault();
-        // works는 홀딩 지점, 기여·트러블 슈팅은 휠 한 칸 더 내려간 위치가 보기 좋다
+
+        // About Me는 섹션 머리글이 아니라 첫 원칙 카드가 자리 잡는 지점으로 보낸다
+        if (id === "about") {
+            scrollToY(principleScrollY(target as HTMLElement, 0) + WHEEL * 2);
+            return;
+        }
+
+        // works는 홀딩 지점, 기여와 트러블 슈팅은 휠 한 칸 더 내려간 위치가 보기 좋다.
+        // Tech Stack은 제목만 걸리면 휑해서 휠 열세 칸만큼 더 내려간다
         const offset =
             id === "works" || id === "ask" || id === "contact"
                 ? 0
                 : id === "contribution" || id === "learn"
                   ? -20
-                  : 88;
+                  : id === "tech"
+                    ? 88 - WHEEL * 13
+                    : 88;
         scrollToY(target.getBoundingClientRect().top + window.scrollY - offset);
     };
 
@@ -93,6 +107,11 @@ export default function Header() {
                 <div className="shell flex h-16 items-center justify-between gap-6">
                     <Link
                         to="/"
+                        // 이미 메인이면 라우팅 대신 부드럽게 맨 위로 되돌린다
+                        onClick={(event) => {
+                            event.preventDefault();
+                            scrollToY(0);
+                        }}
                         className="text-sm font-bold tracking-tight md:text-base"
                     >
                         FE<span className="text-pink">.</span>Hayoung

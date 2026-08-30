@@ -16,7 +16,7 @@ const PAPER = "#ffffff";
 const WASH = "#fff5f7";
 
 /**
- * 상세 페이지 배경판. 배경색이 다른 구간(핵심 기능·트러블 슈팅)에
+ * 상세 페이지 배경판. 배경색이 다른 구간(핵심 기능, 트러블 슈팅)에
  * 스크롤로 다가가면 서서히 물들었다가 지나가면 다시 흰색이 된다.
  */
 function DetailBackdrop({ projectId }: { projectId: string }) {

@@ -359,9 +359,9 @@ export default function AskHayoung() {
                             </a>
                             로 동작합니다.
                             <br />
-                            질문을 분류하고, 필요한 자료만 찾아, 답변까지 전부
-                            브라우저 안에서 처리합니다. 서버도 API 키도
-                            없습니다.
+                            질문을 분류해 필요한 자료만 찾은 뒤 답변을
+                            만들어냅니다. 이 과정이 전부 브라우저 안에서
+                            돌아가, 서버도 API 키도 필요 없습니다.
                         </p>
                     </Fade>
 
@@ -390,10 +390,10 @@ export default function AskHayoung() {
                                     </p>
                                     <p className="text-sm break-keep text-muted">
                                         온디바이스 AI(Gemini Nano)를 쓸 수 없는
-                                        기기·브라우저예요.
+                                        환경이에요.
                                         <br />
-                                        Chrome 138 이상, 여유 공간 22GB 환경에서
-                                        다시 만나요.
+                                        PC의 Chrome 138 이상, 여유 공간 22GB
+                                        환경에서 다시 만나요.
                                     </p>
                                 </div>
                             ) : (
@@ -584,7 +584,7 @@ function StatusCard({ ready, progress }: { ready: Ready; progress: number }) {
                       ? "이 브라우저는 온디바이스 AI를 지원해요. Gemini Nano(약 4GB) 다운로드를 시작합니다 — 기기 여유 공간이 22GB 이상일 때만 받아져요.\n다운로드가 진행되지 않으면 챗봇이 잠겨요."
                       : ready === "downloading"
                         ? "Chrome이 Gemini Nano(약 4GB)를 다운로드하고 있어요. 다운로드에는 여유 공간 22GB가 필요해요.\n받은 뒤에도 여유가 10GB 아래로 내려가면 모델이 자동 삭제돼요."
-                        : "질문과 답변이 기기 밖으로 나가지 않습니다.\n서버 요청 0회, 토큰 비용 0원."}
+                        : "질문과 답변은 기기 밖으로 나가지 않습니다."}
             </p>
         </div>
     );

@@ -11,6 +11,12 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 /** 카드 한 장이 차지할 스크롤 높이(화면 높이 배수) */
 const SCREENS_PER_CARD = 1.6;
 
+/** index번째 원칙 카드가 화면 가운데에 놓이는 스크롤 위치. 헤더 내비도 쓴다 */
+export function principleScrollY(track: HTMLElement, index: number) {
+    const total = track.offsetHeight - window.innerHeight;
+    return track.offsetTop + (total * (index + 0.5)) / PRINCIPLES.length;
+}
+
 /** 들고 나는 데 쓰는 진행률 폭. 이 구간에서 카드가 화면을 가로지른다 */
 const CROSS = 0.1;
 
@@ -175,10 +181,7 @@ export default function Principles() {
     function jumpTo(index: number) {
         const track = trackRef.current;
         if (!track) return;
-
-        const total = track.offsetHeight - window.innerHeight;
-        const ratio = (index + 0.5) / PRINCIPLES.length;
-        scrollToY(track.offsetTop + total * ratio);
+        scrollToY(principleScrollY(track, index));
     }
 
     return (
