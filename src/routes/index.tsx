@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import RootLayout from "./layouts/RootLayout";
 import Main from "./pages/Main";
-import ProjectDetail from "./pages/ProjectDetail";
 
 const router = createBrowserRouter([
     {
@@ -9,7 +8,13 @@ const router = createBrowserRouter([
         Component: RootLayout,
         children: [
             { index: true, element: <Main /> },
-            { path: "/project/:projectId", element: <ProjectDetail /> },
+            {
+                // 첫 화면에는 없는 페이지라 들어갈 때 받는다
+                path: "/project/:projectId",
+                lazy: async () => ({
+                    Component: (await import("./pages/ProjectDetail")).default,
+                }),
+            },
         ],
     },
 ]);
