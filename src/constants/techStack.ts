@@ -13,12 +13,12 @@ import notionIcon from "@/assets/icons/notion.svg";
 import ollamaIcon from "@/assets/icons/ollama.svg";
 import reactIcon from "@/assets/icons/react.svg";
 import slackIcon from "@/assets/icons/slack.svg";
-import supabaseIcon from "@/assets/icons/supabase.svg";
+import supabaseIcon from "@/assets/icons/supabase.webp";
 import tailwindIcon from "@/assets/icons/tailwind.svg";
-import tanstackIcon from "@/assets/icons/tanstack.svg";
+import tanstackIcon from "@/assets/icons/tanstack.webp";
 import typescriptIcon from "@/assets/icons/typescript.svg";
 import vercelIcon from "@/assets/icons/vercel.svg";
-import zustandIcon from "@/assets/icons/zustand.svg";
+import zustandIcon from "@/assets/icons/zustand.webp";
 
 export const TECH_STACKS = [
     {
