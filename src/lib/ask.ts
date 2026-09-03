@@ -29,6 +29,19 @@ import { TECH_STACKS } from "@/constants/techStack";
  * 모델은 "주어진 자료를 한국어 문장으로 다듬는 일"만 하게 한다.
  */
 
+/**
+ * Prompt API에 출력 언어를 알려 준다. 안 알려주면 브라우저가 콘솔에
+ * "No output language was specified..." 경고를 남긴다.
+ *
+ * 한국어(ko)로 선언할 수는 없다. 이 API가 받는 목록이 de·en·es·fr·ja뿐이라
+ * ko를 주면 availability()가 곧장 'unavailable'을 돌려주고 챗봇이 통째로
+ * 꺼진다(직접 확인). 목록에 있는 en으로 선언하되, 프롬프트와 답변은
+ * 지금까지처럼 한국어 그대로다. ko가 목록에 들어오면 그때 바꾼다.
+ */
+export const EXPECTED_OUTPUTS = [
+    { type: "text" as const, languages: ["en"] },
+];
+
 export type RouteKey =
     | "tech"
     | "project"
@@ -238,6 +251,7 @@ export function createAsk(handlers: {
 }): AskHandle {
     const classifier = new Agent({
         name: "classifier",
+        expectedOutputs: EXPECTED_OUTPUTS,
         instruction:
             "질문이 어떤 주제인지 하나로 분류한다. 가고 싶은 회사, 원하는 동료 등 본인의 희망·선호를 묻는 질문은 반드시 preference다. 포트폴리오와 무관한 잡담은 offtopic이다. 그 외에 확실하지 않으면 about을 고른다.",
         stateless: true,
@@ -253,6 +267,7 @@ export function createAsk(handlers: {
     /* 초안을 채점하는 검증자. 기준 미달이면 refine이 피드백과 함께 다시 쓰게 한다 */
     const evaluator = new Agent({
         name: "evaluator",
+        expectedOutputs: EXPECTED_OUTPUTS,
         instruction: [
             "너는 답변 초안을 검증하는 채점자다. 0~100점으로 채점한다.",
             "감점 기준: [자료]에 없는 내용이 섞임(-40), 프로젝트 이름이나 용어가 자료의 표기와 다름(-40),",
@@ -270,6 +285,7 @@ export function createAsk(handlers: {
     ): Runnable => {
         const answerer = new Agent({
             name: key,
+            expectedOutputs: EXPECTED_OUTPUTS,
             instruction: `${BASE_RULES}\n${KNOWLEDGE[key].focus}`,
             stateless: true,
             // 고유명사를 지어내지 않도록 샘플링을 최대한 좁힌다
@@ -368,7 +384,7 @@ export function createAsk(handlers: {
  */
 export function checkAvailability(): Promise<Availability> {
     return Promise.race([
-        availability(),
+        availability({ expectedOutputs: EXPECTED_OUTPUTS }),
         new Promise<Availability>((resolve) =>
             setTimeout(() => resolve("unavailable"), 10000),
         ),

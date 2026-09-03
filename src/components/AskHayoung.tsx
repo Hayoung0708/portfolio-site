@@ -8,6 +8,7 @@ import { MAIN_PROJECTS, SIDE_WORKS } from "@/constants/projects";
 import { SUGGESTED_QUESTIONS } from "@/constants/qa";
 import { track } from "@/lib/analytics";
 import {
+    EXPECTED_OUTPUTS,
     ROUTE_LABEL,
     checkAvailability,
     createAsk,
@@ -121,6 +122,10 @@ export default function AskHayoung() {
                 window as unknown as {
                     LanguageModel?: {
                         create(options?: {
+                            expectedOutputs?: Array<{
+                                type: "text";
+                                languages: Array<string>;
+                            }>;
                             monitor?(monitor: {
                                 addEventListener(
                                     type: "downloadprogress",
@@ -137,6 +142,7 @@ export default function AskHayoung() {
 
             languageModel
                 .create({
+                    expectedOutputs: EXPECTED_OUTPUTS,
                     monitor(monitor) {
                         monitor.addEventListener(
                             "downloadprogress",
