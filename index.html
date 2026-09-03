@@ -47,6 +47,21 @@
 
                 if (isLocal || isPreview || off) return;
 
+                // 실제로 붙일 때만 미리 연결해 둔다. 스크립트가 뒤늦게
+                // 꼬리를 물고 붙는 구조라 연결 시간이 그대로 지연이 된다
+                [
+                    "https://www.clarity.ms",
+                    "https://scripts.clarity.ms",
+                    "https://www.googletagmanager.com",
+                ].forEach(function (origin) {
+                    // 일반 <script>로 받는 곳이라 crossorigin은 붙이지 않는다.
+                    // 붙이면 실제로 쓰는 연결과 종류가 달라 미리 연 것이 버려진다
+                    var hint = document.createElement("link");
+                    hint.rel = "preconnect";
+                    hint.href = origin;
+                    document.head.appendChild(hint);
+                });
+
                 (function (c, l, a, r, i, t, y) {
                     c[a] =
                         c[a] ||
