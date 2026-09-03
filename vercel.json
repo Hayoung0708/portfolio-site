@@ -1,3 +1,14 @@
 {
-    "rewrites": [{ "source": "/((?!api/).*)", "destination": "/" }]
+    "rewrites": [{ "source": "/((?!api/).*)", "destination": "/" }],
+    "headers": [
+        {
+            "source": "/fonts/pretendard/(.*)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        }
+    ]
 }

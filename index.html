@@ -7,6 +7,12 @@
         <meta name="theme-color" content="#ff6b8a" />
 
         <!--
+            Pretendard 동적 서브셋. 앱 CSS와 따로 두어 배포마다 다시 받지 않고,
+            unicode-range로 실제 쓰인 글자가 든 조각만 내려받는다.
+        -->
+        <link rel="stylesheet" href="/fonts/pretendard.css" />
+
+        <!--
             Microsoft Clarity + Google Analytics.
             내 방문은 세지 않는다: 로컬 개발 서버와 Vercel 미리보기 배포에서는
             아예 불러오지 않고, 그 밖의 브라우저는 ?analytics=off 로 끌 수 있다
