@@ -377,6 +377,12 @@ export default function Works() {
                                         }
                                         className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-pink"
                                     >
+                                        {/* 화면에는 "자세히 보기"만 보인다. 같은 글자가
+                                            목록에 다섯 번 나와 어디로 가는 링크인지
+                                            읽어서는 알 수 없으므로 이름을 숨겨서 붙인다 */}
+                                        <span className="sr-only">
+                                            {project.title}{" "}
+                                        </span>
                                         자세히 보기
                                         <ArrowRight
                                             size={16}
@@ -530,6 +536,9 @@ export default function Works() {
                                         to={work.to}
                                         className="group mr-1 inline-flex items-center gap-1 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink-soft transition-colors hover:border-pink hover:text-pink"
                                     >
+                                        <span className="sr-only">
+                                            {work.title}{" "}
+                                        </span>
                                         자세히 보기
                                         <ArrowRight
                                             size={13}
