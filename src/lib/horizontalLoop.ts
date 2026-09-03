@@ -39,36 +39,41 @@ export function horizontalLoop(
     let distanceToLoop = 0;
     let item: HTMLElement;
 
-    gsap.set(items, {
-        xPercent: (i, el) => {
-            const w = (widths[i] = parseFloat(
-                gsap.getProperty(el, "width", "px") as string,
-            ));
-            xPercents[i] = snap(
-                (parseFloat(gsap.getProperty(el, "x", "px") as string) / w) *
-                    100 +
-                    (gsap.getProperty(el, "xPercent") as number),
-            );
-            return xPercents[i];
-        },
-    });
+    /*
+     * 재는 일과 쓰는 일을 갈라 둔다. 한 항목씩 재고 바로 쓰면 그때마다
+     * 브라우저가 레이아웃을 다시 잡아 강제 리플로우가 줄줄이 생긴다.
+     */
+    const scaleXs: Array<number> = [];
+    const offsetLefts: Array<number> = [];
+    for (let i = 0; i < length; i++) {
+        const el = items[i];
+        widths[i] = parseFloat(gsap.getProperty(el, "width", "px") as string);
+        scaleXs[i] = gsap.getProperty(el, "scaleX") as number;
+        offsetLefts[i] = el.offsetLeft;
+        xPercents[i] = snap(
+            (parseFloat(gsap.getProperty(el, "x", "px") as string) /
+                widths[i]) *
+                100 +
+                (gsap.getProperty(el, "xPercent") as number),
+        );
+    }
+    const lastOffsetWidth = items[length - 1].offsetWidth;
+
+    gsap.set(items, { xPercent: (i) => xPercents[i] });
     gsap.set(items, { x: 0 });
 
     totalWidth =
-        items[length - 1].offsetLeft +
+        offsetLefts[length - 1] +
         (xPercents[length - 1] / 100) * widths[length - 1] -
         startX +
-        items[length - 1].offsetWidth *
-            (gsap.getProperty(items[length - 1], "scaleX") as number) +
+        lastOffsetWidth * scaleXs[length - 1] +
         (config.paddingRight ?? 0);
 
     for (let i = 0; i < length; i++) {
         item = items[i];
         curX = (xPercents[i] / 100) * widths[i];
-        distanceToStart = item.offsetLeft + curX - startX;
-        distanceToLoop =
-            distanceToStart +
-            widths[i] * (gsap.getProperty(item, "scaleX") as number);
+        distanceToStart = offsetLefts[i] + curX - startX;
+        distanceToLoop = distanceToStart + widths[i] * scaleXs[i];
         tl.to(
             item,
             {
