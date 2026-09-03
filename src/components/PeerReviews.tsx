@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import Fade from "@/components/Fade";
 import TitleReveal from "@/components/TitleReveal";
 import { PEER_REVIEWS } from "@/constants/peerReview";
-import { horizontalLoop } from "@/lib/horizontalLoop";
+import type { horizontalLoop } from "@/lib/horizontalLoop";
 
 /* 두 줄로 나눠 서로 반대 방향으로 돌린다 */
 const ROWS = [
@@ -22,30 +22,44 @@ export default function PeerReviews() {
             return;
         }
 
-        const loops = [firstTrackRef, secondTrackRef]
-            .map((ref, index) => {
-                const track = ref.current;
-                if (!track) return null;
-                const loop = horizontalLoop(
-                    Array.from(track.children) as Array<HTMLElement>,
-                    {
-                        repeat: -1,
-                        speed: 0.5,
-                        draggable: true,
-                        paddingRight: 20,
-                    },
-                );
-                // 아랫줄은 반대 방향으로 돈다. t=0에서 바로 reverse하면 멈추므로
-                // 재생 위치를 한참 앞으로 밀어 둔 뒤 되감는다
-                if (index === 1) {
-                    loop.timeline.vars.onReverseComplete?.();
-                    loop.timeline.reverse();
-                }
-                return loop;
-            })
-            .filter(Boolean);
+        let loops: Array<ReturnType<typeof horizontalLoop>> = [];
+        let alive = true;
 
-        return () => loops.forEach((loop) => loop?.kill());
+        /*
+         * 마퀴에만 쓰는 GSAP Draggable·InertiaPlugin은 첫 화면 번들에서 뺀다.
+         * 아래쪽 섹션이라 이 조각이 조금 늦게 붙어도 눈에 띄지 않는다.
+         */
+        void import("@/lib/horizontalLoop").then(({ horizontalLoop }) => {
+            if (!alive) return;
+
+            loops = [firstTrackRef, secondTrackRef]
+                .map((ref, index) => {
+                    const track = ref.current;
+                    if (!track) return null;
+                    const loop = horizontalLoop(
+                        Array.from(track.children) as Array<HTMLElement>,
+                        {
+                            repeat: -1,
+                            speed: 0.5,
+                            draggable: true,
+                            paddingRight: 20,
+                        },
+                    );
+                    // 아랫줄은 반대 방향으로 돈다. t=0에서 바로 reverse하면 멈추므로
+                    // 재생 위치를 한참 앞으로 밀어 둔 뒤 되감는다
+                    if (index === 1) {
+                        loop.timeline.vars.onReverseComplete?.();
+                        loop.timeline.reverse();
+                    }
+                    return loop;
+                })
+                .filter((loop) => loop !== null);
+        });
+
+        return () => {
+            alive = false;
+            loops.forEach((loop) => loop.kill());
+        };
     }, []);
 
     const trackRefs = [firstTrackRef, secondTrackRef];

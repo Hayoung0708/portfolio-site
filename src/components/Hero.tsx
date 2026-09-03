@@ -4,7 +4,8 @@ import { Github, Sparkles } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getTextTypingSteps } from "react-hangul-motion";
 
-import profileImg from "@/assets/images/profile.jpg";
+import profileSmall from "@/assets/images/profile-small.webp";
+import profileImg from "@/assets/images/profile.webp";
 import Blossoms from "@/components/Blossoms";
 import { BLOSSOMS } from "@/constants/blossoms";
 import { PROFILE, STATS } from "@/constants/profile";
@@ -175,11 +176,15 @@ export default function Hero() {
                                 aria-hidden="true"
                                 className="absolute -top-4 -right-4 h-full w-full rounded-[2.5rem] bg-pink-soft/60"
                             />
+                            {/* 첫 화면의 LCP 대상. 화면 밀도에 맞는 크기만 받는다 */}
                             <img
                                 src={profileImg}
+                                srcSet={`${profileSmall} 220w, ${profileImg} 366w`}
+                                sizes="(min-width: 768px) 216px, 192px"
                                 alt={`${PROFILE.name} 프로필 사진`}
-                                width={228}
-                                height={288}
+                                width={366}
+                                height={460}
+                                fetchPriority="high"
                                 className="relative h-[15rem] w-[12rem] rounded-[2.5rem] object-cover md:h-[17rem] md:w-[13.5rem]"
                             />
                         </div>

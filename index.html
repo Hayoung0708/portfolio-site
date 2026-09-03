@@ -7,6 +7,12 @@
         <meta name="theme-color" content="#ff6b8a" />
 
         <!--
+            Pretendard 동적 서브셋. 앱 CSS와 따로 두어 배포마다 다시 받지 않고,
+            unicode-range로 실제 쓰인 글자가 든 조각만 내려받는다.
+        -->
+        <link rel="stylesheet" href="/fonts/pretendard.css" />
+
+        <!--
             Microsoft Clarity + Google Analytics.
             내 방문은 세지 않는다: 로컬 개발 서버와 Vercel 미리보기 배포에서는
             아예 불러오지 않고, 그 밖의 브라우저는 ?analytics=off 로 끌 수 있다
@@ -40,6 +46,21 @@
                 }
 
                 if (isLocal || isPreview || off) return;
+
+                // 실제로 붙일 때만 미리 연결해 둔다. 스크립트가 뒤늦게
+                // 꼬리를 물고 붙는 구조라 연결 시간이 그대로 지연이 된다
+                [
+                    "https://www.clarity.ms",
+                    "https://scripts.clarity.ms",
+                    "https://www.googletagmanager.com",
+                ].forEach(function (origin) {
+                    // 일반 <script>로 받는 곳이라 crossorigin은 붙이지 않는다.
+                    // 붙이면 실제로 쓰는 연결과 종류가 달라 미리 연 것이 버려진다
+                    var hint = document.createElement("link");
+                    hint.rel = "preconnect";
+                    hint.href = origin;
+                    document.head.appendChild(hint);
+                });
 
                 (function (c, l, a, r, i, t, y) {
                     c[a] =
