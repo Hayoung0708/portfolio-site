@@ -5,6 +5,7 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 
+import LazyVideo from "@/components/LazyVideo";
 import { MAIN_PROJECTS, SIDE_WORKS } from "@/constants/projects";
 import { track } from "@/lib/analytics";
 import { scrollToY } from "@/lib/scroll";
@@ -307,12 +308,8 @@ export default function Works() {
                                 >
                                     <div className="flex aspect-video items-center justify-center overflow-hidden bg-pink-wash">
                                         {project.video ? (
-                                            <video
+                                            <LazyVideo
                                                 src={project.video}
-                                                autoPlay
-                                                muted
-                                                loop
-                                                playsInline
                                                 className="h-full w-full object-cover"
                                             />
                                         ) : project.image[0] ? (
@@ -443,12 +440,18 @@ export default function Works() {
                                         }`}
                                     >
                                         {project.video ? (
+                                            /* 프레임이 화면에 다가올 때까지는 받지 않는다.
+                                               모바일에서는 프레임이 숨겨져 끝까지 안 받는다 */
                                             <video
                                                 ref={(element) => {
                                                     videoRefs.current[index] =
                                                         element;
                                                 }}
-                                                src={project.video}
+                                                src={
+                                                    frameVisible
+                                                        ? project.video
+                                                        : undefined
+                                                }
                                                 muted
                                                 loop
                                                 playsInline
