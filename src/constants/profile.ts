@@ -69,5 +69,5 @@ export const STATS: Array<{ label: string; value: string }> = [
 
 export const CERTIFICATES = [
     { name: "TOEIC Speaking IM1", date: "2025.01" },
-    { name: "정보처리기사 필기", date: "2025.03" },
+    { name: "정보처리기사", date: "2026.09" },
 ] as const;
